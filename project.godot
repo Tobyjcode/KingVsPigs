@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="KingVsPigs"
+run/main_scene="uid://bsidra6cwxs67"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="KingVsPigs"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
