@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dmixkcy6oojq1"]
+[gd_scene load_steps=24 format=3 uid="uid://dmixkcy6oojq1"]
 
 [ext_resource type="Texture2D" uid="uid://0re6e3f1tkjp" path="res://assets/Kings and Pigs/Sprites/03-Pig/Attack (34x28).png" id="1_j740r"]
 [ext_resource type="Texture2D" uid="uid://cgy70rw6km6ho" path="res://assets/Kings and Pigs/Sprites/03-Pig/Hit (34x28).png" id="2_ct3s0"]
@@ -148,12 +148,17 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow6q2"]
+
 [node name="Piggy" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pjtmk")
 animation = &"attack"
-frame = 4
-frame_progress = 0.443434
+frame = 3
+frame_progress = 0.409426
 
 [node name="Node" type="Node" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ow6q2")

@@ -401,10 +401,11 @@ radius = 8.06226
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
 position = Vector2(8, -15)
 sprite_frames = SubResource("SpriteFrames_urp6f")
-animation = &"dead"
-frame_progress = 0.174104
+animation = &"hit"
+frame_progress = 0.070131
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -11)
