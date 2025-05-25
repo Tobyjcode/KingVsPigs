@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://bsidra6cwxs67"]
+[gd_scene load_steps=11 format=4 uid="uid://bsidra6cwxs67"]
 
 [ext_resource type="PackedScene" uid="uid://cj47rlfy46f4y" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dn5pk4sf1sf25" path="res://assets/Kings and Pigs/Sprites/14-TileSets/Decorations (32x32).png" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://dis7fet3ee3w8" path="res://assets/Kings and Pigs/Sprites/14-TileSets/Terrain (32x32).png" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dvlpf7cffg5bj" path="res://scenes/box.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://y35ewkaajeqr" path="res://scenes/pig.tscn" id="5_iywne"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("2_lnu2h")
@@ -877,3 +878,6 @@ position_smoothing_enabled = true
 
 [node name="Box" parent="." instance=ExtResource("4_lbhrr")]
 position = Vector2(289, 92)
+
+[node name="pig" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(250, 76)
