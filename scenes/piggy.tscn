@@ -1,8 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://dmixkcy6oojq1"]
+[gd_scene load_steps=32 format=3 uid="uid://dmixkcy6oojq1"]
 
+[ext_resource type="Script" uid="uid://dwbatx1scim37" path="res://scripts/enemy_pig.gd" id="1_56si3"]
 [ext_resource type="Texture2D" uid="uid://0re6e3f1tkjp" path="res://assets/Kings and Pigs/Sprites/03-Pig/Attack (34x28).png" id="1_j740r"]
 [ext_resource type="Texture2D" uid="uid://cgy70rw6km6ho" path="res://assets/Kings and Pigs/Sprites/03-Pig/Hit (34x28).png" id="2_ct3s0"]
 [ext_resource type="Texture2D" uid="uid://cr44fsllx7qkh" path="res://assets/Kings and Pigs/Sprites/03-Pig/Idle (34x28).png" id="3_7e1yb"]
+[ext_resource type="Texture2D" uid="uid://b2l6pcn2bfr5j" path="res://assets/Kings and Pigs/Sprites/03-Pig/Run (34x28).png" id="5_7wbru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnrkt"]
 atlas = ExtResource("1_j740r")
@@ -76,6 +78,30 @@ region = Rect2(306, 0, 34, 28)
 atlas = ExtResource("3_7e1yb")
 region = Rect2(340, 0, 34, 28)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nypqq"]
+atlas = ExtResource("5_7wbru")
+region = Rect2(0, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ud3u2"]
+atlas = ExtResource("5_7wbru")
+region = Rect2(34, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_venk0"]
+atlas = ExtResource("5_7wbru")
+region = Rect2(68, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3t7up"]
+atlas = ExtResource("5_7wbru")
+region = Rect2(102, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0au4"]
+atlas = ExtResource("5_7wbru")
+region = Rect2(136, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2ntg"]
+atlas = ExtResource("5_7wbru")
+region = Rect2(170, 0, 34, 28)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_pjtmk"]
 animations = [{
 "frames": [{
@@ -146,17 +172,39 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nypqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ud3u2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_venk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3t7up")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0au4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2ntg")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow6q2"]
 
 [node name="Piggy" type="CharacterBody2D"]
+script = ExtResource("1_56si3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pjtmk")
-animation = &"attack"
-frame = 3
-frame_progress = 0.409426
+animation = &"run"
 
 [node name="Node" type="Node" parent="."]
 
