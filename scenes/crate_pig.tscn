@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdwst50utlk8l"]
+
+[ext_resource type="Texture2D" uid="uid://dumj8lw1wbr2e" path="res://assets/Kings and Pigs/Sprites/06-Pig Hide in the Box/Looking Out (26x20).png" id="1_dhm0k"]
+[ext_resource type="Script" path="res://cratePig.gd" id="2_p8sf5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at67k"]
+atlas = ExtResource("1_dhm0k")
+region = Rect2(0, 0, 26, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27elf"]
+atlas = ExtResource("1_dhm0k")
+region = Rect2(26, 0, 26, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo23t"]
+atlas = ExtResource("1_dhm0k")
+region = Rect2(52, 0, 26, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rwnpw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_at67k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27elf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo23t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dhm0k"]
+size = Vector2(17, 15)
+
+[node name="CratePig" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rwnpw")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("2_p8sf5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_dhm0k")

@@ -30,7 +30,7 @@ func _physics_process(delta):
 	# Check if player is in range
 	if player and position.distance_to(player.position) < DETECTION_RANGE:
 		# Move towards player
-		var direction = sign(player.position.x - position.x)
+		var direction = 1 if player.position.x > position.x else -1
 		velocity.x = direction * SPEED
 		animated_sprite.flip_h = direction < 0
 		animated_sprite.play("run")
