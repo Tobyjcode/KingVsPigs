@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://bppp4umxww2jg"]
+
+[ext_resource type="Texture2D" uid="uid://d2spom8qcs3xo" path="res://assets/Kings and Pigs/Sprites/08-Box/Hit.png" id="1_l118f"]
+[ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://assets/Kings and Pigs/Sprites/08-Box/Idle.png" id="2_ryp3t"]
+
+[sub_resource type="PhysicsMaterial" id="75"]
+bounce = 0.2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpmf1"]
+atlas = ExtResource("1_l118f")
+region = Rect2(0, 0, 22, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ribg8"]
+atlas = ExtResource("2_ryp3t")
+region = Rect2(0, 0, 22, 16)
+
+[sub_resource type="SpriteFrames" id="72"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpmf1")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ribg8")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="74"]
+size = Vector2(19, 16)
+
+[sub_resource type="RectangleShape2D" id="73"]
+size = Vector2(15, 15)
+
+[node name="Crate" type="RigidBody2D"]
+z_index = 5
+collision_layer = 16
+collision_mask = 17
+mass = 4.0
+physics_material_override = SubResource("75")
+gravity_scale = 4.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("72")
+animation = &"Idle"
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
+
+[node name="HitBox" type="Area2D" parent="."]
+rotation = 3.14159
+scale = Vector2(1, -1)
+collision_layer = 4
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0.5, 0)
+shape = SubResource("74")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0.5)
+shape = SubResource("73")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimationFinished"]
+[connection signal="finished" from="Hit" to="." method="AudioFinished"]
+[connection signal="area_entered" from="HitBox" to="." method="OnHitBoxEntered"]

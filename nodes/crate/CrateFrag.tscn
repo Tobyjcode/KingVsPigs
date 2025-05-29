@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://6haa6sye800o"]
+
+[ext_resource type="Texture2D" uid="uid://m7diopy8wfv8" path="res://assets/Kings and Pigs/Sprites/08-Box/Box Pieces 1.png" id="1_tyxsv"]
+[ext_resource type="Texture2D" uid="uid://cr8yh1tj8qsl4" path="res://assets/Kings and Pigs/Sprites/08-Box/Box Pieces 2.png" id="2_ki3kp"]
+[ext_resource type="Texture2D" uid="uid://c243xe72w553a" path="res://assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="3_4ggal"]
+[ext_resource type="Texture2D" uid="uid://i163qipbg7na" path="res://assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="4_xw7kk"]
+
+[sub_resource type="PhysicsMaterial" id="74"]
+bounce = 0.3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytlto"]
+atlas = ExtResource("2_ki3kp")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utto5"]
+atlas = ExtResource("3_4ggal")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prish"]
+atlas = ExtResource("4_xw7kk")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="72"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tyxsv")
+}],
+"loop": false,
+"name": &"0",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytlto")
+}],
+"loop": false,
+"name": &"1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utto5")
+}],
+"loop": false,
+"name": &"2",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prish")
+}],
+"loop": false,
+"name": &"3",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="73"]
+size = Vector2(10, 7)
+
+[node name="CrateFrag" type="RigidBody2D"]
+z_index = 9
+collision_layer = 1024
+physics_material_override = SubResource("74")
+gravity_scale = 3.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("72")
+animation = &"3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("73")

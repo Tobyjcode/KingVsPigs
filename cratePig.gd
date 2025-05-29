@@ -1,96 +1,144 @@
 extends CharacterBody2D
 
-enum State { IDLE, PICKING, RUN, THROWING }
+enum State { IDLE, BEFORE_JUMP, HIT, FALL, GROUND, JUMP, LOOKING_OUT }
 
 var state = State.IDLE
-var velocity := Vector2.ZERO
-var speed := 100.0
-var hit := false
+var next_state = null
+var atk_cd = -0.1
+var _dir = 1
+var _jmp_dir = 1
+var speed = 100.0
+var jump_force = 300.0
+var hit = false
 var dir := Vector2.ZERO
 var invincible_timer := 0.0
+var trigger = true # <--- Set this at the top for testing
+var rng = RandomNumberGenerator.new()
 
 @onready var sprite_anchor = $SpriteAnchor
+@onready var hitbox = $Hitbox
 
 func _ready():
-	change_state(State.PICKING)
+	change_state(State.IDLE)
+	if hitbox:
+		hitbox.area_entered.connect(_on_hitbox_area_entered)
+	rng.randomize()
 
 func _physics_process(delta):
+	atk_cd -= delta
+	var new_state = state
 	match state:
 		State.IDLE:
-			state_idle()
-		State.RUN:
-			state_run()
-		State.PICKING:
-			state_picking()
-		State.THROWING:
-			state_throwing()
+			new_state = state_idle()
+		State.BEFORE_JUMP:
+			new_state = state_before_jump()
+		State.HIT:
+			new_state = state_hit()
+		State.FALL:
+			new_state = state_fall()
+		State.GROUND:
+			new_state = state_ground()
+		State.JUMP:
+			new_state = state_jump()
+		State.LOOKING_OUT:
+			new_state = state_looking_out()
+		_:
+			pass
+	if next_state != null:
+		new_state = next_state
+		next_state = null
+	if new_state != state:
+		change_state(new_state)
 	move_and_slide()
 
 func state_idle():
-	handle_speed()
-	if abs(velocity.x) > 4:
-		change_state(State.RUN)
+	speed_handler()
+	return state
 
-func state_run():
-	handle_speed()
-	if abs(velocity.x) < 4:
-		change_state(State.IDLE)
+func state_before_jump():
+	speed_handler()
+	if velocity.y < 0:
+		return State.JUMP
+	return state
 
-func state_picking():
-	handle_speed()
+func state_hit():
+	speed_handler(0.1)
+	return state
 
-func state_throwing():
+func state_fall():
+	if is_on_floor():
+		return State.GROUND
+	return state
+
+func state_ground():
+	speed_handler(0.15)
+	return state
+
+func state_jump():
+	if is_on_floor():
+		return State.GROUND
+	elif velocity.y > 0:
+		return State.FALL
+	return state
+
+func state_looking_out():
+	speed_handler()
+	return state
+
+func speed_handler(factor := 1.0):
+	# Implement friction/acceleration if needed
 	pass
 
-func handle_speed():
-	# Add friction or acceleration if needed
-	pass
+func ready_jump(dir):
+	if state in [State.IDLE, State.LOOKING_OUT]:
+		if atk_cd > 0.0:
+			return
+		atk_cd = 1.6
+		_jmp_dir = dir
+		next_state = State.BEFORE_JUMP
 
-func movement_handler(direction: int, factor := 1.0):
-	if state in [State.PICKING, State.THROWING]:
-		return
-	sprite_anchor.scale = Vector2(-direction, 1)
-	velocity.x = lerp(velocity.x, direction * speed * factor, 0.2)
+func on_animation_finished(anim_name):
+	var state_enum = State.values().find(anim_name)
+	if state_enum == State.GROUND:
+		next_state = State.IDLE
+	elif state_enum == State.BEFORE_JUMP:
+		next_state = State.JUMP
+	if state_enum == State.HIT:
+		generate_fragments()
+		generate_pig()
+		queue_free()
+	elif state_enum == State.BEFORE_JUMP:
+		sprite_anchor.scale = Vector2(-_jmp_dir, 1)
+		velocity.x = _jmp_dir * speed * 2
+		velocity.y = -jump_force
 
-func throw_crate():
-	hit = true
-	var crate_scene = preload("res://scenes/FlyingCrate.tscn")
-	var crate = crate_scene.instantiate()
-	crate.global_position = global_position
-	get_parent().add_child(crate)
-	var throw_dir = dir.normalized()
-	var factor = dir.y < 0.1 ? 0.3 : 0.8
-	crate.apply_central_impulse(throw_dir * crate.weight * 1.5 + Vector2.UP * crate.weight * factor)
+func generate_fragments():
+	var parent = get_parent()
+	for i in range(4):
+		var frag = preload("res://nodes/crate/CrateFrag.tscn").instantiate()
+		frag.global_position = global_position
+		# Set fragment velocity here if needed
+		parent.add_child(frag)
 
-func on_throwed():
-	var pig_scene = preload("res://scenes/Pig.tscn")
-	var pig = pig_scene.instantiate()
-	pig.global_position = global_position
+func generate_pig():
+	var parent = get_parent()
+	var pig = preload("res://scenes/Pig.tscn").instantiate()
 	pig.face_dir = sprite_anchor.scale.x > 0
-	get_parent().add_child(pig)
-	queue_free()
-
-func on_animation_finished(anim_name: String):
-	if anim_name == "picking":
-		change_state(State.IDLE)
-	elif anim_name == "throwing":
-		on_throwed()
+	pig.global_position = global_position + Vector2.UP * 2
+	parent.add_child(pig)
 
 func _on_hitbox_area_entered(area):
-	if invincible_timer <= 0 and not hit and area.is_in_group("attack_box"):
+	if invincible_timer <= 0 and not hit and area.is_in_group("attack_box") and area.name != "BoxAtkBox":
 		hit = true
-		var pig_scene = preload("res://scenes/Pig.tscn")
-		var crate_scene = preload("res://scenes/Crate.tscn")
-		var pig = pig_scene.instantiate()
-		var crate = crate_scene.instantiate()
-		pig.global_position = global_position
-		crate.global_position = global_position
-		pig.dmged = true
-		pig.face_dir = sprite_anchor.scale.x < 0
-		var parent = get_parent()
-		parent.add_child(pig)
-		parent.add_child(crate)
-		queue_free()
+		_dir = -1 if area.global_position.x > global_position.x else 1
+		next_state = State.HIT
 
 func change_state(new_state):
 	state = new_state
+
+func state_wander(delta):
+	if invincible_timer < 0:
+		invincible_timer = rng.randi_range(2, 5)
+	invincible_timer -= delta
+	speed_handler()
+	velocity.x = _dir * speed

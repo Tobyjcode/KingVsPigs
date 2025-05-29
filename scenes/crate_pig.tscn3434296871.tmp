@@ -103,6 +103,7 @@ size = Vector2(17, 15)
 
 [node name="CratePig" type="CharacterBody2D"]
 script = ExtResource("1_lo23t")
+dir = null
 
 [node name="SpriteAnchor" type="Node2D" parent="."]
 
