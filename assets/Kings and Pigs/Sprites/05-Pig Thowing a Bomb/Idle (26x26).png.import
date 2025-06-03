@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lq6k40rlk0fs"
-path="res://.godot/imported/Idle (26x26).png-4db2e23451cb3f990b45b7a37996039d.ctex"
+path="res://.godot/imported/Idle (26x26).png-a7a860985e617a52772699be90fe0cc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/05-Pig Thowing a Bomb/Idle (26x26).png"
-dest_files=["res://.godot/imported/Idle (26x26).png-4db2e23451cb3f990b45b7a37996039d.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/05-Pig Thowing a Bomb/Idle (26x26).png"
+dest_files=["res://.godot/imported/Idle (26x26).png-a7a860985e617a52772699be90fe0cc1.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtapwce7okwmg"
-path="res://.godot/imported/Hello In (24x8).png-6d98b4ff5f2f215b6fe91cff2a24eec7.ctex"
+path="res://.godot/imported/Hello In (24x8).png-4c2692eccf9adfe11abc6819c7df42bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/13-Dialogue Boxes/Hello In (24x8).png"
-dest_files=["res://.godot/imported/Hello In (24x8).png-6d98b4ff5f2f215b6fe91cff2a24eec7.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/13-Dialogue Boxes/Hello In (24x8).png"
+dest_files=["res://.godot/imported/Hello In (24x8).png-4c2692eccf9adfe11abc6819c7df42bc.ctex"]
 
 [params]
 

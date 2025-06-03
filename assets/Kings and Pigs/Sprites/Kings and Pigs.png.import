@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cx0sppme1o524"
-path="res://.godot/imported/Kings and Pigs.png-0e068ec6b92cdb9c8052de7786e349f0.ctex"
+path="res://.godot/imported/Kings and Pigs.png-edbe12d48602b9436195f2c3fe3c5c6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/Kings and Pigs.png"
-dest_files=["res://.godot/imported/Kings and Pigs.png-0e068ec6b92cdb9c8052de7786e349f0.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/Kings and Pigs.png"
+dest_files=["res://.godot/imported/Kings and Pigs.png-edbe12d48602b9436195f2c3fe3c5c6f.ctex"]
 
 [params]
 

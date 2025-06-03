@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://x4jhc5p3uao2"
-path="res://.godot/imported/Run (38x28).png-b1adab820d662b3bfdb3f005f8e58236.ctex"
+path="res://.godot/imported/Run (38x28).png-3bbc5da28d3eba171c9a10477aab2035.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/02-King Pig/Run (38x28).png"
-dest_files=["res://.godot/imported/Run (38x28).png-b1adab820d662b3bfdb3f005f8e58236.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/02-King Pig/Run (38x28).png"
+dest_files=["res://.godot/imported/Run (38x28).png-3bbc5da28d3eba171c9a10477aab2035.ctex"]
 
 [params]
 

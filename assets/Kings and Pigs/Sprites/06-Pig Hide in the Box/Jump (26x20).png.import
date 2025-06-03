@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://scp2phhnlt7o"
-path="res://.godot/imported/Jump (26x20).png-de7e561e507f9a96c7ccac8c5743ae17.ctex"
+path="res://.godot/imported/Jump (26x20).png-f4784085baa01d7e5a7e37dfceaf6ec1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/06-Pig Hide in the Box/Jump (26x20).png"
-dest_files=["res://.godot/imported/Jump (26x20).png-de7e561e507f9a96c7ccac8c5743ae17.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/06-Pig Hide in the Box/Jump (26x20).png"
+dest_files=["res://.godot/imported/Jump (26x20).png-f4784085baa01d7e5a7e37dfceaf6ec1.ctex"]
 
 [params]
 

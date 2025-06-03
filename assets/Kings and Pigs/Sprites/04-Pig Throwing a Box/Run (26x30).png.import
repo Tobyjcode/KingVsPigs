@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpmv2vhguntgx"
-path="res://.godot/imported/Run (26x30).png-23b82080cafbaf142d1b394c8c9a5a08.ctex"
+path="res://.godot/imported/Run (26x30).png-365fdae5409867320fb1849c2fa7dbb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/04-Pig Throwing a Box/Run (26x30).png"
-dest_files=["res://.godot/imported/Run (26x30).png-23b82080cafbaf142d1b394c8c9a5a08.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/04-Pig Throwing a Box/Run (26x30).png"
+dest_files=["res://.godot/imported/Run (26x30).png-365fdae5409867320fb1849c2fa7dbb5.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ciaoqn0gd33ta"
-path="res://.godot/imported/Throwing Box (26x30).png-6ca7e1f8eb656068c9fbc108a4350b36.ctex"
+path="res://.godot/imported/Throwing Box (26x30).png-52821e8f8c886392f895d804eba416e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/04-Pig Throwing a Box/Throwing Box (26x30).png"
-dest_files=["res://.godot/imported/Throwing Box (26x30).png-6ca7e1f8eb656068c9fbc108a4350b36.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/04-Pig Throwing a Box/Throwing Box (26x30).png"
+dest_files=["res://.godot/imported/Throwing Box (26x30).png-52821e8f8c886392f895d804eba416e4.ctex"]
 
 [params]
 

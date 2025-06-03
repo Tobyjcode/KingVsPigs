@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2b4l7maahpns"
-path="res://.godot/imported/Big Diamond Idle (18x14).png-f8e55f481f3cbefbb269ec75a5bc7fe3.ctex"
+path="res://.godot/imported/Big Diamond Idle (18x14).png-83ee67d8bb1c3de40e16887c191b915e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/12-Live and Coins/Big Diamond Idle (18x14).png"
-dest_files=["res://.godot/imported/Big Diamond Idle (18x14).png-f8e55f481f3cbefbb269ec75a5bc7fe3.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/12-Live and Coins/Big Diamond Idle (18x14).png"
+dest_files=["res://.godot/imported/Big Diamond Idle (18x14).png-83ee67d8bb1c3de40e16887c191b915e.ctex"]
 
 [params]
 

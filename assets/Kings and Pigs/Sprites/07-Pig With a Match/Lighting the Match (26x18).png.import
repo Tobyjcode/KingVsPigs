@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://23xvh34s4qk5"
-path="res://.godot/imported/Lighting the Match (26x18).png-a4866cc8c0b9ba4447550a312440db12.ctex"
+path="res://.godot/imported/Lighting the Match (26x18).png-745083ee1f7b9ed11f2b1bc235c8a235.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/07-Pig With a Match/Lighting the Match (26x18).png"
-dest_files=["res://.godot/imported/Lighting the Match (26x18).png-a4866cc8c0b9ba4447550a312440db12.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/07-Pig With a Match/Lighting the Match (26x18).png"
+dest_files=["res://.godot/imported/Lighting the Match (26x18).png-745083ee1f7b9ed11f2b1bc235c8a235.ctex"]
 
 [params]
 

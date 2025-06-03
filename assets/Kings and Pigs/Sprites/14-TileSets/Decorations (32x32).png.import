@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dn5pk4sf1sf25"
-path="res://.godot/imported/Decorations (32x32).png-0d8d84d7fca06f193fe912ea6d6850a9.ctex"
+path="res://.godot/imported/Decorations (32x32).png-8dbe47f76499806c39158f991d7b8e07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/14-TileSets/Decorations (32x32).png"
-dest_files=["res://.godot/imported/Decorations (32x32).png-0d8d84d7fca06f193fe912ea6d6850a9.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/14-TileSets/Decorations (32x32).png"
+dest_files=["res://.godot/imported/Decorations (32x32).png-8dbe47f76499806c39158f991d7b8e07.ctex"]
 
 [params]
 

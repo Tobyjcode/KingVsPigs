@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bblvh6e1ducv0"
-path="res://.godot/imported/Ground (34x28).png-1b3492e529af7bad5177658cdf0695f0.ctex"
+path="res://.godot/imported/Ground (34x28).png-f247ea2c2e8fc6c5f0e5137e991c0e51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/03-Pig/Ground (34x28).png"
-dest_files=["res://.godot/imported/Ground (34x28).png-1b3492e529af7bad5177658cdf0695f0.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/03-Pig/Ground (34x28).png"
+dest_files=["res://.godot/imported/Ground (34x28).png-f247ea2c2e8fc6c5f0e5137e991c0e51.ctex"]
 
 [params]
 

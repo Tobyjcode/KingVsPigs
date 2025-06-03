@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lieepu43vnx5"
-path="res://.godot/imported/Big Heart Idle (18x14).png-8bc63e3c0ce7377db1ad568155c6aed9.ctex"
+path="res://.godot/imported/Big Heart Idle (18x14).png-cbe45876ad6a6a718a59298d4d28e5ac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/12-Live and Coins/Big Heart Idle (18x14).png"
-dest_files=["res://.godot/imported/Big Heart Idle (18x14).png-8bc63e3c0ce7377db1ad568155c6aed9.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/12-Live and Coins/Big Heart Idle (18x14).png"
+dest_files=["res://.godot/imported/Big Heart Idle (18x14).png-cbe45876ad6a6a718a59298d4d28e5ac.ctex"]
 
 [params]
 

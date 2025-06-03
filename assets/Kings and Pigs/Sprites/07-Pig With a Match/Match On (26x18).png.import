@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6lu0q727e7cx"
-path="res://.godot/imported/Match On (26x18).png-334c612385e389bcf6517af23e353d95.ctex"
+path="res://.godot/imported/Match On (26x18).png-6b1ca59b6cd268725d0dfa29695d92cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/07-Pig With a Match/Match On (26x18).png"
-dest_files=["res://.godot/imported/Match On (26x18).png-334c612385e389bcf6517af23e353d95.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/07-Pig With a Match/Match On (26x18).png"
+dest_files=["res://.godot/imported/Match On (26x18).png-6b1ca59b6cd268725d0dfa29695d92cf.ctex"]
 
 [params]
 

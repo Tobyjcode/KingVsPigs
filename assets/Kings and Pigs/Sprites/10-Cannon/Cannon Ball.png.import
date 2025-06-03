@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8gap7wrp5inj"
-path="res://.godot/imported/Cannon Ball.png-c737fd517716e0efaa69f8e6256830c7.ctex"
+path="res://.godot/imported/Cannon Ball.png-93097ad33a0876c12c1f589763940ea7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/10-Cannon/Cannon Ball.png"
-dest_files=["res://.godot/imported/Cannon Ball.png-c737fd517716e0efaa69f8e6256830c7.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/10-Cannon/Cannon Ball.png"
+dest_files=["res://.godot/imported/Cannon Ball.png-93097ad33a0876c12c1f589763940ea7.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bk6kllqvy0xqa"
-path="res://.godot/imported/Big Heart Hit (18x14).png-e2d5133d8963f20c11a581d2771d4783.ctex"
+path="res://.godot/imported/Big Heart Hit (18x14).png-4bb6567f1302c9c471f40a40073fa3e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/12-Live and Coins/Big Heart Hit (18x14).png"
-dest_files=["res://.godot/imported/Big Heart Hit (18x14).png-e2d5133d8963f20c11a581d2771d4783.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/12-Live and Coins/Big Heart Hit (18x14).png"
+dest_files=["res://.godot/imported/Big Heart Hit (18x14).png-4bb6567f1302c9c471f40a40073fa3e3.ctex"]
 
 [params]
 

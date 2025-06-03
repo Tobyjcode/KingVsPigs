@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7688iitami0g"
-path="res://.godot/imported/Idle (26x30).png-fdfa7ccd7663708ab1f7fd36f73baa65.ctex"
+path="res://.godot/imported/Idle (26x30).png-d5bcb4e53e5a701d24b7d25d8da0781f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/04-Pig Throwing a Box/Idle (26x30).png"
-dest_files=["res://.godot/imported/Idle (26x30).png-fdfa7ccd7663708ab1f7fd36f73baa65.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/04-Pig Throwing a Box/Idle (26x30).png"
+dest_files=["res://.godot/imported/Idle (26x30).png-d5bcb4e53e5a701d24b7d25d8da0781f.ctex"]
 
 [params]
 

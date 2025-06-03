@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://btljlju16m0y0"
-path="res://.godot/imported/Fall (78x58).png-f7948fbd1c0adcedcf14fc75ee9f200b.ctex"
+path="res://.godot/imported/Fall (78x58).png-230f246c34be4fc4f940205e2edc6fcf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/01-King Human/Fall (78x58).png"
-dest_files=["res://.godot/imported/Fall (78x58).png-f7948fbd1c0adcedcf14fc75ee9f200b.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/01-King Human/Fall (78x58).png"
+dest_files=["res://.godot/imported/Fall (78x58).png-230f246c34be4fc4f940205e2edc6fcf.ctex"]
 
 [params]
 

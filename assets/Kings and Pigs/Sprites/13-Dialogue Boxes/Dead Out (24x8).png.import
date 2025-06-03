@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clwa16rhoulqr"
-path="res://.godot/imported/Dead Out (24x8).png-07ff8d379085e1a63323d9776c5bace1.ctex"
+path="res://.godot/imported/Dead Out (24x8).png-4d601f5da68f1b0809c6a616449e927c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/13-Dialogue Boxes/Dead Out (24x8).png"
-dest_files=["res://.godot/imported/Dead Out (24x8).png-07ff8d379085e1a63323d9776c5bace1.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/13-Dialogue Boxes/Dead Out (24x8).png"
+dest_files=["res://.godot/imported/Dead Out (24x8).png-4d601f5da68f1b0809c6a616449e927c.ctex"]
 
 [params]
 

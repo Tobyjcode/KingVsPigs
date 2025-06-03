@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://uyn7aq1vuhd0"
-path="res://.godot/imported/Bomb Off.png-14a66881f9ab4a3b0e8b3664da495e0e.ctex"
+path="res://.godot/imported/Bomb Off.png-cb48cf72ccc206b24ff15ed80a9d9ff3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/09-Bomb/Bomb Off.png"
-dest_files=["res://.godot/imported/Bomb Off.png-14a66881f9ab4a3b0e8b3664da495e0e.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/09-Bomb/Bomb Off.png"
+dest_files=["res://.godot/imported/Bomb Off.png-cb48cf72ccc206b24ff15ed80a9d9ff3.ctex"]
 
 [params]
 

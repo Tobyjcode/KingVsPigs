@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3m051bmm5kfd"
-path="res://.godot/imported/Idle.png-01fdf95b81aef2d4461b5acd32e5d932.ctex"
+path="res://.godot/imported/Idle.png-0066db7ac1ef9c9d8ad629657521f31e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/10-Cannon/Idle.png"
-dest_files=["res://.godot/imported/Idle.png-01fdf95b81aef2d4461b5acd32e5d932.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/10-Cannon/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-0066db7ac1ef9c9d8ad629657521f31e.ctex"]
 
 [params]
 

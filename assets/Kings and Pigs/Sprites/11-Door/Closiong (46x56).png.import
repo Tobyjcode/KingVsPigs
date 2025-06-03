@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3jlq6apxrlom"
-path="res://.godot/imported/Closiong (46x56).png-4092450685aedaa9e399fbcf27655c43.ctex"
+path="res://.godot/imported/Closiong (46x56).png-7e70409704eefae3571cde828b92b6ac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kings and Pigs/Sprites/11-Door/Closiong (46x56).png"
-dest_files=["res://.godot/imported/Closiong (46x56).png-4092450685aedaa9e399fbcf27655c43.ctex"]
+source_file="res://Assets/Kings and Pigs/Sprites/11-Door/Closiong (46x56).png"
+dest_files=["res://.godot/imported/Closiong (46x56).png-7e70409704eefae3571cde828b92b6ac.ctex"]
 
 [params]
 
