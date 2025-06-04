@@ -8,15 +8,21 @@ const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking = false
 var is_hit = false
+var is_on_cooldown = false
+var is_winding_up = false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
+@onready var attack_area = $AttackArea
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_AnimatedSprite2D_animation_finished)
 	hit_timer.timeout.connect(_on_HitTimer_timeout)
 
 func _physics_process(delta):
+	if is_hit:
+		return
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -25,6 +31,7 @@ func _physics_process(delta):
 	if not is_attacking and Input.is_action_just_pressed("attack"):
 		is_attacking = true
 		animated_sprite.play("attack")
+		attack()
 
 	# Prevent movement and jumping while attacking or hit
 	if is_attacking or is_hit:
@@ -74,7 +81,16 @@ func hit():
 		is_hit = true
 		animated_sprite.play("hit")
 		hit_timer.start()
-		velocity.x = -100 * (-1 if animated_sprite.flip_h else 1) # Push player away from pig
 
 func _on_HitTimer_timeout():
 	is_hit = false
+
+func attack():
+	attack_area.monitoring = true
+	var bodies = attack_area.get_overlapping_bodies()
+	print("Bodies in attack area: ", bodies)
+	for body in bodies:
+		if body.has_method("hit"):
+			print("Hitting: ", body)
+			body.hit()
+	attack_area.monitoring = false

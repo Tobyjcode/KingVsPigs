@@ -404,10 +404,16 @@ script = ExtResource("1_g2els")
 z_index = 5
 position = Vector2(8, -15)
 sprite_frames = SubResource("SpriteFrames_urp6f")
-animation = &"idle"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -11)
 shape = SubResource("CircleShape2D_bwjto")
 
 [node name="HitTimer" type="Timer" parent="."]
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
+position = Vector2(47.547, -6.9155)
+polygon = PackedVector2Array(-27.547, -24.0845, -22.547, -31.0845, -13.547, -31.0845, -3.547, -23.0845, -0.547005, -9.0845, -0.547005, 1.9155, -7.547, 11.9155, -20.547, 18.9155, -31.547, 19.9155, -41.547, 19.9155, -54.547, 15.9155, -60.547, 8.9155, -54.547, 7.9155, -43.547, 9.9155, -33.547, 9.9155, -25.547, 2.9155, -23.547, -2.0845, -22.547, -9.0845, -26.547, -16.0845, -28.547, -21.0845)

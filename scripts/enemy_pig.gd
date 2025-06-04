@@ -10,20 +10,26 @@ var start_position: Vector2
 var patrol_direction = 1
 var is_attacking = false
 var is_on_cooldown = false
+var is_hit = false
+var is_winding_up = false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var attack_windup_timer: Timer = $AttackWindupTimer
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
-var is_winding_up = false
+@onready var hit_timer: Timer = $HitTimer
+@onready var attack_area = $AttackArea
 
 func _ready():
 	start_position = position
-	animated_sprite.animation_finished.connect(_on_AnimatedSprite2D_animation_finished)
-	attack_windup_timer.timeout.connect(_on_AttackWindupTimer_timeout)
-	attack_cooldown_timer.timeout.connect(_on_AttackCooldownTimer_timeout)
+	animated_sprite.animation_finished.connect(_on_animation_finished)
+	attack_windup_timer.timeout.connect(_on_attack_windup_timeout)
+	attack_cooldown_timer.timeout.connect(_on_attack_cooldown_timeout)
+	hit_timer.timeout.connect(_on_hit_timer_timeout)
 
 func _physics_process(delta):
+	if is_hit:
+		return
 	# Add gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -32,12 +38,10 @@ func _physics_process(delta):
 	if player and position.distance_to(player.position) < DETECTION_RANGE:
 		# If close enough, start windup if not already attacking or winding up or cooling down
 		if position.distance_to(player.position) < ATTACK_RANGE:
-			if not is_attacking and not is_winding_up and not is_on_cooldown:
+			if not is_attacking and not is_on_cooldown and not is_winding_up:
 				is_winding_up = true
 				animated_sprite.play("attack")
 				attack_windup_timer.start()
-				player.hit()
-				attack_cooldown_timer.start()
 			# Always face the player during attack or windup
 			var direction = 1 if player.position.x > position.x else -1
 			animated_sprite.flip_h = direction > 0
@@ -67,20 +71,38 @@ func _physics_process(delta):
 		animated_sprite.play("run")
 	move_and_slide()
 
-func _on_AttackWindupTimer_timeout():
+func _on_attack_windup_timeout():
 	is_winding_up = false
 	is_attacking = true
-	# Actually do the attack now!
 	if player and position.distance_to(player.position) < ATTACK_RANGE:
 		player.hit()
-	animated_sprite.play("attack")
 	attack_cooldown_timer.start()
 
-func _on_AttackCooldownTimer_timeout():
+func _on_attack_cooldown_timeout():
 	is_attacking = false
 	is_on_cooldown = false
 
-func _on_AnimatedSprite2D_animation_finished():
+func _on_animation_finished():
 	if animated_sprite.animation == "attack":
 		is_attacking = false
 		is_on_cooldown = true
+
+func _on_hit_timer_timeout():
+	is_hit = false
+
+func hit():
+	if not is_hit:
+		print("Piggy got hit!")
+		is_hit = true
+		animated_sprite.play("hit")
+		hit_timer.start()
+
+func attack():
+	attack_area.monitoring = true
+	var bodies = attack_area.get_overlapping_bodies()
+	print("Bodies in attack area: ", bodies)
+	for body in bodies:
+		if body.has_method("hit"):
+			print("Hitting: ", body)
+			body.hit()
+	attack_area.monitoring = false
