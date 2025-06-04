@@ -210,3 +210,7 @@ animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ow6q2")
+
+[node name="AttackWindupTimer" type="Timer" parent="."]
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]

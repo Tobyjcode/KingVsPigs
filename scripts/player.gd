@@ -74,6 +74,7 @@ func hit():
 		is_hit = true
 		animated_sprite.play("hit")
 		hit_timer.start()
+		velocity.x = -100 * (-1 if animated_sprite.flip_h else 1) # Push player away from pig
 
 func _on_HitTimer_timeout():
 	is_hit = false
