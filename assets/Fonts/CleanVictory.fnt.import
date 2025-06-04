@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://d3cs80n8io813"
+path="res://.godot/imported/CleanVictory.fnt-37aa96d10b41b6b77253f954121d3fc2.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/CleanVictory.fnt"
+dest_files=["res://.godot/imported/CleanVictory.fnt-37aa96d10b41b6b77253f954121d3fc2.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

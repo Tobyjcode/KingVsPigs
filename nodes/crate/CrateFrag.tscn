@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://6haa6sye800o"]
 
-[ext_resource type="Texture2D" uid="uid://m7diopy8wfv8" path="res://assets/Kings and Pigs/Sprites/08-Box/Box Pieces 1.png" id="1_tyxsv"]
-[ext_resource type="Texture2D" uid="uid://cr8yh1tj8qsl4" path="res://assets/Kings and Pigs/Sprites/08-Box/Box Pieces 2.png" id="2_ki3kp"]
-[ext_resource type="Texture2D" uid="uid://c243xe72w553a" path="res://assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="3_4ggal"]
-[ext_resource type="Texture2D" uid="uid://i163qipbg7na" path="res://assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="4_xw7kk"]
+[ext_resource type="Texture2D" uid="uid://m7diopy8wfv8" path="res://Assets/Sprites/08-Box/Box Pieces 1.png" id="1_tyxsv"]
+[ext_resource type="Texture2D" uid="uid://cr8yh1tj8qsl4" path="res://Assets/Sprites/08-Box/Box Pieces 2.png" id="2_ki3kp"]
+[ext_resource type="Texture2D" uid="uid://c243xe72w553a" path="res://Assets/Sprites/08-Box/Box Pieces 3.png" id="3_4ggal"]
+[ext_resource type="Texture2D" uid="uid://i163qipbg7na" path="res://Assets/Sprites/08-Box/Box Pieces 4.png" id="4_xw7kk"]
 
 [sub_resource type="PhysicsMaterial" id="74"]
 bounce = 0.3

@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://f0hsgn4ab8dg"
+path="res://.godot/imported/CleanCraters.fnt-7d8a15f8f989e055a90b158f79155615.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/CleanCraters.fnt"
+dest_files=["res://.godot/imported/CleanCraters.fnt-7d8a15f8f989e055a90b158f79155615.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

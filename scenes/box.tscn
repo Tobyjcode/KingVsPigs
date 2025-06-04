@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvlpf7cffg5bj"]
 
-[ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://assets/Kings and Pigs/Sprites/08-Box/Idle.png" id="1_3inec"]
+[ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://Assets/Sprites/08-Box/Idle.png" id="1_3inec"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kyaj"]
 size = Vector2(19, 14.5)

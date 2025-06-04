@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://cvxqh8iqklcuh"
+path="res://.godot/imported/BasicPupBlack.fnt-aa4d27dfc7a5a626b18f9f30f70a23e4.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/BasicPupBlack.fnt"
+dest_files=["res://.godot/imported/BasicPupBlack.fnt-aa4d27dfc7a5a626b18f9f30f70a23e4.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

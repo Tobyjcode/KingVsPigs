@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://durpk3530uu50"
+path="res://.godot/imported/BasicPupWhite.fnt-0e66527a2fbf78006d7f0793d73e7ae9.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/BasicPupWhite.fnt"
+dest_files=["res://.godot/imported/BasicPupWhite.fnt-0e66527a2fbf78006d7f0793d73e7ae9.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

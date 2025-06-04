@@ -1,11 +1,11 @@
 [gd_scene load_steps=18 format=3 uid="uid://bdwst50utlk8l"]
 
-[ext_resource type="Texture2D" uid="uid://dumj8lw1wbr2e" path="res://assets/Kings and Pigs/Sprites/06-Pig Hide in the Box/Looking Out (26x20).png" id="1_dhm0k"]
+[ext_resource type="Texture2D" uid="uid://dumj8lw1wbr2e" path="res://Assets/Sprites/06-Pig Hide in the Box/Looking Out (26x20).png" id="1_dhm0k"]
 [ext_resource type="Script" uid="uid://cmln3r5j3y87b" path="res://cratePigAI.gd" id="1_lo23t"]
-[ext_resource type="Texture2D" uid="uid://bhw327ig3vthy" path="res://assets/Kings and Pigs/Sprites/06-Pig Hide in the Box/Fall (26x20).png" id="3_lo23t"]
-[ext_resource type="Texture2D" uid="uid://bbw5wvq0gjnnk" path="res://assets/Kings and Pigs/Sprites/06-Pig Hide in the Box/Ground (26x20).png" id="4_rwnpw"]
-[ext_resource type="Texture2D" uid="uid://scp2phhnlt7o" path="res://assets/Kings and Pigs/Sprites/06-Pig Hide in the Box/Jump (26x20).png" id="5_a6kyt"]
-[ext_resource type="Texture2D" uid="uid://bc8d2703jcf8y" path="res://assets/Kings and Pigs/Sprites/06-Pig Hide in the Box/Jump Anticipation (26x20).png" id="6_q01go"]
+[ext_resource type="Texture2D" uid="uid://bhw327ig3vthy" path="res://Assets/Sprites/06-Pig Hide in the Box/Fall (26x20).png" id="3_lo23t"]
+[ext_resource type="Texture2D" uid="uid://bbw5wvq0gjnnk" path="res://Assets/Sprites/06-Pig Hide in the Box/Ground (26x20).png" id="4_rwnpw"]
+[ext_resource type="Texture2D" uid="uid://scp2phhnlt7o" path="res://Assets/Sprites/06-Pig Hide in the Box/Jump (26x20).png" id="5_a6kyt"]
+[ext_resource type="Texture2D" uid="uid://bc8d2703jcf8y" path="res://Assets/Sprites/06-Pig Hide in the Box/Jump Anticipation (26x20).png" id="6_q01go"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_at67k"]
 atlas = ExtResource("1_dhm0k")

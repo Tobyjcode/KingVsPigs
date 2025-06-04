@@ -1,10 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://y35ewkaajeqr"]
+[gd_scene load_steps=26 format=3 uid="uid://dyvps71wst4sr"]
 
-[ext_resource type="Script" uid="uid://cnjxfxog1yadr" path="res://scenes/pig.gd" id="1_7e1yb"]
+[ext_resource type="Script" path="res://scenes/pig.gd" id="1_7e1yb"]
 [ext_resource type="PackedScene" uid="uid://dmixkcy6oojq1" path="res://scenes/piggy.tscn" id="1_ct3s0"]
-[ext_resource type="Texture2D" uid="uid://0re6e3f1tkjp" path="res://assets/Kings and Pigs/Sprites/03-Pig/Attack (34x28).png" id="1_j740r"]
-[ext_resource type="Texture2D" uid="uid://cgy70rw6km6ho" path="res://assets/Kings and Pigs/Sprites/03-Pig/Hit (34x28).png" id="2_ct3s0"]
-[ext_resource type="Texture2D" uid="uid://cr44fsllx7qkh" path="res://assets/Kings and Pigs/Sprites/03-Pig/Idle (34x28).png" id="3_7e1yb"]
+[ext_resource type="Texture2D" uid="uid://0re6e3f1tkjp" path="res://Assets/Sprites/03-Pig/Attack (34x28).png" id="1_j740r"]
+[ext_resource type="Texture2D" uid="uid://cgy70rw6km6ho" path="res://Assets/Sprites/03-Pig/Hit (34x28).png" id="2_ct3s0"]
+[ext_resource type="Texture2D" uid="uid://cr44fsllx7qkh" path="res://Assets/Sprites/03-Pig/Idle (34x28).png" id="3_7e1yb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnrkt"]
 atlas = ExtResource("1_j740r")
