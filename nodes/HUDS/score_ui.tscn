@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://j40m86t4cokl"]
+[gd_scene load_steps=15 format=3 uid="uid://j40m86t4cokl"]
 
 [ext_resource type="Script" uid="uid://fqhvnrkqjbul" path="res://scripts/score_ui.gd" id="1_81aap"]
 [ext_resource type="Texture2D" uid="uid://cfo1ln6qhxjrj" path="res://Assets/Sprites/12-Live and Coins/Live Bar.png" id="1_yt0h2"]
 [ext_resource type="Texture2D" uid="uid://dphmkouw5u7ta" path="res://Assets/Sprites/12-Live and Coins/Small Diamond (18x14).png" id="2_jw7sf"]
 [ext_resource type="FontFile" uid="uid://c6q0lhvrmcxa3" path="res://Assets/Fonts/BMFont.fnt" id="2_npyp2"]
+[ext_resource type="PackedScene" uid="uid://0h5ryfn0d2ao" path="res://nodes/HUDS/heart.tscn" id="5_71jnt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npyp2"]
 atlas = ExtResource("2_jw7sf")
@@ -83,15 +84,37 @@ texture = ExtResource("1_yt0h2")
 [node name="ScoreGroup" type="Node2D" parent="ScoreUIContainer"]
 
 [node name="DiamondScoreUI" type="Label" parent="ScoreUIContainer/ScoreGroup"]
-offset_left = 34.0
-offset_top = 28.0
-offset_right = 66.0
-offset_bottom = 77.0
+offset_left = 33.0
+offset_top = 29.0
+offset_right = 65.0
+offset_bottom = 78.0
 theme_override_fonts/font = ExtResource("2_npyp2")
 text = "0
 "
 
 [node name="DiamondUI" type="AnimatedSprite2D" parent="ScoreUIContainer/ScoreGroup/DiamondScoreUI"]
-position = Vector2(-9, 4)
+position = Vector2(-9, 5)
 sprite_frames = SubResource("SpriteFrames_wfp5c")
-frame_progress = 0.0962618
+autoplay = "default"
+frame_progress = 0.222657
+
+[node name="LifeBars" type="Node2D" parent="ScoreUIContainer"]
+
+[node name="Lifebars" type="HBoxContainer" parent="ScoreUIContainer/LifeBars"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Heart" parent="ScoreUIContainer/LifeBars/Lifebars" instance=ExtResource("5_71jnt")]
+position = Vector2(20, 20)
+autoplay = "idle"
+frame_progress = 0.364427
+
+[node name="Heart2" parent="ScoreUIContainer/LifeBars/Lifebars" instance=ExtResource("5_71jnt")]
+position = Vector2(31, 20)
+autoplay = "idle"
+frame_progress = 0.251878
+
+[node name="Heart3" parent="ScoreUIContainer/LifeBars/Lifebars" instance=ExtResource("5_71jnt")]
+position = Vector2(42, 20)
+autoplay = "idle"
+frame_progress = 0.938489
