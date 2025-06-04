@@ -7,11 +7,14 @@ const JUMP_VELOCITY = -300.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking = false
+var is_hit = false
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var hit_timer: Timer = $HitTimer
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_AnimatedSprite2D_animation_finished)
+	hit_timer.timeout.connect(_on_HitTimer_timeout)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -23,8 +26,8 @@ func _physics_process(delta):
 		is_attacking = true
 		animated_sprite.play("attack")
 
-	# Prevent movement and jumping while attacking
-	if is_attacking:
+	# Prevent movement and jumping while attacking or hit
+	if is_attacking or is_hit:
 		velocity.x = 0
 		move_and_slide()
 		return
@@ -65,3 +68,12 @@ func _physics_process(delta):
 func _on_AnimatedSprite2D_animation_finished():
 	if animated_sprite.animation == "attack":
 		is_attacking = false
+
+func hit():
+	if not is_hit:
+		is_hit = true
+		animated_sprite.play("hit")
+		hit_timer.start()
+
+func _on_HitTimer_timeout():
+	is_hit = false

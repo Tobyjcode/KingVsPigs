@@ -204,7 +204,7 @@ script = ExtResource("1_56si3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pjtmk")
-animation = &"run"
+animation = &"attack"
 
 [node name="Node" type="Node" parent="."]
 

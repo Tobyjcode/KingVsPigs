@@ -96,7 +96,7 @@ text = "0
 position = Vector2(-9, 5)
 sprite_frames = SubResource("SpriteFrames_wfp5c")
 autoplay = "default"
-frame_progress = 0.222657
+frame_progress = 0.335544
 
 [node name="LifeBars" type="Node2D" parent="ScoreUIContainer"]
 
@@ -107,14 +107,14 @@ offset_bottom = 40.0
 [node name="Heart" parent="ScoreUIContainer/LifeBars/Lifebars" instance=ExtResource("5_71jnt")]
 position = Vector2(20, 20)
 autoplay = "idle"
-frame_progress = 0.364427
+frame_progress = 0.477314
 
 [node name="Heart2" parent="ScoreUIContainer/LifeBars/Lifebars" instance=ExtResource("5_71jnt")]
 position = Vector2(31, 20)
 autoplay = "idle"
-frame_progress = 0.251878
+frame_progress = 0.364765
 
 [node name="Heart3" parent="ScoreUIContainer/LifeBars/Lifebars" instance=ExtResource("5_71jnt")]
 position = Vector2(42, 20)
 autoplay = "idle"
-frame_progress = 0.938489
+frame_progress = 0.0513764

@@ -98,7 +98,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -109,7 +109,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hit",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -161,7 +161,6 @@ script = ExtResource("1_7e1yb")
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Piggy"]
 sprite_frames = SubResource("SpriteFrames_7e1yb")
 animation = &"attack"
-frame_progress = 0.0993523
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Piggy"]
 position = Vector2(3, 6)

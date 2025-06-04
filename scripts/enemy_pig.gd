@@ -29,6 +29,7 @@ func _physics_process(delta):
 			if not is_attacking:
 				is_attacking = true
 				animated_sprite.play("attack")
+				player.hit()
 			# Always face the player during attack
 			var direction = 1 if player.position.x > position.x else -1
 			animated_sprite.flip_h = direction > 0
