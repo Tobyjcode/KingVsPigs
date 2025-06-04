@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://c05o3xp4hr6rn"]
+[gd_scene load_steps=14 format=3 uid="uid://j40m86t4cokl"]
 
+[ext_resource type="Script" uid="uid://fqhvnrkqjbul" path="res://scripts/score_ui.gd" id="1_81aap"]
 [ext_resource type="Texture2D" uid="uid://cfo1ln6qhxjrj" path="res://Assets/Sprites/12-Live and Coins/Live Bar.png" id="1_yt0h2"]
 [ext_resource type="Texture2D" uid="uid://dphmkouw5u7ta" path="res://Assets/Sprites/12-Live and Coins/Small Diamond (18x14).png" id="2_jw7sf"]
 [ext_resource type="FontFile" uid="uid://c6q0lhvrmcxa3" path="res://Assets/Fonts/BMFont.fnt" id="2_npyp2"]
@@ -69,19 +70,19 @@ animations = [{
 }]
 
 [node name="ScoreUI" type="CanvasLayer"]
+script = ExtResource("1_81aap")
 
-[node name="Lifebars" type="TextureRect" parent="."]
-offset_right = 66.0
-offset_bottom = 40.0
-texture = ExtResource("1_yt0h2")
-
-[node name="DiamondUI" type="HBoxContainer" parent="."]
+[node name="ScoreUIContainer" type="HBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ScoreGroup" type="Node" parent="DiamondUI"]
+[node name="Lifebars" type="TextureRect" parent="ScoreUIContainer"]
+layout_mode = 2
+texture = ExtResource("1_yt0h2")
 
-[node name="DiamondScoreUI" type="Label" parent="DiamondUI/ScoreGroup"]
+[node name="ScoreGroup" type="Node2D" parent="ScoreUIContainer"]
+
+[node name="DiamondScoreUI" type="Label" parent="ScoreUIContainer/ScoreGroup"]
 offset_left = 34.0
 offset_top = 28.0
 offset_right = 66.0
@@ -90,7 +91,7 @@ theme_override_fonts/font = ExtResource("2_npyp2")
 text = "0
 "
 
-[node name="DiamondUI" type="AnimatedSprite2D" parent="DiamondUI/ScoreGroup/DiamondScoreUI"]
+[node name="DiamondUI" type="AnimatedSprite2D" parent="ScoreUIContainer/ScoreGroup/DiamondScoreUI"]
 position = Vector2(-9, 4)
 sprite_frames = SubResource("SpriteFrames_wfp5c")
-frame_progress = 0.489953
+frame_progress = 0.0962618

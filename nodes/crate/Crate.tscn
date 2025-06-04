@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bppp4umxww2jg"]
 
-[ext_resource type="Texture2D" uid="uid://d2spom8qcs3xo" path="res://assets/Kings and Pigs/Sprites/08-Box/Hit.png" id="1_l118f"]
-[ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://assets/Kings and Pigs/Sprites/08-Box/Idle.png" id="2_ryp3t"]
+[ext_resource type="Texture2D" uid="uid://d2spom8qcs3xo" path="res://Assets/Sprites/08-Box/Hit.png" id="1_l118f"]
+[ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://Assets/Sprites/08-Box/Idle.png" id="2_ryp3t"]
 
 [sub_resource type="PhysicsMaterial" id="75"]
 bounce = 0.2
