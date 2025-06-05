@@ -14,6 +14,9 @@ var is_winding_up = false
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
 @onready var attack_area = $AttackArea
+@onready var jump_sound = $JumpSound
+@onready var hit_sound = $HitSound
+@onready var attack_sound = $AttackSound
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_AnimatedSprite2D_animation_finished)
@@ -31,6 +34,7 @@ func _physics_process(delta):
 	if not is_attacking and Input.is_action_just_pressed("attack"):
 		is_attacking = true
 		animated_sprite.play("attack")
+		attack_sound.play()
 		attack()
 
 	# Prevent movement and jumping while attacking or hit
@@ -42,6 +46,7 @@ func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		jump_sound.play()
 
 	# Get the input direction: -1, 0, 1
 	var direction = Input.get_axis("move_left", "move_right")
@@ -80,6 +85,7 @@ func hit():
 	if not is_hit:
 		is_hit = true
 		animated_sprite.play("hit")
+		hit_sound.play()
 		hit_timer.start()
 
 func _on_HitTimer_timeout():
