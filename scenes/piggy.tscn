@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://dmixkcy6oojq1"]
+[gd_scene load_steps=37 format=3 uid="uid://dmixkcy6oojq1"]
 
 [ext_resource type="Script" uid="uid://dwbatx1scim37" path="res://scripts/enemy_pig.gd" id="1_56si3"]
 [ext_resource type="Texture2D" uid="uid://0re6e3f1tkjp" path="res://Assets/Sprites/03-Pig/Attack (34x28).png" id="1_j740r"]
 [ext_resource type="Texture2D" uid="uid://cgy70rw6km6ho" path="res://Assets/Sprites/03-Pig/Hit (34x28).png" id="2_ct3s0"]
 [ext_resource type="Texture2D" uid="uid://cr44fsllx7qkh" path="res://Assets/Sprites/03-Pig/Idle (34x28).png" id="3_7e1yb"]
+[ext_resource type="Texture2D" uid="uid://bwro67ivl4nfj" path="res://Assets/Sprites/03-Pig/Dead (34x28).png" id="3_nypqq"]
 [ext_resource type="Texture2D" uid="uid://b2l6pcn2bfr5j" path="res://Assets/Sprites/03-Pig/Run (34x28).png" id="5_7wbru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnrkt"]
@@ -25,6 +26,22 @@ region = Rect2(102, 0, 34, 28)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ley84"]
 atlas = ExtResource("1_j740r")
 region = Rect2(136, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lj5m"]
+atlas = ExtResource("3_nypqq")
+region = Rect2(0, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo3qk"]
+atlas = ExtResource("3_nypqq")
+region = Rect2(34, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ju8d8"]
+atlas = ExtResource("3_nypqq")
+region = Rect2(68, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw6i1"]
+atlas = ExtResource("3_nypqq")
+region = Rect2(102, 0, 34, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_udrue"]
 atlas = ExtResource("2_ct3s0")
@@ -126,6 +143,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1lj5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo3qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ju8d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw6i1")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_udrue")
 }, {
 "duration": 1.0,
@@ -204,7 +238,7 @@ script = ExtResource("1_56si3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pjtmk")
-animation = &"run"
+animation = &"dead"
 
 [node name="Node" type="Node" parent="."]
 
