@@ -25,6 +25,11 @@ func _process(_delta):
 			return
 
 		$AnimatedSprite2D.play("open")
+		# Tell the player to play the doorIn animation
+		if player.has_method("play_door_in"):
+			player.play_door_in()
+		elif player.has_node("AnimatedSprite2D"):
+			player.get_node("AnimatedSprite2D").play("doorIn")
 		await get_tree().create_timer(0.4).timeout  # Wait for the open animation to finish
 		if next_level:
 			get_tree().change_scene_to_packed(next_level) 
