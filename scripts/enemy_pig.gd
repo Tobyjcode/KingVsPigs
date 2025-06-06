@@ -103,7 +103,8 @@ func _on_animation_finished():
 		is_on_cooldown = true
 		attack_cooldown_timer.start()
 	elif animated_sprite.animation == "dead":
-		queue_free()
+		# queue_free()  # Commented out so the pig stays visible after dying
+		pass
 
 func _on_hit_timer_timeout():
 	is_hit = false
