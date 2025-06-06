@@ -12,6 +12,10 @@ var is_attacking = false
 var is_on_cooldown = false
 var is_hit = false
 var is_winding_up = false
+var lives := 3
+var is_dead := false
+var knockback_velocity := Vector2.ZERO
+var is_falling := false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -28,6 +32,14 @@ func _ready():
 	hit_timer.timeout.connect(_on_hit_timer_timeout)
 
 func _physics_process(delta):
+	if is_dead:
+		velocity = Vector2.ZERO
+		return
+	if is_falling:
+		velocity = knockback_velocity
+		knockback_velocity.y += gravity * delta  # apply gravity
+		move_and_slide()
+		return
 	if is_hit:
 		return
 	# Add gravity
@@ -36,9 +48,9 @@ func _physics_process(delta):
 	
 	# Check if player is in range
 	if player and position.distance_to(player.position) < DETECTION_RANGE:
-		# If close enough, start windup if not already attacking or winding up or cooling down
 		if position.distance_to(player.position) < ATTACK_RANGE:
 			if not is_attacking and not is_on_cooldown and not is_winding_up:
+				is_attacking = true
 				is_winding_up = true
 				animated_sprite.play("attack")
 				attack_windup_timer.start()
@@ -73,36 +85,52 @@ func _physics_process(delta):
 
 func _on_attack_windup_timeout():
 	is_winding_up = false
-	is_attacking = true
 	if player and position.distance_to(player.position) < ATTACK_RANGE:
 		player.hit()
-	attack_cooldown_timer.start()
 
 func _on_attack_cooldown_timeout():
-	is_attacking = false
 	is_on_cooldown = false
 
 func _on_animation_finished():
-	if animated_sprite.animation == "attack":
+	if animated_sprite.animation == "hit":
+		animated_sprite.play("fall")
+	elif animated_sprite.animation == "fall":
+		animated_sprite.play("ground")
+	elif animated_sprite.animation == "ground":
+		is_falling = false
+	elif animated_sprite.animation == "attack":
 		is_attacking = false
 		is_on_cooldown = true
+		attack_cooldown_timer.start()
+	elif animated_sprite.animation == "dead":
+		queue_free()
 
 func _on_hit_timer_timeout():
 	is_hit = false
 
 func hit():
-	if not is_hit:
-		print("Piggy got hit!")
-		is_hit = true
+	if is_dead or is_hit:
+		return
+	is_hit = true
+	lives -= 1
+	if lives <= 0:
+		is_dead = true
+		animated_sprite.play("dead")
+		velocity = Vector2.ZERO
+	else:
 		animated_sprite.play("hit")
-		hit_timer.start()
+		# Knockback: move away from player
+		var dir = sign(global_position.x - player.global_position.x)
+		if dir == 0:
+			dir = 1
+		knockback_velocity = Vector2(150 * dir, -80)  # adjust to taste
+		is_falling = true
+	hit_timer.start()
 
 func attack():
 	attack_area.monitoring = true
 	var bodies = attack_area.get_overlapping_bodies()
-	print("Bodies in attack area: ", bodies)
 	for body in bodies:
 		if body.has_method("hit"):
-			print("Hitting: ", body)
 			body.hit()
 	attack_area.monitoring = false

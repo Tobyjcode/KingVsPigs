@@ -101,6 +101,12 @@ func hit():
 		hit_timer.start()
 		lives -= 1
 		update_hearts()
+		# Knockback effect
+		var knockback_dir = sign(global_position.x - get_node("../Piggy").global_position.x)
+		if knockback_dir == 0:
+			knockback_dir = 1  # fallback if on same x
+		velocity.x = 200 * knockback_dir  # adjust 200 to taste
+		velocity.y = -100  # optional: a little upward
 		if lives <= 0:
 			die()
 
