@@ -10,6 +10,8 @@ var is_attacking = false
 var is_hit = false
 var is_on_cooldown = false
 var is_winding_up = false
+var lives := 3
+var is_dead := false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
@@ -17,12 +19,21 @@ var is_winding_up = false
 @onready var jump_sound = $JumpSound
 @onready var hit_sound = $HitSound
 @onready var attack_sound = $AttackSound
+@onready var restart_message: TextureRect = $RestartMessage
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_AnimatedSprite2D_animation_finished)
 	hit_timer.timeout.connect(_on_HitTimer_timeout)
+	var hud = get_tree().get_first_node_in_group("ScoreUI")
+	if hud:
+		if hud.has_method("show_restart_message"):
+			hud.show_restart_message()
 
 func _physics_process(delta):
+	if is_dead:
+		if Input.is_action_just_pressed("restart"):
+			get_tree().reload_current_scene()
+		return
 	if is_hit:
 		return
 
@@ -82,11 +93,15 @@ func _on_AnimatedSprite2D_animation_finished():
 		is_attacking = false
 
 func hit():
-	if not is_hit:
+	if not is_hit and not is_dead:
 		is_hit = true
 		animated_sprite.play("hit")
 		hit_sound.play()
 		hit_timer.start()
+		lives -= 1
+		update_hearts()
+		if lives <= 0:
+			die()
 
 func _on_HitTimer_timeout():
 	is_hit = false
@@ -100,3 +115,22 @@ func attack():
 			print("Hitting: ", body)
 			body.hit()
 	attack_area.monitoring = false
+
+func update_hearts():
+	var hud = get_tree().get_first_node_in_group("ScoreUI")
+	if hud:
+		var lifebars = hud.get_node("ScoreUIContainer/LifeBars/Lifebars")
+		for i in range(3):
+			var heart = lifebars.get_child(i)
+			if i < lives:
+				heart.play_idle()
+			else:
+				heart.play_hit()
+
+func die():
+	print("Player died!")
+	is_dead = true
+	animated_sprite.play("dead")
+	var death_screen = get_tree().get_root().find_child("DeathScreen", true, false)
+	if death_screen:
+		death_screen.visible = true

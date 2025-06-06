@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfj53na1183dg"]
+
+[ext_resource type="FontFile" uid="uid://cvxqh8iqklcuh" path="res://Assets/Fonts/BasicPupBlack.fnt" id="1_2xle3"]
+[ext_resource type="Texture2D" uid="uid://dsd1gos8kkkto" path="res://Assets/UI/tile_0088.png" id="1_7lmbm"]
+[ext_resource type="Texture2D" uid="uid://c5elgmwxd2d62" path="res://Assets/UI/Panel2.png" id="1_d8xbd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8w4y5"]
+texture = ExtResource("1_d8xbd")
+
+[node name="DeathScreen" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.35
+anchor_right = 0.65
+anchor_bottom = 0.55
+theme_override_styles/panel = SubResource("StyleBoxTexture_8w4y5")
+
+[node name="YouDiedLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.05
+anchor_right = 0.9
+anchor_bottom = 0.3
+offset_left = -139.76
+offset_top = -8.28
+offset_right = -139.76
+offset_bottom = -8.28
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("1_2xle3")
+text = "You Died!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartKey" type="TextureRect" parent="Panel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = 68.8
+offset_top = -35.8
+offset_right = 168.8
+offset_bottom = 64.2
+scale = Vector2(2, 2)
+texture = ExtResource("1_7lmbm")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="RestartLabel" type="Label" parent="Panel"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+offset_left = 70.8
+offset_top = 58.2
+offset_right = 169.8
+offset_bottom = 98.2
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("1_2xle3")
+text = "to restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartBox" type="VBoxContainer" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = -0.02
+anchor_right = 0.65
+anchor_bottom = 0.23
+offset_left = 63.84
+offset_top = 77.792
+offset_right = 63.84
+offset_bottom = 77.792
+alignment = 1

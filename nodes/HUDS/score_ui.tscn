@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://j40m86t4cokl"]
+[gd_scene load_steps=16 format=3 uid="uid://j40m86t4cokl"]
 
 [ext_resource type="Script" uid="uid://fqhvnrkqjbul" path="res://scripts/score_ui.gd" id="1_81aap"]
 [ext_resource type="Texture2D" uid="uid://cfo1ln6qhxjrj" path="res://Assets/Sprites/12-Live and Coins/Live Bar.png" id="1_yt0h2"]
 [ext_resource type="Texture2D" uid="uid://dphmkouw5u7ta" path="res://Assets/Sprites/12-Live and Coins/Small Diamond (18x14).png" id="2_jw7sf"]
 [ext_resource type="FontFile" uid="uid://c6q0lhvrmcxa3" path="res://Assets/Fonts/BMFont.fnt" id="2_npyp2"]
 [ext_resource type="PackedScene" uid="uid://0h5ryfn0d2ao" path="res://nodes/HUDS/heart.tscn" id="5_71jnt"]
+[ext_resource type="Texture2D" uid="uid://dsd1gos8kkkto" path="res://Assets/UI/tile_0088.png" id="6_r35vf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npyp2"]
 atlas = ExtResource("2_jw7sf")
@@ -70,8 +71,16 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="ScoreUI" type="CanvasLayer"]
+[node name="ScoreUI" type="CanvasLayer" groups=["ScoreUI"]]
 script = ExtResource("1_81aap")
+
+[node name="RestartMessage" type="TextureRect" parent="."]
+visible = false
+offset_left = 7.0
+offset_top = 65.0
+offset_right = 47.0
+offset_bottom = 105.0
+texture = ExtResource("6_r35vf")
 
 [node name="ScoreUIContainer" type="HBoxContainer" parent="."]
 offset_right = 40.0
