@@ -12,6 +12,9 @@ var is_on_cooldown = false
 var is_winding_up = false
 var lives := 3
 var is_dead := false
+var is_entering_door = false
+var knockback_velocity := Vector2.ZERO
+var is_falling := false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
@@ -20,21 +23,34 @@ var is_dead := false
 @onready var hit_sound = $HitSound
 @onready var attack_sound = $AttackSound
 @onready var restart_message: TextureRect = $RestartMessage
+@onready var attack_timer: Timer = $AttackTimer
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_AnimatedSprite2D_animation_finished)
 	hit_timer.timeout.connect(_on_HitTimer_timeout)
+	if attack_timer:
+		attack_timer.timeout.connect(_on_AttackTimer_timeout)
 	var hud = get_tree().get_first_node_in_group("ScoreUI")
 	if hud:
 		if hud.has_method("show_restart_message"):
 			hud.show_restart_message()
-	animated_sprite.play("dead")
+	animated_sprite.play("idle")
 
 func _physics_process(delta):
 	if is_dead:
 		if Input.is_action_just_pressed("restart"):
 			get_tree().reload_current_scene()
 		return
+	if is_entering_door:
+		return
+
+	# FALLING/knockback logic comes BEFORE is_hit!
+	if is_falling:
+		velocity = knockback_velocity
+		knockback_velocity.y += gravity * delta
+		move_and_slide()
+		return
+
 	if is_hit:
 		return
 
@@ -92,8 +108,17 @@ func _physics_process(delta):
 func _on_AnimatedSprite2D_animation_finished():
 	if animated_sprite.animation == "attack":
 		is_attacking = false
+		check_attack_area()  # Check one final time when animation ends
+	elif animated_sprite.animation == "doorIn":
+		is_entering_door = false
+	elif animated_sprite.animation == "hit":
+		animated_sprite.play("fall")
+	elif animated_sprite.animation == "fall":
+		animated_sprite.play("ground")
+	elif animated_sprite.animation == "ground":
+		is_falling = false
 
-func hit():
+func hit(attacker = null):
 	if not is_hit and not is_dead:
 		is_hit = true
 		animated_sprite.play("hit")
@@ -102,11 +127,13 @@ func hit():
 		lives -= 1
 		update_hearts()
 		# Knockback effect
-		var knockback_dir = sign(global_position.x - get_node("../Piggy").global_position.x)
-		if knockback_dir == 0:
-			knockback_dir = 1  # fallback if on same x
-		velocity.x = 200 * knockback_dir  # adjust 200 to taste
-		velocity.y = -100  # optional: a little upward
+		var knockback_dir = 1
+		if attacker and attacker.has_method("global_position"):
+			knockback_dir = sign(global_position.x - attacker.global_position.x)
+			if knockback_dir == 0:
+				knockback_dir = 1
+		knockback_velocity = Vector2(200 * knockback_dir, -100)
+		is_falling = true
 		if lives <= 0:
 			die()
 
@@ -115,13 +142,21 @@ func _on_HitTimer_timeout():
 
 func attack():
 	attack_area.monitoring = true
+	if attack_timer:
+		attack_timer.start()
+	check_attack_area()
+
+func check_attack_area():
 	var bodies = attack_area.get_overlapping_bodies()
 	print("Bodies in attack area: ", bodies)
 	for body in bodies:
 		if body.has_method("hit"):
 			print("Hitting: ", body)
 			body.hit()
-	attack_area.monitoring = false
+
+func _on_AttackTimer_timeout():
+	if attack_area:
+		attack_area.monitoring = false
 
 func update_hearts():
 	var hud = get_tree().get_first_node_in_group("ScoreUI")
@@ -143,4 +178,6 @@ func die():
 		death_screen.visible = true
 
 func play_door_in():
+	is_entering_door = true
+	velocity = Vector2.ZERO  # Stop movement
 	animated_sprite.play("doorIn")

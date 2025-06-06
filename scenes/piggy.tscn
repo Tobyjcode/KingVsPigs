@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dmixkcy6oojq1"]
+[gd_scene load_steps=44 format=3 uid="uid://dmixkcy6oojq1"]
 
 [ext_resource type="Script" uid="uid://dwbatx1scim37" path="res://scripts/enemy_pig.gd" id="1_56si3"]
 [ext_resource type="Texture2D" uid="uid://0re6e3f1tkjp" path="res://Assets/Sprites/03-Pig/Attack (34x28).png" id="1_j740r"]
@@ -152,7 +152,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ley84")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack",
 "speed": 10.0
 }, {
@@ -270,31 +270,49 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3t7up"]
+size = Vector2(17, 17.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow6q2"]
+size = Vector2(20.5, 17.125)
 
 [node name="Piggy" type="CharacterBody2D"]
 script = ExtResource("1_56si3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pjtmk")
-animation = &"hit"
-
-[node name="Node" type="Node" parent="."]
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 4)
-shape = SubResource("RectangleShape2D_ow6q2")
+position = Vector2(3, 5.25)
+shape = SubResource("RectangleShape2D_3t7up")
 
 [node name="AttackWindupTimer" type="Timer" parent="."]
-wait_time = 0.054
+wait_time = 0.28
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 wait_time = 0.658
 
 [node name="HitTimer" type="Timer" parent="."]
+wait_time = 0.56
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(-66, 0)
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 target_position = Vector2(79, 0)
+
+[node name="DebugTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
+polygon = PackedVector2Array(-12, -12, -15, -8, -17, -5, -17, -1, -15, 3, -13, 6, -10, 7, -9, 8, -8, 8, -8, 6, -9, 4, -11, 0, -11, -3, -11, -5, -9, -8, -8, -9, -8, -12, -10, -13)
+
+[node name="Hitbox" type="Area2D" parent="." groups=["enemy_hitbox"]]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["enemy_hitbox"]]
+position = Vector2(2, 5)
+shape = SubResource("RectangleShape2D_ow6q2")
