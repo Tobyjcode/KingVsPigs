@@ -12,7 +12,6 @@ var is_on_cooldown = false
 var is_winding_up = false
 var lives := 3
 var is_dead := false
-var is_entering_door = false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
@@ -29,6 +28,7 @@ func _ready():
 	if hud:
 		if hud.has_method("show_restart_message"):
 			hud.show_restart_message()
+	animated_sprite.play("dead")
 
 func _physics_process(delta):
 	if is_dead:
@@ -70,10 +70,7 @@ func _physics_process(delta):
 		animated_sprite.flip_h = true
 	
 	# Play animations
-	if is_entering_door:
-		# Don't override the doorIn animation
-		pass
-	elif is_attacking:
+	if is_attacking:
 		# Attack animation is already playing
 		pass
 	elif is_on_floor():
@@ -132,7 +129,7 @@ func update_hearts():
 				heart.play_hit()
 
 func die():
-	print("Player died!")
+	print("Player died! (die() called)")
 	is_dead = true
 	animated_sprite.play("dead")
 	var death_screen = get_tree().get_root().find_child("DeathScreen", true, false)
@@ -140,5 +137,4 @@ func die():
 		death_screen.visible = true
 
 func play_door_in():
-	is_entering_door = true
 	animated_sprite.play("doorIn")

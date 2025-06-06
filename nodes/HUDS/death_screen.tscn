@@ -10,59 +10,49 @@ texture = ExtResource("1_d8xbd")
 [node name="DeathScreen" type="CanvasLayer"]
 
 [node name="Panel" type="Panel" parent="."]
-anchors_preset = -1
-anchor_left = 0.35
-anchor_top = 0.35
-anchor_right = 0.65
-anchor_bottom = 0.55
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_right = 180.0
+offset_bottom = 240.0
+grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_8w4y5")
 
-[node name="YouDiedLabel" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.05
-anchor_right = 0.9
-anchor_bottom = 0.3
-offset_left = -139.76
-offset_top = -8.28
-offset_right = -139.76
-offset_bottom = -8.28
-scale = Vector2(2, 2)
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel/CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="YouDiedLabel" type="Label" parent="Panel/CenterContainer/VBox"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("1_2xle3")
+theme_override_font_sizes/font_size = 32
 text = "You Died!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RestartKey" type="TextureRect" parent="Panel"]
+[node name="RestartKey" type="TextureRect" parent="Panel/CenterContainer/VBox"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-offset_left = 68.8
-offset_top = -35.8
-offset_right = 168.8
-offset_bottom = 64.2
-scale = Vector2(2, 2)
 texture = ExtResource("1_7lmbm")
 expand_mode = 1
-stretch_mode = 3
 
-[node name="RestartLabel" type="Label" parent="Panel"]
-custom_minimum_size = Vector2(0, 40)
+[node name="RestartLabel" type="Label" parent="Panel/CenterContainer/VBox"]
 layout_mode = 2
-offset_left = 70.8
-offset_top = 58.2
-offset_right = 169.8
-offset_bottom = 98.2
-scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("1_2xle3")
+theme_override_font_sizes/font_size = 32
 text = "to restart"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RestartBox" type="VBoxContainer" parent="Panel"]
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.35
 anchor_top = -0.02
 anchor_right = 0.65
