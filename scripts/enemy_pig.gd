@@ -23,6 +23,7 @@ var is_falling := false
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var hit_timer: Timer = $HitTimer
 @onready var attack_area = $AttackArea
+@onready var walking: AudioStreamPlayer2D = $Walking
 
 func _ready():
 	start_position = position

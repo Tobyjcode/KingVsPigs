@@ -24,6 +24,7 @@ var is_falling := false
 @onready var attack_sound = $AttackSound
 @onready var restart_message: TextureRect = $RestartMessage
 @onready var attack_timer: Timer = $AttackTimer
+@onready var walking: AudioStreamPlayer2D = $Walking
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_AnimatedSprite2D_animation_finished)
@@ -88,14 +89,21 @@ func _physics_process(delta):
 	# Play animations
 	if is_attacking:
 		# Attack animation is already playing
-		pass
+		if walking.playing:
+			walking.stop()
 	elif is_on_floor():
 		if direction == 0:
 			animated_sprite.play("idle")
+			if walking.playing:
+				walking.stop()
 		else:
 			animated_sprite.play("run")
+			if not walking.playing:
+				walking.play()
 	else:
 		animated_sprite.play("jump")
+		if walking.playing:
+			walking.stop()
 	
 	# Apply movement
 	if direction:
