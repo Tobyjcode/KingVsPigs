@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://6haa6sye800o"]
+[gd_scene load_steps=12 format=3 uid="uid://6haa6sye800o"]
 
+[ext_resource type="Script" uid="uid://m0qahyapofqa" path="res://nodes/crate/CrateFrag.gd" id="1_ki3kp"]
 [ext_resource type="Texture2D" uid="uid://m7diopy8wfv8" path="res://Assets/Sprites/08-Box/Box Pieces 1.png" id="1_tyxsv"]
 [ext_resource type="Texture2D" uid="uid://cr8yh1tj8qsl4" path="res://Assets/Sprites/08-Box/Box Pieces 2.png" id="2_ki3kp"]
 [ext_resource type="Texture2D" uid="uid://c243xe72w553a" path="res://Assets/Sprites/08-Box/Box Pieces 3.png" id="3_4ggal"]
@@ -63,6 +64,7 @@ z_index = 9
 collision_layer = 1024
 physics_material_override = SubResource("74")
 gravity_scale = 3.0
+script = ExtResource("1_ki3kp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("72")

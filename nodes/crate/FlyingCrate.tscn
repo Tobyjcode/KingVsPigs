@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c60lj6ntv00we"]
+[gd_scene load_steps=10 format=3 uid="uid://c60lj6ntv00we"]
 
-[ext_resource type="Texture2D" uid="uid://d2spom8qcs3xo" path="res://assets/Kings and Pigs/Sprites/08-Box/Hit.png" id="1_i4gmy"]
-[ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://assets/Kings and Pigs/Sprites/08-Box/Idle.png" id="2_40vav"]
+[ext_resource type="Texture2D" uid="uid://d2spom8qcs3xo" path="res://Assets/Sprites/08-Box/Hit.png" id="1_i4gmy"]
+[ext_resource type="Script" uid="uid://bmh2sqyfre5uj" path="res://nodes/crate/FlyingCrate.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://Assets/Sprites/08-Box/Idle.png" id="2_40vav"]
 
 [sub_resource type="PhysicsMaterial" id="75"]
 bounce = 0.2
@@ -46,6 +47,7 @@ collision_mask = 17
 mass = 20.0
 physics_material_override = SubResource("75")
 gravity_scale = 4.0
+script = ExtResource("1_script")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("72")

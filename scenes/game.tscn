@@ -898,6 +898,7 @@ position = Vector2(-227, 84)
 
 [node name="Crate" parent="." instance=ExtResource("8_gee14")]
 position = Vector2(-39, 80)
+script = null
 
 [node name="ScoreUI" parent="." instance=ExtResource("9_0tnpc")]
 
@@ -915,3 +916,6 @@ bus = &"Music"
 
 [node name="Diamond" parent="." groups=["ScoreUI"] instance=ExtResource("12_dinhu")]
 position = Vector2(138, 82)
+
+[node name="Crate2" parent="." instance=ExtResource("8_gee14")]
+position = Vector2(100, 81)
