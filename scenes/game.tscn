@@ -906,6 +906,7 @@ visible = false
 
 [node name="door" parent="." instance=ExtResource("11_kvpfn")]
 position = Vector2(335, 69)
+next_level = null
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_dinhu")
