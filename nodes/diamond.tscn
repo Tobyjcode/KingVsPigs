@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://c48hbd4pblqw3"]
+[gd_scene load_steps=18 format=3 uid="uid://c48hbd4pblqw3"]
 
+[ext_resource type="Script" uid="uid://dtutnijcsy7c8" path="res://nodes/diamond.gd" id="1_jauew"]
 [ext_resource type="Texture2D" uid="uid://bk6kllqvy0xqa" path="res://Assets/Sprites/12-Live and Coins/Big Heart Hit (18x14).png" id="1_m83s5"]
 [ext_resource type="Texture2D" uid="uid://2b4l7maahpns" path="res://Assets/Sprites/12-Live and Coins/Big Diamond Idle (18x14).png" id="2_jauew"]
 
@@ -104,6 +105,7 @@ animations = [{
 size = Vector2(17, 15)
 
 [node name="Diamond" type="Area2D"]
+script = ExtResource("1_jauew")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xqyk1")
