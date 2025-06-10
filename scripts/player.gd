@@ -83,10 +83,8 @@ func _physics_process(delta):
 	# Flip the Sprite
 	if direction > 0:
 		animated_sprite.flip_h = false
-		attack_area.scale.x = 1
 	elif direction < 0:
 		animated_sprite.flip_h = true
-		attack_area.scale.x = -1
 	
 	# Play animations
 	if is_attacking:

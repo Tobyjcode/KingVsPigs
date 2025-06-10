@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://c6fpl6p44lbnm" path="res://Assets/Sounds/KingVsPigsTheme.ogg" id="11_dinhu"]
 [ext_resource type="PackedScene" uid="uid://c5i57fcarmmr2" path="res://scenes/door.tscn" id="11_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://c48hbd4pblqw3" path="res://nodes/diamond.tscn" id="12_dinhu"]
-[ext_resource type="PackedScene" uid="uid://ccmbhcieqerou" path="res://scenes/bomberPiggy.tscn" id="12_kvuet"]
+[ext_resource type="PackedScene" uid="uid://ccmbhcieqerou" path="res://scenes/PigWithBomb.tscn" id="12_kvuet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("2_lnu2h")
@@ -921,7 +921,4 @@ position = Vector2(113, 79)
 position = Vector2(-141, 84)
 
 [node name="PigWithBomb" parent="." instance=ExtResource("12_kvuet")]
-position = Vector2(83, 93)
-
-[node name="PigWithBomb2" parent="." instance=ExtResource("12_kvuet")]
-position = Vector2(159, 92)
+position = Vector2(-225, 92)
