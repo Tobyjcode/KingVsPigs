@@ -1,11 +1,19 @@
 [gd_scene load_steps=18 format=3 uid="uid://bdwst50utlk8l"]
 
 [ext_resource type="Texture2D" uid="uid://dumj8lw1wbr2e" path="res://Assets/Sprites/06-Pig Hide in the Box/Looking Out (26x20).png" id="1_dhm0k"]
-[ext_resource type="Script" uid="uid://cmln3r5j3y87b" path="res://cratePigAI.gd" id="1_lo23t"]
+[ext_resource type="Script" uid="uid://cmln3r5j3y87b" path="res://mimicPiggyAI.gd" id="1_lo23t"]
 [ext_resource type="Texture2D" uid="uid://bhw327ig3vthy" path="res://Assets/Sprites/06-Pig Hide in the Box/Fall (26x20).png" id="3_lo23t"]
 [ext_resource type="Texture2D" uid="uid://bbw5wvq0gjnnk" path="res://Assets/Sprites/06-Pig Hide in the Box/Ground (26x20).png" id="4_rwnpw"]
 [ext_resource type="Texture2D" uid="uid://scp2phhnlt7o" path="res://Assets/Sprites/06-Pig Hide in the Box/Jump (26x20).png" id="5_a6kyt"]
 [ext_resource type="Texture2D" uid="uid://bc8d2703jcf8y" path="res://Assets/Sprites/06-Pig Hide in the Box/Jump Anticipation (26x20).png" id="6_q01go"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7p1u"]
+atlas = ExtResource("3_lo23t")
+region = Rect2(0, 0, 26, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da0en"]
+atlas = ExtResource("4_rwnpw")
+region = Rect2(0, 0, 26, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_at67k"]
 atlas = ExtResource("1_dhm0k")
@@ -18,14 +26,6 @@ region = Rect2(26, 0, 26, 20)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lo23t"]
 atlas = ExtResource("1_dhm0k")
 region = Rect2(52, 0, 26, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g7p1u"]
-atlas = ExtResource("3_lo23t")
-region = Rect2(0, 0, 26, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_da0en"]
-atlas = ExtResource("4_rwnpw")
-region = Rect2(0, 0, 26, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2dcco"]
 atlas = ExtResource("5_a6kyt")
@@ -47,6 +47,22 @@ region = Rect2(26, 0, 26, 20)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_g7p1u")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da0en")
+}],
+"loop": false,
+"name": &"ground",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_at67k")
 }, {
 "duration": 1.0,
@@ -56,24 +72,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_lo23t")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g7p1u")
-}],
-"loop": true,
-"name": &"fall",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_da0en")
-}],
-"loop": true,
-"name": &"ground",
-"speed": 5.0
+"name": &"idle",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -82,9 +82,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5nsqh")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -93,22 +93,22 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fjnbk")
 }],
-"loop": true,
+"loop": false,
 "name": &"jumpantip",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dhm0k"]
 size = Vector2(17, 15)
 
-[node name="CratePig" type="CharacterBody2D"]
+[node name="mimicPiggy" type="CharacterBody2D"]
 script = ExtResource("1_lo23t")
 
 [node name="SpriteAnchor" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteAnchor"]
 sprite_frames = SubResource("SpriteFrames_rwnpw")
-animation = &"fall"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
