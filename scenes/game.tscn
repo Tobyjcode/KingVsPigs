@@ -884,7 +884,7 @@ zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 
 [node name="Piggy" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(285, 80)
+position = Vector2(243, 81)
 
 [node name="Crate" parent="." instance=ExtResource("8_gee14")]
 position = Vector2(-39, 80)
@@ -914,7 +914,7 @@ position = Vector2(-108, 79)
 position = Vector2(-12, 85)
 
 [node name="Bomb2" parent="." instance=ExtResource("4_kvpfn")]
-position = Vector2(121, 87)
+position = Vector2(113, 79)
 
 [node name="Bomb3" parent="." instance=ExtResource("4_kvpfn")]
 position = Vector2(-141, 84)

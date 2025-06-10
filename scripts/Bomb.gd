@@ -7,10 +7,22 @@ var is_boom = false
 var can_boom = false
 var player_near = false
 var jumped = false
+var is_hit = false
+var knockback_velocity = Vector2.ZERO
+var is_falling = false
+var was_hit = false
+var boom_timer = null
 
 func _ready():
 	velocity = Vector2(-20, -1) if fly_left else Vector2(0, -1)
 	add_to_group("enemies")
+	collision_layer = 8  # Layer 8 (enemy layer that player can hit)
+	collision_mask = 5   # Mask 1 (world) and 4 (player)
+	boom_timer = Timer.new()
+	boom_timer.one_shot = true
+	boom_timer.wait_time = 0.5  # 0.5s fuse after landing
+	boom_timer.connect("timeout", Callable(self, "boom"))
+	add_child(boom_timer)
 
 func boom():
 	$BoomDetector.monitorable = true
@@ -23,6 +35,22 @@ func turn_off_detector():
 	collision_mask = 6
 
 func _physics_process(delta):
+	if is_falling:
+		velocity = knockback_velocity
+		knockback_velocity.y += gravity * delta
+		move_and_slide()
+		if is_on_floor() and was_hit and !is_boom:
+			$Ani.play("On")
+			can_boom = true
+			is_boom = true
+			was_hit = false
+			if boom_timer:
+				boom_timer.start()
+		return
+		
+	if is_hit:
+		return
+		
 	if is_on_floor():
 		velocity.x = 0
 	elif player_near and !jumped:
@@ -55,7 +83,19 @@ func _on_BoomDetector_body_entered(body):
 		body.hit()
 
 func hit():
-	boom()
+	if is_hit:
+		return
+	is_hit = true
+	was_hit = true
+	# Get player for knockback direction
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		# Make bomb fly away from player
+		var dir = sign(global_position.x - player.global_position.x)
+		if dir == 0:
+			dir = 1
+		knockback_velocity = Vector2(300 * dir, -100)  # Custom knockback for bomb when being launched
+		is_falling = true
 
 func _on_StartDetecting_timeout():
 	can_boom = true
