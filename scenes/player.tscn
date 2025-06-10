@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c8212kqypk53y" path="res://Assets/Sprites/01-King Human/Hit (78x58).png" id="8_f1ej7"]
 [ext_resource type="AudioStream" uid="uid://621nvtcjugy4" path="res://Assets/Sounds/jump3.ogg" id="12_jej6c"]
 [ext_resource type="AudioStream" uid="uid://dpwfthsto36jf" path="res://Assets/Sounds/hit2.ogg" id="13_jej6c"]
-[ext_resource type="AudioStream" uid="uid://o2j8shxxwlrs" path="res://Assets/Sounds/hit1.ogg" id="14_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://b8fxbo2f25ryi" path="res://Assets/Sounds/effects/human/hum_attack_less_bas.wav" id="14_oprun"]
 [ext_resource type="AudioStream" uid="uid://d3xkousl7kf0c" path="res://Assets/Sounds/footstep_concrete_003.ogg" id="15_oprun"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
@@ -435,7 +435,7 @@ stream = ExtResource("12_jej6c")
 stream = ExtResource("13_jej6c")
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("14_f1ej7")
+stream = ExtResource("14_oprun")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["player_hitbox"]]
 collision_layer = 2
