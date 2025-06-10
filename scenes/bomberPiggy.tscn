@@ -1,10 +1,211 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccmbhcieqerou"]
+[gd_scene load_steps=50 format=3 uid="uid://ccmbhcieqerou"]
 
 [ext_resource type="Script" uid="uid://c8y052o3aueew" path="res://scripts/PigWithBomb.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8u2mpprqr4qw" path="res://Assets/Sprites/05-Pig Thowing a Bomb/09-PigWithBomb.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://lq6k40rlk0fs" path="res://Assets/Sprites/05-Pig Thowing a Bomb/Idle (26x26).png" id="2_akp0b"]
 [ext_resource type="AudioStream" uid="uid://ckktnk3xld4yx" path="res://Assets/Sounds/effects/enemies/pig_hrrr.wav" id="3"]
-[ext_resource type="PackedScene" uid="uid://bdcbvobirlh0k" path="res://animated_sprite_2d.tscn" id="3_4i1xp"]
+[ext_resource type="Texture2D" uid="uid://cedajv6pf123m" path="res://Assets/Sprites/05-Pig Thowing a Bomb/Picking Bomb (26x26).png" id="3_wvbuv"]
 [ext_resource type="AudioStream" uid="uid://b4cwq1lngbvl1" path="res://Assets/Sounds/effects/enemies/pig_die.wav" id="4"]
+[ext_resource type="Texture2D" uid="uid://b1l6amkvg6rw5" path="res://Assets/Sprites/05-Pig Thowing a Bomb/Run (26x26).png" id="4_v84bl"]
+[ext_resource type="Texture2D" uid="uid://16ajyr21l6q6" path="res://Assets/Sprites/05-Pig Thowing a Bomb/Throwing Boom (26x26).png" id="5_653xe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6pfl"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrol5"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jd27v"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfm57"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(78, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5u5g"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(104, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs0j0"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(130, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au63l"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(156, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djovx"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(182, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yak2d"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(208, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fep50"]
+atlas = ExtResource("2_akp0b")
+region = Rect2(234, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1b0e"]
+atlas = ExtResource("3_wvbuv")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwhg1"]
+atlas = ExtResource("3_wvbuv")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6r41"]
+atlas = ExtResource("3_wvbuv")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpnj3"]
+atlas = ExtResource("3_wvbuv")
+region = Rect2(78, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63lhh"]
+atlas = ExtResource("4_v84bl")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyp71"]
+atlas = ExtResource("4_v84bl")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sal4"]
+atlas = ExtResource("4_v84bl")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7y0x"]
+atlas = ExtResource("4_v84bl")
+region = Rect2(78, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c6kf"]
+atlas = ExtResource("4_v84bl")
+region = Rect2(104, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgafd"]
+atlas = ExtResource("4_v84bl")
+region = Rect2(130, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qvjs"]
+atlas = ExtResource("5_653xe")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4qsh"]
+atlas = ExtResource("5_653xe")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63ugd"]
+atlas = ExtResource("5_653xe")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3ong"]
+atlas = ExtResource("5_653xe")
+region = Rect2(78, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3pfi"]
+atlas = ExtResource("5_653xe")
+region = Rect2(104, 0, 26, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a5dfg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6pfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrol5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jd27v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfm57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5u5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs0j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au63l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djovx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yak2d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fep50")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1b0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwhg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6r41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpnj3")
+}],
+"loop": false,
+"name": &"picking",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63lhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyp71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sal4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7y0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0c6kf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgafd")
+}],
+"loop": false,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qvjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4qsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63ugd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3ong")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3pfi")
+}],
+"loop": false,
+"name": &"throwing",
+"speed": 10.0
+}]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Attack"
@@ -173,12 +374,28 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_pbxqp"]
+resource_name = "Jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lcxnd"]
 _data = {
 &"Attack": SubResource("1"),
 &"Dead": SubResource("2"),
 &"Hit": SubResource("12"),
 &"Idle": SubResource("3"),
+&"Jump": SubResource("Animation_pbxqp"),
 &"PickUp": SubResource("4"),
 &"Run": SubResource("5"),
 &"Throw": SubResource("6")
@@ -300,17 +517,18 @@ collision_mask = 2
 script = ExtResource("1")
 disable_move = true
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_a5dfg")
+animation = &"idle"
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.210359, 0.210359, 1)
 position = Vector2(0, -13)
 texture = ExtResource("2")
 hframes = 10
 vframes = 5
-frame = 10
-
-[node name="AnimatedSprite2D" parent="." instance=ExtResource("3_4i1xp")]
-visible = false
-animation = &"idle"
+frame = 22
 
 [node name="ani" type="AnimationPlayer" parent="."]
 libraries = {
@@ -345,7 +563,6 @@ wait_time = 1.5
 position = Vector2(-9, -14)
 
 [node name="EffectPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3")
 
 [node name="Color" type="AnimationPlayer" parent="."]
 libraries = {

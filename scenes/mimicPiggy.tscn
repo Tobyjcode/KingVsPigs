@@ -108,13 +108,24 @@ script = ExtResource("1_lo23t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteAnchor"]
 sprite_frames = SubResource("SpriteFrames_rwnpw")
-animation = &"idle"
+animation = &"jumpantip"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_dhm0k")
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_dhm0k")
+
+[node name="ViewRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewRange"]
+shape = SubResource("RectangleShape2D_dhm0k")
+
+[connection signal="area_entered" from="Hitbox" to="." method="on_hit_box_entered"]
+[connection signal="body_entered" from="ViewRange" to="." method="on_view_range_entered"]
+[connection signal="body_exited" from="ViewRange" to="." method="on_view_range_exited"]

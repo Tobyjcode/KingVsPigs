@@ -14,6 +14,8 @@ var dir := Vector2.ZERO
 var invincible_timer := 0.0
 var trigger = true # <--- Set this at the top for testing
 var rng = RandomNumberGenerator.new()
+var player_in_view = false
+var player
 
 @onready var sprite_anchor = $SpriteAnchor
 @onready var hitbox = $Hitbox
@@ -29,7 +31,7 @@ func _physics_process(delta):
 	var new_state = state
 	match state:
 		State.IDLE:
-			new_state = state_idle()
+			new_state = state_idle(delta)
 		State.BEFORE_JUMP:
 			new_state = state_before_jump()
 		State.HIT:
@@ -51,8 +53,14 @@ func _physics_process(delta):
 		change_state(new_state)
 	move_and_slide()
 
-func state_idle():
-	speed_handler()
+func state_idle(delta):
+	if not triggered:
+		return state
+	if player and player_in_view and atk_cd <= 0:
+		var x_delta = global_position.x - player.global_position.x
+		_dir = -1 if x_delta > 0 else 1
+		sprite_anchor.scale.x = -_dir
+		ready_jump(_dir)
 	return state
 
 func state_before_jump():
@@ -82,7 +90,11 @@ func state_jump():
 	return state
 
 func state_looking_out():
-	speed_handler()
+	if player and player_in_view and atk_cd <= 0:
+		var x_delta = global_position.x - player.global_position.x
+		_dir = -1 if x_delta > 0 else 1
+		sprite_anchor.scale.x = -_dir
+		ready_jump(_dir)
 	return state
 
 func speed_handler(factor := 1.0):
@@ -142,3 +154,12 @@ func state_wander(delta):
 	invincible_timer -= delta
 	speed_handler()
 	velocity.x = _dir * speed
+
+func on_view_range_entered(body):
+	if body.is_in_group("player"):
+		player_in_view = true
+		player = body
+
+func on_view_range_exited(body):
+	if body.is_in_group("player"):
+		player_in_view = false
