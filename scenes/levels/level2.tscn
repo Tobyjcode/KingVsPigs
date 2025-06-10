@@ -900,7 +900,3 @@ position = Vector2(138, 82)
 
 [node name="Crate2" parent="." instance=ExtResource("9_oyk6k")]
 position = Vector2(100, 81)
-
-[node name="door2" parent="." instance=ExtResource("2")]
-position = Vector2(-164, 65)
-next_level = null
