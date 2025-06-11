@@ -10,4 +10,8 @@ func _on_body_entered(body):
 		var hud = get_tree().get_first_node_in_group("ScoreUI")
 		if hud and hud.has_method("add_diamond"):
 			hud.add_diamond(value)
+		$AnimatedSprite2D.visible = false
+		$CollisionShape2D.disabled = true
+		$PickupSound.play()
+		await $PickupSound.finished
 		queue_free()
