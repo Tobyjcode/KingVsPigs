@@ -8,5 +8,6 @@ const PLAYER = preload("res://scenes/player.tscn")
 
 func _ready():
 	if start_door.is_start_door:
+		player.global_position = start_door.global_position  # Move player to start door
 		start_door.connect("start_door_opened", Callable(player, "play_door_out"))
 		start_door.start_open_sequence()

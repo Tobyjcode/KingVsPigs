@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bsidra6cwxs67"]
+[gd_scene load_steps=22 format=4 uid="uid://bsidra6cwxs67"]
 
 [ext_resource type="Script" uid="uid://cfw4u41wkkrk7" path="res://scenes/game.gd" id="1_ir15t"]
 [ext_resource type="PackedScene" uid="uid://cj47rlfy46f4y" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dmixkcy6oojq1" path="res://scenes/piggy.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://bppp4umxww2jg" path="res://nodes/crate/Crate.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://j40m86t4cokl" path="res://nodes/HUDS/score_ui.tscn" id="9_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://brlnxkwx745fo" path="res://scenes/levels/level2.tscn" id="10_ca42v"]
 [ext_resource type="PackedScene" uid="uid://cfj53na1183dg" path="res://nodes/HUDS/death_screen.tscn" id="10_vtaks"]
 [ext_resource type="AudioStream" uid="uid://c6fpl6p44lbnm" path="res://Assets/Sounds/KingVsPigsTheme.ogg" id="11_dinhu"]
 [ext_resource type="PackedScene" uid="uid://c5i57fcarmmr2" path="res://scenes/door.tscn" id="11_kvpfn"]
@@ -902,7 +903,7 @@ visible = false
 
 [node name="door" parent="." instance=ExtResource("11_kvpfn")]
 position = Vector2(335, 69)
-next_level = null
+next_level = ExtResource("10_ca42v")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_dinhu")
