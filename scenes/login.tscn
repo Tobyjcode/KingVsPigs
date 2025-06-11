@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7gxr642eirfj"]
+[gd_scene load_steps=5 format=3 uid="uid://b7gxr642eirfj"]
 
 [ext_resource type="FontFile" uid="uid://bfawprnajfbaw" path="res://Assets/Fonts/CleanPlate.fnt" id="1_0emk2"]
+[ext_resource type="Script" uid="uid://bde3l3wtg1s02" path="res://scripts/login.gd" id="1_cs5o2"]
 [ext_resource type="FontFile" uid="uid://durpk3530uu50" path="res://Assets/Fonts/BasicPupWhite.fnt" id="2_cs5o2"]
 [ext_resource type="FontFile" uid="uid://d3cs80n8io813" path="res://Assets/Fonts/CleanVictory.fnt" id="3_47b6t"]
 
@@ -11,13 +12,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_cs5o2")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.25
 anchor_top = 0.2
 anchor_right = 0.75
 anchor_bottom = 0.8
+offset_left = -5.0
+offset_top = 0.399994
+offset_right = -1.0
+offset_bottom = 117.6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -36,6 +43,26 @@ text = "Name:"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_cs5o2")
 placeholder_text = "Enter your name"
+
+[node name="EmailLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Email:"
+
+[node name="EmailEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cs5o2")
+placeholder_text = "Enter your email"
+
+[node name="PasswordLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0emk2")
+text = "Password:"
+
+[node name="PasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cs5o2")
+placeholder_text = "Enter your password"
+secret = true
 
 [node name="AgeLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -57,16 +84,24 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_cs5o2")
 placeholder_text = "Enter your country"
 
-[node name="PasswordLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="GenderLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_0emk2")
-text = "Password:"
+text = "Gender:"
 
-[node name="PasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+[node name="GenderRadioContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cs5o2")
-placeholder_text = "Enter your password"
-secret = true
+
+[node name="MaleCheck" type="CheckBox" parent="Panel/VBoxContainer/GenderRadioContainer"]
+layout_mode = 2
+text = "Male"
+
+[node name="FemaleCheck" type="CheckBox" parent="Panel/VBoxContainer/GenderRadioContainer"]
+layout_mode = 2
+text = "Female"
+
+[node name="OtherCheck" type="CheckBox" parent="Panel/VBoxContainer/GenderRadioContainer"]
+layout_mode = 2
+text = "Other"
 
 [node name="ButtonContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -100,3 +135,11 @@ horizontal_alignment = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_cs5o2")
 text = "Already have user? Login (Users get special rewards!)"
+
+[node name="FeedbackLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
