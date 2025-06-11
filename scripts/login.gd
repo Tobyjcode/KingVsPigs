@@ -11,10 +11,14 @@ var firebase_api_key = "AIzaSyCmdy8DSoDesCFhX9hb3lO9Qseq-STnEWg"
 var pending_action = ""
 var id_token = ""
 var local_id = ""
+var redirect_timer = Timer.new()
 
 func _ready():
 	login_button.pressed.connect(_on_login_pressed)
 	forgot_password_button.pressed.connect(_on_forgot_password_pressed)
+	add_child(redirect_timer)
+	redirect_timer.one_shot = true
+	redirect_timer.timeout.connect(_on_redirect_timer_timeout)
 
 func _on_login_pressed():
 	var user = user_edit.text.strip_edges()
@@ -64,7 +68,8 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		if response_code == 200:
 			local_id = response.get("localId", "")
 			id_token = response.get("idToken", "")
-			feedback_label.text = "Login successful!"
+			feedback_label.text = "Login successful! Redirecting..."
+			redirect_timer.start(2.0)
 			# You can add code here to change scene or load user profile
 		else:
 			feedback_label.text = "Login failed. Please check your password."
@@ -75,3 +80,6 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		else:
 			feedback_label.text = "Failed to send reset email. Please check your email address."
 			print("Reset failed:", response)  # Developer debug info
+
+func _on_redirect_timer_timeout():
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
