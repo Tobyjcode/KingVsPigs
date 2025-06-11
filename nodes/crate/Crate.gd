@@ -14,11 +14,12 @@ var crate_frag_scene = preload("res://nodes/crate/CrateFrag.tscn")
 var diamond_scene = preload("res://nodes/diamond.tscn")
 
 func _ready():
-	$HitBox.area_entered.connect(_on_hit_box_entered)
-	$HitBox.body_entered.connect(_on_hit_box_entered)
+	$HitBox.area_entered.connect(_on_HitBox_area_entered)
 
-func _on_hit_box_entered(area_or_body):
-	if area_or_body.is_in_group("player_attack") or (area_or_body.is_in_group("player") and area_or_body.has_method("is_attacking")):
+func _on_HitBox_area_entered(area):
+	print("Area entered:", area, "Groups:", area.get_groups(), "Monitoring:", area.monitoring)
+	if area.is_in_group("player_attack"):
+		print("Breaking crate!")
 		break_into_fragments()
 
 func break_into_fragments():

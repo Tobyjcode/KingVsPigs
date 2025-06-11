@@ -424,8 +424,8 @@ shape = SubResource("RectangleShape2D_f1ej7")
 wait_time = 0.761
 
 [node name="AttackArea" type="Area2D" parent="." groups=["player_attack"]]
-collision_layer = 8
-collision_mask = 9
+collision_layer = 136
+collision_mask = 137
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
 position = Vector2(47.547, -6.9155)
@@ -450,3 +450,7 @@ shape = SubResource("CircleShape2D_bwjto")
 
 [node name="Walking" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_oprun")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

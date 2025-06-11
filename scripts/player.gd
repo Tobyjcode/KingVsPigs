@@ -20,6 +20,7 @@ var is_falling := false
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
 @onready var attack_area = $AttackArea
+@onready var attack_shape = $AttackArea/CollisionPolygon2D
 @onready var jump_sound = $JumpSound
 @onready var hit_sound = $HitSound
 @onready var attack_sound = $AttackSound
@@ -38,6 +39,8 @@ func _ready():
 		if hud.has_method("show_restart_message"):
 			hud.show_restart_message()
 	animated_sprite.play("idle")
+	attack_area.monitoring = false
+	attack_shape.disabled = true
 
 func _physics_process(delta):
 	if is_dead:
@@ -64,9 +67,13 @@ func _physics_process(delta):
 	# Handle attack
 	if not is_attacking and Input.is_action_just_pressed("attack"):
 		is_attacking = true
+		attack_area.monitoring = true
+		attack_shape.disabled = false
 		animated_sprite.play("attack")
 		attack_sound.play()
 		attack()
+		if attack_timer:
+			attack_timer.start()  # Start the attack window
 
 	# Prevent movement and jumping while attacking or hit
 	if is_attacking or is_hit:
@@ -121,7 +128,7 @@ func _physics_process(delta):
 func _on_AnimatedSprite2D_animation_finished():
 	if animated_sprite.animation == "attack":
 		is_attacking = false
-		check_attack_area()  # Check one final time when animation ends
+		check_attack_area()  # Only check for hits after the animation
 	elif animated_sprite.animation == "doorIn":
 		is_entering_door = false
 	elif animated_sprite.animation == "hit":
@@ -154,9 +161,6 @@ func _on_HitTimer_timeout():
 	is_hit = false
 
 func attack():
-	attack_area.monitoring = true
-	if attack_timer:
-		attack_timer.start()
 	check_attack_area()
 
 func check_attack_area():
@@ -168,8 +172,9 @@ func check_attack_area():
 			body.hit()
 
 func _on_AttackTimer_timeout():
-	if attack_area:
-		attack_area.monitoring = false
+	attack_area.monitoring = false
+	attack_shape.disabled = true
+	is_attacking = false  # Optionally reset attack state here if needed
 
 func update_hearts():
 	var hud = get_tree().get_first_node_in_group("ScoreUI")
