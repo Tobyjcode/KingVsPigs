@@ -13,3 +13,22 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Python/Node/Other
+*.pyc
+node_modules/
+.env
+
+# Godot temporary/backup files
+*.tmp
+*.backup
