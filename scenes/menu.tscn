@@ -1,111 +1,70 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://dfm04o3vkemdm"]
 
-[ext_resource path="res://scripts/menu.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/Kings and Pigs.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sprites/14-TileSets/Decorations (32x32).png" type="Texture" id=3]
-[ext_resource path="res://Assets/Sprites/01-King Human/Idle (78x58).png" type="Texture" id=4]
-[ext_resource path="res://Assets/Sprites/02-King Pig/Idle (38x28).png" type="Texture" id=5]
-[ext_resource path="res://Assets/Fonts/BasicPupWhite.fnt" type="Font" id=6]
-[ext_resource path="res://Assets/Sprites/13-Dialogue Boxes/Hello In (24x8).png" type="Texture" id=7]
+[ext_resource type="Script" uid="uid://b0gtrri0jioq2" path="res://scripts/menu.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cx0sppme1o524" path="res://Assets/Sprites/Kings and Pigs.png" id="2"]
+[ext_resource type="FontFile" uid="uid://durpk3530uu50" path="res://Assets/Fonts/BasicPupWhite.fnt" id="6"]
 
 [node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Background" type="TextureRect" parent="."]
-anchor_left = 0.0
-anchor_top = 0.0
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-stretch_mode = 3 # TILE
-texture = ExtResource( 3 )
+stretch_mode = 3
 
 [node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_left = 0.3
 anchor_top = 0.08
 anchor_right = 0.7
 anchor_bottom = 0.22
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 0.0
-margin_bottom = 0.0
-expand = true
+texture = ExtResource("2")
+expand_mode = 1
 stretch_mode = 5
-texture = ExtResource( 2 )
 
 [node name="KingHuman" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_left = 0.05
 anchor_top = 0.35
 anchor_right = 0.18
 anchor_bottom = 0.65
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 0.0
-margin_bottom = 0.0
-expand = false
-stretch_mode = 0 # SCALE
-texture = ExtResource( 4 )
 
 [node name="KingPig" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_left = 0.82
 anchor_top = 0.35
 anchor_right = 0.95
 anchor_bottom = 0.65
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 0.0
-margin_bottom = 0.0
-expand = false
-stretch_mode = 0 # SCALE
-texture = ExtResource( 5 )
 
 [node name="Panel" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_left = 0.35
 anchor_top = 0.35
 anchor_right = 0.65
 anchor_bottom = 0.65
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 0.0
-margin_bottom = 0.0
-expand = true
-stretch_mode = 3 # TILE
-texture = ExtResource( 7 )
+expand_mode = 1
+stretch_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-anchor_left = 0.0
-anchor_top = 0.0
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 30.0
-margin_top = 30.0
-margin_right = -30.0
-margin_bottom = -30.0
-custom_constants/separation = 40
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="StartButton" type="Button" parent="Panel/VBoxContainer"]
-margin_right = 0.0
-margin_bottom = 0.0
-text = "Start Game"
-theme_override_fonts/font = ExtResource( 6 )
 custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_fonts/font = ExtResource("6")
+text = "Start Game"
 
 [node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 0.0
-margin_right = 0.0
-margin_bottom = 0.0
-text = "Quit"
-theme_override_fonts/font = ExtResource( 6 )
 custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_fonts/font = ExtResource("6")
+text = "Quit"

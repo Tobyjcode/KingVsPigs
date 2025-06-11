@@ -79,10 +79,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_2sqka")
 text = "Country:"
 
-[node name="CountryEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+[node name="CountryOption" type="OptionButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vfncv")
-placeholder_text = "Enter your country"
 
 [node name="GenderLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -154,7 +155,9 @@ theme_override_fonts/font = ExtResource("3_vfncv")
 text = "Already have user? Login (Users get special rewards!)"
 
 [node name="FeedbackLabel" type="Label" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+text = " "
 horizontal_alignment = 2
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]

@@ -3,7 +3,7 @@ extends Control
 @onready var name_edit = $Panel/VBoxContainer/NameEdit
 @onready var email_edit = $Panel/VBoxContainer/EmailEdit
 @onready var age_edit = $Panel/VBoxContainer/AgeEdit
-@onready var country_edit = $Panel/VBoxContainer/CountryEdit
+@onready var country_option = $Panel/VBoxContainer/CountryOption
 @onready var password_edit = $Panel/VBoxContainer/PasswordEdit
 @onready var guest_button = $Panel/VBoxContainer/ButtonContainer/GuestButton
 @onready var create_user_button = $Panel/VBoxContainer/ButtonContainer/CreateUserButton
@@ -16,6 +16,31 @@ extends Control
 
 var firebase_api_key = "AIzaSyCmdy8DSoDesCFhX9hb3lO9Qseq-STnEWg" # Replace with your actual API key
 var pending_action = ""
+var redirect_timer = Timer.new()
+var countries = [
+	"Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+	"Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia",
+	"Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon",
+	"Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia",
+	"Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
+	"Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia",
+	"Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
+	"Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy",
+	"Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
+	"Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia",
+	"Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco",
+	"Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand",
+	"Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine",
+	"Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia",
+	"Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia",
+	"Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan",
+	"Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania",
+	"Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda",
+	"Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
+	"Yemen", "Zambia", "Zimbabwe"
+]
+var country_type_buffer = ""
+var country_type_timer = null
 
 func _ready():
 	guest_button.pressed.connect(_on_guest_pressed)
@@ -27,6 +52,22 @@ func _ready():
 	male_check.toggled.connect(_on_gender_toggled.bind("MaleCheck"))
 	female_check.toggled.connect(_on_gender_toggled.bind("FemaleCheck"))
 	other_check.toggled.connect(_on_gender_toggled.bind("OtherCheck"))
+	
+	# Setup timer for delayed redirect
+	add_child(redirect_timer)
+	redirect_timer.one_shot = true
+	redirect_timer.timeout.connect(_on_redirect_timer_timeout)
+	
+	# Setup feedback label
+	feedback_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # Green color for success
+	feedback_label.add_theme_font_size_override("font_size", 20)  # Larger font size
+
+	# Add all countries to OptionButton
+	for country in countries:
+		country_option.add_item(country)
+	country_option.focus_entered.connect(_on_country_option_focus)
+	country_option.gui_input.connect(_on_country_option_gui_input)
 
 func _on_guest_pressed():
 	pending_action = "guest"
@@ -36,8 +77,15 @@ func _on_create_user_pressed():
 	print("Create User button pressed")
 	var name = name_edit.text.strip_edges()
 	var email = email_edit.text.strip_edges()
+	print("Email entered: '", email, "'")
+	if not ("@" in email and "." in email.split("@")[-1]):
+		show_feedback("Please enter a valid email.", true)
+		return
 	var age = age_edit.text.strip_edges()
-	var country = country_edit.text.strip_edges()
+	if country_option.selected < 0:
+		show_feedback("Please select a country.", true)
+		return
+	var country = country_option.text
 	var password = password_edit.text.strip_edges()
 	var gender = ""
 	if male_check.button_pressed:
@@ -46,22 +94,29 @@ func _on_create_user_pressed():
 		gender = "Female"
 	elif other_check.button_pressed:
 		gender = "Other"
-	if name == "" or email == "" or age == "" or country == "" or password == "" or gender == "":
-		print("Please fill in all fields.")
+
+	if name == "":
+		show_feedback("Please enter your name.", true)
 		return
+	if email == "":
+		show_feedback("Please enter your email.", true)
+		return
+	if password == "":
+		show_feedback("Please enter your password.", true)
+		return
+	if age == "":
+		show_feedback("Please enter your age.", true)
+		return
+	if gender == "":
+		show_feedback("Please select a gender.", true)
+		return
+
 	pending_action = "register"
 	print("name:", name, "email:", email, "age:", age, "country:", country, "password:", password, "gender:", gender)
 	register_user(email, password)
 
 func _on_login_pressed():
-	var name = name_edit.text.strip_edges()
-	var password = password_edit.text.strip_edges()
-	if name == "" or password == "":
-		print("Please enter name and password to login.")
-		return
-	pending_action = "login"
-	var email = name + "@kingvspigs.com"
-	login_user(email, password)
+	get_tree().change_scene_to_file("res://scenes/login.tscn")
 
 func register_user(email, password):
 	var url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=%s" % firebase_api_key
@@ -113,10 +168,28 @@ func save_user_profile(local_id, id_token, name, age, country, gender):
 	var json = JSON.stringify(data)
 	http.request(url, [], HTTPClient.METHOD_PUT, json)
 
+func _on_redirect_timer_timeout():
+	if pending_action == "register":
+		get_tree().change_scene_to_file("res://scenes/login.tscn")
+	elif pending_action == "guest":
+		get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
+func show_feedback(message: String, is_error: bool = false):
+	print("Showing feedback:", message) # Debug print
+	feedback_label.text = message
+	feedback_label.show()
+	if is_error:
+		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # Red
+	else:
+		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # Green
+	# Optionally, set a background color:
+	feedback_label.add_theme_color_override("bg_color", Color(0.1, 0.1, 0.1, 0.8))
+
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 	var response = JSON.parse_string(body.get_string_from_utf8())
 	if response_code == 200:
-		feedback_label.text = "Successful! " + pending_action.capitalize() + "."
+		var success_message = "Successfully " + pending_action + "! Redirecting..."
+		show_feedback(success_message)
 		print("Success!", pending_action, response)
 		if pending_action == "register":
 			var local_id = response.get("localId", "")
@@ -127,13 +200,21 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 					id_token,
 					name_edit.text.strip_edges(),
 					age_edit.text.strip_edges(),
-					country_edit.text.strip_edges(),
+					country_option.text,
 					"Male" if male_check.button_pressed else "Female" if female_check.button_pressed else "Other"
 				)
+				# Start timer for redirect after showing feedback
+				redirect_timer.start(3.0)  # Show feedback for 3 seconds
+		elif pending_action == "guest":
+			# Store the guest user's ID and token if needed
+			var local_id = response.get("localId", "")
+			var id_token = response.get("idToken", "")
+			# Start timer for redirect after showing feedback
+			redirect_timer.start(3.0)  # Show feedback for 3 seconds
 	else:
-		var error_msg = "Error during %s: %s" % [pending_action, response]
-		feedback_label.text = error_msg
-		print(error_msg)
+		var error_message = "Error: " + response.get("error", {}).get("message", "Unknown error occurred")
+		show_feedback(error_message, true)
+		print("Error:", response)
 
 func _on_gender_toggled(button_pressed, name):
 	if not button_pressed:
@@ -141,3 +222,31 @@ func _on_gender_toggled(button_pressed, name):
 	for i in $Panel/VBoxContainer/GenderRadioContainer.get_children():
 		if i.name != name and i is CheckBox:
 			i.button_pressed = false
+
+func _on_country_option_focus():
+	country_type_buffer = ""
+
+func _on_country_option_gui_input(event):
+	if event is InputEventKey and event.unicode != 0:
+		var char = char(event.unicode).to_lower()
+		if country_type_timer:
+			country_type_timer.stop()
+		else:
+			country_type_timer = Timer.new()
+			country_type_timer.one_shot = true
+			country_type_timer.wait_time = 1.0
+			country_type_timer.timeout.connect(_on_country_type_timer_timeout)
+			add_child(country_type_timer)
+		country_type_buffer += char
+		_country_option_jump_to(country_type_buffer)
+		country_type_timer.start()
+
+func _on_country_type_timer_timeout():
+	country_type_buffer = ""
+
+func _country_option_jump_to(prefix):
+	for i in range(country_option.item_count):
+		var item_text = country_option.get_item_text(i).to_lower()
+		if item_text.begins_with(prefix):
+			country_option.selected = i
+			break
