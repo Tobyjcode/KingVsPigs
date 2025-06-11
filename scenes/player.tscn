@@ -405,13 +405,14 @@ size = Vector2(19, 25)
 radius = 8.06226
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 5
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
 position = Vector2(8, -15)
 sprite_frames = SubResource("SpriteFrames_urp6f")
-animation = &"run"
+animation = &"doorIn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
