@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://deqd23wu358fa"]
+[gd_scene load_steps=5 format=3 uid="uid://b7gxr642eirfj"]
 
-[ext_resource type="FontFile" uid="uid://bfawprnajfbaw" path="res://Assets/Fonts/CleanPlate.fnt" id="1_0emk2"]
-[ext_resource type="Script" uid="uid://bacgmpwe4h6kn" path="res://scripts/login.gd" id="1_cs5o2"]
-[ext_resource type="FontFile" uid="uid://durpk3530uu50" path="res://Assets/Fonts/BasicPupWhite.fnt" id="2_cs5o2"]
-[ext_resource type="FontFile" uid="uid://d3cs80n8io813" path="res://Assets/Fonts/CleanVictory.fnt" id="3_47b6t"]
+[ext_resource type="Script" uid="uid://bde3l3wtg1s02" path="res://scripts/signup.gd" id="1_4vokp"]
+[ext_resource type="FontFile" uid="uid://bfawprnajfbaw" path="res://Assets/Fonts/CleanPlate.fnt" id="2_2sqka"]
+[ext_resource type="FontFile" uid="uid://durpk3530uu50" path="res://Assets/Fonts/BasicPupWhite.fnt" id="3_vfncv"]
+[ext_resource type="FontFile" uid="uid://d3cs80n8io813" path="res://Assets/Fonts/CleanVictory.fnt" id="4_nj2e1"]
 
-[node name="Login" type="Control"]
+[node name="Signup" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_cs5o2")
+script = ExtResource("1_4vokp")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -23,8 +23,8 @@ anchor_right = 0.75
 anchor_bottom = 0.8
 offset_left = -5.0
 offset_top = 0.399994
-offset_right = -1.0
-offset_bottom = 120.6
+offset_right = 6.0
+offset_bottom = 147.6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -36,12 +36,12 @@ anchor_bottom = 0.9
 
 [node name="NameLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_0emk2")
+theme_override_fonts/font = ExtResource("2_2sqka")
 text = "Name:"
 
 [node name="NameEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cs5o2")
+theme_override_fonts/font = ExtResource("3_vfncv")
 placeholder_text = "Enter your name"
 
 [node name="EmailLabel" type="Label" parent="Panel/VBoxContainer"]
@@ -50,27 +50,38 @@ text = "Email:"
 
 [node name="EmailEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cs5o2")
+theme_override_fonts/font = ExtResource("3_vfncv")
 placeholder_text = "Enter your email"
+
+[node name="PasswordLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
+text = "Password:"
+
+[node name="PasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vfncv")
+placeholder_text = "Enter your password"
+secret = true
 
 [node name="AgeLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_0emk2")
+theme_override_fonts/font = ExtResource("2_2sqka")
 text = "Age:"
 
 [node name="AgeEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cs5o2")
+theme_override_fonts/font = ExtResource("3_vfncv")
 placeholder_text = "Enter your age"
 
 [node name="CountryLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_0emk2")
+theme_override_fonts/font = ExtResource("2_2sqka")
 text = "Country:"
 
 [node name="CountryEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cs5o2")
+theme_override_fonts/font = ExtResource("3_vfncv")
 placeholder_text = "Enter your country"
 
 [node name="GenderLabel" type="Label" parent="Panel/VBoxContainer"]
@@ -82,26 +93,32 @@ layout_mode = 2
 
 [node name="MaleCheck" type="CheckBox" parent="Panel/VBoxContainer/GenderRadioContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
 text = "Male"
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer/GenderRadioContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 11.54
 
 [node name="FemaleCheck" type="CheckBox" parent="Panel/VBoxContainer/GenderRadioContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
 text = "Female"
+
+[node name="Spacer3" type="Control" parent="Panel/VBoxContainer/GenderRadioContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 11.54
 
 [node name="OtherCheck" type="CheckBox" parent="Panel/VBoxContainer/GenderRadioContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
 text = "Other"
 
-[node name="PasswordLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="SpacerAfterGender" type="Control" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_0emk2")
-text = "Password:"
-
-[node name="PasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cs5o2")
-placeholder_text = "Enter your password"
-secret = true
 
 [node name="ButtonContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -111,7 +128,7 @@ alignment = 2
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("2_cs5o2")
+theme_override_fonts/font = ExtResource("3_vfncv")
 text = "Guest"
 
 [node name="Spacer" type="Control" parent="Panel/VBoxContainer/ButtonContainer"]
@@ -122,18 +139,18 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_47b6t")
+theme_override_fonts/font = ExtResource("4_nj2e1")
 text = "Create User"
 
 [node name="CallToActionLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_47b6t")
+theme_override_fonts/font = ExtResource("4_nj2e1")
 text = "Registered users get: highscore tracking, special rewards! "
 horizontal_alignment = 2
 
 [node name="LoginButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cs5o2")
+theme_override_fonts/font = ExtResource("3_vfncv")
 text = "Already have user? Login (Users get special rewards!)"
 
 [node name="FeedbackLabel" type="Label" parent="Panel/VBoxContainer"]
