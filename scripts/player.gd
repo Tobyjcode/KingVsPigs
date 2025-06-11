@@ -28,6 +28,7 @@ var is_falling := false
 @onready var walking: AudioStreamPlayer2D = $Walking
 
 func _ready():
+	visible = false  # Make player invisible at start
 	animated_sprite.animation_finished.connect(_on_AnimatedSprite2D_animation_finished)
 	hit_timer.timeout.connect(_on_HitTimer_timeout)
 	if attack_timer:
@@ -193,3 +194,10 @@ func play_door_in():
 	is_entering_door = true
 	velocity = Vector2.ZERO  # Stop movement
 	animated_sprite.play("doorIn")
+
+func play_door_out():
+	is_entering_door = true
+	visible = true
+	animated_sprite.play("doorOut")
+	await get_tree().create_timer(0.8).timeout  # Adjust to match your animation
+	is_entering_door = false

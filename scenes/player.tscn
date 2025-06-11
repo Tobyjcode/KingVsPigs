@@ -412,7 +412,9 @@ script = ExtResource("1_g2els")
 z_index = 5
 position = Vector2(8, -15)
 sprite_frames = SubResource("SpriteFrames_urp6f")
-animation = &"doorIn"
+animation = &"doorOut"
+frame = 7
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)

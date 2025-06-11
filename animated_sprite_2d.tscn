@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bdcbvobirlh0k"]
+[gd_scene load_steps=31 format=3 uid="uid://c16n4xb0jumkl"]
 
 [ext_resource type="Texture2D" uid="uid://lq6k40rlk0fs" path="res://Assets/Sprites/05-Pig Thowing a Bomb/Idle (26x26).png" id="1_7wud7"]
 [ext_resource type="Texture2D" uid="uid://cedajv6pf123m" path="res://Assets/Sprites/05-Pig Thowing a Bomb/Picking Bomb (26x26).png" id="2_wk1on"]

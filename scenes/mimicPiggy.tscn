@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://bdwst50utlk8l"]
 
 [ext_resource type="Texture2D" uid="uid://dumj8lw1wbr2e" path="res://Assets/Sprites/06-Pig Hide in the Box/Looking Out (26x20).png" id="1_dhm0k"]
-[ext_resource type="Script" uid="uid://cmln3r5j3y87b" path="res://mimicPiggyAI.gd" id="1_lo23t"]
+[ext_resource type="Script" uid="uid://cmln3r5j3y87b" path="res://scripts/mimicPiggyAI.gd" id="1_lo23t"]
 [ext_resource type="Texture2D" uid="uid://bhw327ig3vthy" path="res://Assets/Sprites/06-Pig Hide in the Box/Fall (26x20).png" id="3_lo23t"]
 [ext_resource type="Texture2D" uid="uid://bbw5wvq0gjnnk" path="res://Assets/Sprites/06-Pig Hide in the Box/Ground (26x20).png" id="4_rwnpw"]
 [ext_resource type="Texture2D" uid="uid://scp2phhnlt7o" path="res://Assets/Sprites/06-Pig Hide in the Box/Jump (26x20).png" id="5_a6kyt"]
