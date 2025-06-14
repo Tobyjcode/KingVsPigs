@@ -123,6 +123,7 @@ position = Vector2(0, 3)
 texture = ExtResource("2_31oai")
 hframes = 5
 vframes = 3
+frame = 10
 
 [node name="Ani" type="AnimationPlayer" parent="."]
 libraries = {
