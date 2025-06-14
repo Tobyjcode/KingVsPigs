@@ -2,6 +2,7 @@ extends Control
 
 @onready var start_button = $Panel/VBoxContainer/StartButton
 @onready var survey_button = $Panel/VBoxContainer/SurveyButton
+@onready var options_button = $Panel/VBoxContainer/OptionsButton
 @onready var admin_button = $Panel/VBoxContainer/AdminButton
 @onready var quit_button = $Panel/VBoxContainer/QuitButton
 
@@ -11,6 +12,7 @@ func _ready():
 	# Corrected paths to the buttons after menu redesign
 	start_button.pressed.connect(_on_start_pressed)
 	survey_button.pressed.connect(_on_survey_pressed)
+	options_button.pressed.connect(_on_options_pressed)
 	admin_button.pressed.connect(_on_admin_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 
@@ -21,6 +23,9 @@ func _on_start_pressed():
 func _on_survey_pressed():
 	# Change to the survey scene
 	get_tree().change_scene_to_file("res://scenes/survey.tscn")
+
+func _on_options_pressed():
+	get_tree().change_scene_to_file("res://scenes/options.tscn")
 
 func get_user_id():
 	if Engine.has_singleton("FirebaseAuth"):

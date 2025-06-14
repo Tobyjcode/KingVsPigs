@@ -72,6 +72,12 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("6")
 text = "Give Feedback"
 
+[node name="OptionsButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6")
+text = "Options"
+
 [node name="AdminButton" type="Button" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2

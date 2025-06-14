@@ -14,6 +14,9 @@ config/name="KingVsPigs"
 run/main_scene="uid://b7gxr642eirfj"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+sfx_volume=0.5
+muted=false
+music_volume=0.5
 
 [dotnet]
 
