@@ -1,6 +1,6 @@
-[gd_scene load_steps=50 format=3 uid="uid://ccmbhcieqerou"]
+[gd_scene load_steps=51 format=3 uid="uid://ccmbhcieqerou"]
 
-[ext_resource type="Script" uid="uid://c8y052o3aueew" path="res://scripts/PigWithBomb.gd" id="1"]
+[ext_resource type="Script" uid="uid://c8y052o3aueew" path="res://scripts/bomberPiggy.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8u2mpprqr4qw" path="res://Assets/Sprites/05-Pig Thowing a Bomb/09-PigWithBomb.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://lq6k40rlk0fs" path="res://Assets/Sprites/05-Pig Thowing a Bomb/Idle (26x26).png" id="2_akp0b"]
 [ext_resource type="AudioStream" uid="uid://ckktnk3xld4yx" path="res://Assets/Sounds/effects/enemies/pig_hrrr.wav" id="3"]
@@ -511,9 +511,11 @@ _data = {
 &"Normal": SubResource("11")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mv63"]
+size = Vector2(16, 18)
+
 [node name="bomberPiggy" type="CharacterBody2D"]
-collision_layer = 4
-collision_mask = 2
+z_index = 5
 script = ExtResource("1")
 disable_move = true
 
@@ -524,11 +526,12 @@ sprite_frames = SubResource("SpriteFrames_a5dfg")
 animation = &"idle"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.837412, 0.837412, 1)
 position = Vector2(0, -13)
 texture = ExtResource("2")
 hframes = 10
 vframes = 5
-frame = 22
+frame = 44
 
 [node name="ani" type="AnimationPlayer" parent="."]
 libraries = {
@@ -569,6 +572,15 @@ libraries = {
 &"": SubResource("AnimationLibrary_4i1xp")
 }
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1, -11)
+shape = SubResource("RectangleShape2D_2mv63")
+
 [connection signal="body_entered" from="StompDetector" to="." method="_on_StompDetector_body_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="timeout" from="AttackTime" to="." method="_on_Timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

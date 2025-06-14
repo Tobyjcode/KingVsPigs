@@ -4,6 +4,7 @@ extends PigActor
 @onready var bomb_scene = load("res://scenes/Bomb.tscn")
 
 func _ready():
+	lives = 3 # Make bomber piggy take 3 hits like other piggies
 	$AttackTime.wait_time = randf_range(0.1,0.2)
 	$AttackTime.start()
 	
@@ -11,21 +12,28 @@ func _ready():
 		$Color.play("Fast")
 	else:
 		$Color.play("Normal")
+	if $HitTimer:
+		$HitTimer.timeout.connect(_on_hit_timer_timeout)
+	# Ensure Hitbox is enabled and visible for debugging
+	if has_node("Hitbox"):
+		$Hitbox.visible = true
+		$Hitbox.monitoring = true
+		$Hitbox.set_deferred("monitorable", true)
+		if $Hitbox.has_node("CollisionShape2D"):
+			$Hitbox/CollisionShape2D.disabled = false
 
 func _physics_process(delta):
 	if state == DEAD:
 		velocity = Vector2.ZERO
 		return
-		
 	if is_falling:
 		velocity = knockback_velocity
 		knockback_velocity.y += gravity * delta
 		move_and_slide()
 		return
-		
 	if is_hit:
 		return
-		
+
 	super._physics_process(delta)
 
 func set_flip():
@@ -49,13 +57,18 @@ func _on_Timer_timeout():
 	$AttackTime.wait_time = randf_range(0.1,1) if super_fast else randf_range(1,3)
 	$ani.play("Throw")
 
-func hit(attacker = null):
-	# Only allow hits from the player
-	if attacker and not attacker.is_in_group("player"):
-		return
-		
-	if state == DEAD or is_hit:
-		return
-		
-	is_hit = true
-	call_die()
+func _on_hit_timer_timeout():
+	is_hit = false
+	if is_falling:
+		is_falling = false
+		$ani.play("Idle")
+
+func _on_ani_animation_finished(anim_name):
+	if anim_name == "Hit":
+		$ani.play("Idle")
+		is_hit = false
+	elif anim_name == "Dead":
+		queue_free()
+
+func _on_Hitbox_area_entered(area):
+	hit(area)

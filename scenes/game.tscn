@@ -928,7 +928,7 @@ position = Vector2(113, 79)
 position = Vector2(-141, 84)
 
 [node name="PigWithBomb" parent="." instance=ExtResource("12_kvuet")]
-position = Vector2(83, 93)
+position = Vector2(-151, 95)
 
 [node name="PigWithBomb2" parent="." instance=ExtResource("12_kvuet")]
 position = Vector2(159, 92)
