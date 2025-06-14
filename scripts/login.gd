@@ -6,6 +6,7 @@ extends Control
 @onready var forgot_password_button = $Panel/VBoxContainer/ForgotPasswordButton
 @onready var feedback_label = $Panel/VBoxContainer/FeedbackLabel
 @onready var http = $HTTPRequest
+@onready var back_button = $Panel/VBoxContainer/BackButton
 
 var firebase_api_key = "AIzaSyCmdy8DSoDesCFhX9hb3lO9Qseq-STnEWg"
 var pending_action = ""
@@ -16,6 +17,7 @@ var redirect_timer = Timer.new()
 func _ready():
 	login_button.pressed.connect(_on_login_pressed)
 	forgot_password_button.pressed.connect(_on_forgot_password_pressed)
+	back_button.pressed.connect(_on_back_button_pressed)
 	add_child(redirect_timer)
 	redirect_timer.one_shot = true
 	redirect_timer.timeout.connect(_on_redirect_timer_timeout)
@@ -83,3 +85,6 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 
 func _on_redirect_timer_timeout():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
+func _on_back_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/signup.tscn")
