@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bdwst50utlk8l"]
+[gd_scene load_steps=20 format=3 uid="uid://bdwst50utlk8l"]
 
 [ext_resource type="Texture2D" uid="uid://dumj8lw1wbr2e" path="res://Assets/Sprites/06-Pig Hide in the Box/Looking Out (26x20).png" id="1_dhm0k"]
 [ext_resource type="Script" uid="uid://cmln3r5j3y87b" path="res://scripts/mimicPiggyAI.gd" id="1_lo23t"]
@@ -13,6 +13,10 @@ region = Rect2(0, 0, 26, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_da0en"]
 atlas = ExtResource("4_rwnpw")
+region = Rect2(0, 0, 26, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qetc2"]
+atlas = ExtResource("1_dhm0k")
 region = Rect2(0, 0, 26, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_at67k"]
@@ -63,15 +67,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qetc2")
+}],
+"loop": false,
+"name": &"hide",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_at67k")
 }, {
-"duration": 1.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_27elf")
 }, {
-"duration": 1.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_lo23t")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -99,32 +111,38 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dhm0k"]
-size = Vector2(17, 15)
+size = Vector2(18.5, 14.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_viewrange"]
+size = Vector2(88.875, 46.1875)
 
 [node name="mimicPiggy" type="CharacterBody2D"]
 script = ExtResource("1_lo23t")
 
 [node name="SpriteAnchor" type="Node2D" parent="."]
+position = Vector2(0, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteAnchor"]
 sprite_frames = SubResource("SpriteFrames_rwnpw")
-animation = &"jumpantip"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_dhm0k")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_dhm0k")
 
 [node name="ViewRange" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewRange"]
-shape = SubResource("RectangleShape2D_dhm0k")
+position = Vector2(1, 3)
+shape = SubResource("RectangleShape2D_viewrange")
 
 [connection signal="area_entered" from="Hitbox" to="." method="on_hit_box_entered"]
 [connection signal="body_entered" from="ViewRange" to="." method="on_view_range_entered"]

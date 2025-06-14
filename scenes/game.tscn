@@ -933,9 +933,6 @@ position = Vector2(83, 93)
 [node name="PigWithBomb2" parent="." instance=ExtResource("12_kvuet")]
 position = Vector2(159, 92)
 
-[node name="CratePig" parent="." instance=ExtResource("13_kvuet")]
-position = Vector2(24, 84)
-
 [node name="TutorialBox2" parent="." instance=ExtResource("14_trtic")]
 offset_left = -301.0
 offset_top = -59.0
@@ -947,3 +944,6 @@ metadata/_edit_use_anchors_ = true
 [node name="door2" parent="." instance=ExtResource("11_kvpfn")]
 position = Vector2(-233, 68)
 is_start_door = true
+
+[node name="mimicPiggy" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(20, 85)
