@@ -14,17 +14,23 @@ grow_vertical = 2
 script = ExtResource("1")
 
 [node name="Background" type="TextureRect" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch_mode = 3
 
 [node name="Logo" type="TextureRect" parent="."]
-layout_mode = 0
-anchor_left = 0.3
-anchor_top = 0.08
-anchor_right = 0.7
-anchor_bottom = 0.22
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.31
+anchor_top = 0.162
+anchor_right = 0.71
+anchor_bottom = 0.302
+offset_left = -0.119995
+offset_top = 0.0240021
+offset_right = -0.120117
+offset_bottom = 0.0239868
 texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 5
@@ -61,39 +67,45 @@ anchor_right = 0.9
 anchor_bottom = 0.9
 
 [node name="StartButton" type="Button" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 36
 text = "Start Game"
 
-[node name="HighscoresButton" type="Button" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6")
-text = "Highscores"
-
 [node name="SurveyButton" type="Button" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 36
 text = "Give Feedback"
 
 [node name="OptionsButton" type="Button" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 36
 text = "Options"
 
-[node name="AdminButton" type="Button" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+[node name="HighscoresButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 36
+text = "Highscores"
+
+[node name="AdminButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 36
 text = "View Survey Responses"
 
 [node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 36
 text = "Quit"
 
 [node name="FeedbackLabel" type="Label" parent="Panel/VBoxContainer"]
