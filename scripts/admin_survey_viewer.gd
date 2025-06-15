@@ -7,6 +7,7 @@ extends Control
 @onready var access_panel = $AccessPanel
 @onready var code_input = $AccessPanel/VBoxContainer/LineEdit
 @onready var access_button = $AccessPanel/VBoxContainer/AccessButton
+@onready var back_button = $Panel/VBoxContainer/BackButton
 
 var is_firebase_admin = false
 var delete_pending_id = null
@@ -14,6 +15,7 @@ var delete_pending_id = null
 func _ready():
 	refresh_button.pressed.connect(_on_refresh_pressed)
 	access_button.pressed.connect(_on_access_pressed)
+	back_button.pressed.connect(_on_BackButton_pressed)
 	
 	# Check if user is a Firebase admin
 	var user_id = ""
@@ -207,3 +209,6 @@ func _on_delete_survey_pressed(survey_id):
 	delete_pending_id = survey_id
 	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/surveys/%s.json" % survey_id
 	http.request(url, [], HTTPClient.METHOD_DELETE)
+
+func _on_BackButton_pressed():
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
