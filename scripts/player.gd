@@ -197,10 +197,15 @@ func die():
 	print("Player died! (die() called)")
 	is_dead = true
 	animated_sprite.play("dead")
-	# Show the name input dialog for leaderboard
-	var hud = get_tree().get_first_node_in_group("ScoreUI")
-	if hud and hud.has_method("submit_score"):
-		hud.submit_score()
+	
+	# Automatically submit highscore
+	if Engine.has_singleton("HighscoreManager"):
+		HighscoreManager.submit_score(Globals.diamond_score)
+	else:
+		var highscore_manager = get_node_or_null("/root/HighscoreManager")
+		if highscore_manager:
+			highscore_manager.submit_score(Globals.diamond_score)
+	
 	var death_screen = get_tree().get_root().find_child("DeathScreen", true, false)
 	if death_screen:
 		death_screen.visible = true

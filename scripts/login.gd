@@ -80,11 +80,11 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 			local_id = response.get("localId", "")
 			id_token = response.get("idToken", "")
 			GlobalStorage.user_id = local_id  # Store UID globally!
+			GlobalStorage.set_player_name(response.get("displayName", ""))
 			feedback_label.text = "Login successful! Redirecting..."
 			print("Logged in! Firebase UID:", local_id)
 			print("GlobalStorage.user_id:", GlobalStorage.user_id)
 			redirect_timer.start(2.0)
-			# You can add code here to change scene or load user profile
 		else:
 			feedback_label.text = "Login failed. Please check your password."
 			print("Login failed:", response)  # Developer debug info
@@ -124,10 +124,3 @@ func find_email_by_username(username, callback):
 			http.queue_free()
 	)
 	http.request(url)
-
-func get_user_id():
-	if Engine.has_singleton("FirebaseAuth"):
-		var auth = Engine.get_singleton("FirebaseAuth")
-		if auth.is_logged_in():
-			return auth.get_user_id()
-	return "anonymous"

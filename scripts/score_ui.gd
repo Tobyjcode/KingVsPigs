@@ -38,18 +38,6 @@ func set_diamond_score(amount: int):
 func update_diamond_score():
 	diamond_score_ui.text = str(Globals.diamond_score)
 
-func submit_score():
-	name_line_edit.text = ""
-	name_input_dialog.popup_centered()
-	name_line_edit.grab_focus()
-	name_line_edit.select_all()
-
-func _on_NameInputDialog_confirmed():
-	var name = name_line_edit.text.strip_edges()
-	if name == "":
-		name = "Anonymous"
-	HighscoreManager.submit_score(Globals.diamond_score, name)
-
 func _on_request_completed(result, response_code, headers, body):
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
@@ -61,7 +49,7 @@ func _on_request_completed(result, response_code, headers, body):
 					score_data["id"] = key
 					# If player_name is missing or empty, try to fetch it from users DB
 					if not score_data.has("player_name") or score_data.player_name == "":
-						var user_id = score_data.get("user_id", "")
+						var user_id = GlobalStorage.get_user_id()
 						if user_id != "":
 							var http = HTTPRequest.new()
 							add_child(http)
@@ -91,7 +79,7 @@ func set_player_name_from_db():
 	if Engine.has_singleton("FirebaseAuth"):
 		var auth = Engine.get_singleton("FirebaseAuth")
 		if auth.is_logged_in():
-			var user_id = auth.get_user_id()
+			var user_id = GlobalStorage.get_user_id()
 			var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/users/%s/name.json" % user_id
 			var http = HTTPRequest.new()
 			add_child(http)
