@@ -16,6 +16,7 @@ var is_dead := false
 var is_entering_door = false
 var knockback_velocity := Vector2.ZERO
 var is_falling := false
+var timer_running := false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
@@ -38,6 +39,8 @@ func _ready():
 	if hud:
 		if hud.has_method("show_restart_message"):
 			hud.show_restart_message()
+	Globals.level_time = 0.0
+	timer_running = true
 	animated_sprite.play("idle")
 	attack_area.monitoring = false
 	attack_shape.disabled = true
@@ -226,3 +229,22 @@ func submit_score():
 	var hud = get_tree().get_first_node_in_group("ScoreUI")
 	if hud and hud.has_method("submit_score"):
 		hud.submit_score()
+
+func _process(delta):
+	if timer_running:
+		Globals.level_time += delta
+
+func on_victory():
+	print("Victory triggered! Level time:", Globals.level_time, "Total time before:", Globals.total_level_time)
+	timer_running = false
+	Globals.total_level_time += Globals.level_time
+	print("Total time after:", Globals.total_level_time)
+	get_tree().change_scene_to_file("res://scenes/levels/victoryscene.tscn")
+
+func _on_Door_body_entered(body):
+	if body == self:
+		on_victory()
+
+func end_level():
+	timer_running = false
+	Globals.total_level_time += Globals.level_time

@@ -6,6 +6,7 @@ extends Control
 @onready var feedback_button = $Panel/VBoxContainer/NextLevelButton
 @onready var audio_player = $AudioStreamPlayer
 @onready var victory: AudioStreamPlayer2D = $Victory
+@onready var total_time_label = $Panel/VBoxContainer/TotalTimeLabel
 
 func _ready():
 	# Set up focus style
@@ -34,16 +35,11 @@ func _ready():
 	# Set initial focus
 	menu_button.grab_focus()
 	
-	# Display score and time
-	var score_manager = get_node_or_null("/root/ScoreManager")
-	if score_manager:
-		var score = score_manager.get_score()
-		var time = score_manager.get_time()
-		score_label.text = "Score: " + str(score)
-		time_label.text = "Time: " + str(time) + " seconds"
-	else:
-		score_label.text = "Score: N/A"
-		time_label.text = "Time: N/A"
+	# Display score and time from Globals
+	score_label.text = "Score: " + str(Globals.diamond_score)
+	time_label.text = "Time: " + str(snapped(Globals.level_time, 0.01)) + " seconds"
+	var total_time = "Total Time: " + str(snapped(Globals.total_level_time, 0.01)) + " seconds"
+	total_time_label.text = "Total Time: " + str(snapped(Globals.total_level_time, 0.01)) + " seconds"
 
 	# Play victory sound
 	audio_player.play()

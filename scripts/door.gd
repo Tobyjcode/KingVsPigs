@@ -41,6 +41,8 @@ func _process(_delta):
 		elif player.has_node("AnimatedSprite2D"):
 			player.get_node("AnimatedSprite2D").play("doorIn")
 		await get_tree().create_timer(0.4).timeout  # Wait for the open animation to finish
+		if player and player.has_method("end_level"):
+			player.end_level()
 		if next_level:
 			get_tree().change_scene_to_packed(next_level) 
 

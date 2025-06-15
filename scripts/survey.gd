@@ -135,7 +135,9 @@ func save_survey_data(
 		"improvements": improvements,
 		"timestamp": Time.get_unix_time_from_system(),
 		"user_id": user_id,
-		"system_info": system_info
+		"system_info": system_info,
+		"level_time": Globals.level_time,
+		"total_level_time": Globals.total_level_time
 	}
 
 	var json = JSON.stringify(data)

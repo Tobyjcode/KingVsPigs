@@ -124,6 +124,16 @@ func create_survey_item(survey):
 	rating.text = "Rating: " + str(survey.rating) + "/10"
 	container.add_child(rating)
 	
+	# Add level time
+	var level_time = Label.new()
+	level_time.text = "Level Time: " + (str(snapped(survey.level_time, 0.01)) + " seconds" if survey.has("level_time") else "")
+	container.add_child(level_time)
+
+	# Add total level time
+	var total_time = Label.new()
+	total_time.text = "Total Time: " + (str(snapped(survey.total_level_time, 0.01)) + " seconds" if survey.has("total_level_time") else "")
+	container.add_child(total_time)
+	
 	# Add most enjoyed
 	var gameplay = Label.new()
 	gameplay.text = "Most Enjoyed: " + (survey.most_enjoyed if survey.has("most_enjoyed") else "")

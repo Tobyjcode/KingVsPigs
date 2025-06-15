@@ -64,6 +64,13 @@ theme_override_font_sizes/font_size = 24
 text = "Time: 0 seconds"
 horizontal_alignment = 1
 
+[node name="TotalTimeLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_7c02e")
+theme_override_font_sizes/font_size = 24
+text = "Total Time: 0 seconds"
+horizontal_alignment = 1
+
 [node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
