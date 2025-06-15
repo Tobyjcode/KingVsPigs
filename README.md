@@ -97,4 +97,4 @@ Big thanks to:
 - Anyone who plays, tests, or shares feedback — I really appreciate it  
 
 Thanks again for checking out **Kings and Pigs**.  
-Have fun — and if you have thoughts or ideas, I’m all ears! 🐷👑
+Have fun and if you have thoughts or ideas, I’m all ears! 🐷👑
