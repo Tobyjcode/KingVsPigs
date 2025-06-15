@@ -128,3 +128,16 @@ frame_progress = 0.364765
 position = Vector2(42, 20)
 autoplay = "idle"
 frame_progress = 0.0513764
+
+[node name="NameInputDialog" type="AcceptDialog" parent="."]
+title = "Leaderboard Name"
+size = Vector2i(266, 100)
+visible = true
+
+[node name="LineEdit" type="LineEdit" parent="NameInputDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 258.0
+offset_bottom = 51.0
+rotation = 0.00157656
+placeholder_text = "Your name for the leaderboard"

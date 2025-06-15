@@ -11,15 +11,7 @@ var pending_score = 0
 
 func _ready():
 	back_button.pressed.connect(_on_back_pressed)
-	
-	# Get or create the highscore manager
-	highscore_manager = get_node_or_null("/root/HighscoreManager")
-	if not highscore_manager:
-		highscore_manager = load("res://scripts/highscore_manager.gd").new()
-		highscore_manager.name = "HighscoreManager"
-		get_tree().root.add_child(highscore_manager)
-	
-	highscore_manager.highscores_updated.connect(_on_highscores_updated)
+	HighscoreManager.highscores_updated.connect(_on_highscores_updated)
 	update_highscores()
 
 	if Engine.has_singleton("FirebaseAuth"):
@@ -57,7 +49,7 @@ func update_highscores():
 	scores_container.add_child(loading)
 	
 	# Fetch latest highscores
-	highscore_manager.fetch_highscores()
+	HighscoreManager.fetch_highscores()
 
 func _on_highscores_updated():
 	# Clear existing scores
@@ -65,7 +57,7 @@ func _on_highscores_updated():
 		child.queue_free()
 	
 	# Display highscores
-	var top_scores = highscore_manager.get_top_scores(10)
+	var top_scores = HighscoreManager.get_top_scores(10)
 	if top_scores.is_empty():
 		var no_scores = Label.new()
 		no_scores.text = "No highscores yet!"
@@ -114,5 +106,4 @@ func _on_NameInputDialog_confirmed():
 	var player_name = name_line_edit.text.strip_edges()
 	if player_name == "":
 		player_name = "Anonymous"
-	if highscore_manager:
-		highscore_manager.submit_score(pending_score, player_name)
+	HighscoreManager.submit_score(pending_score, player_name)

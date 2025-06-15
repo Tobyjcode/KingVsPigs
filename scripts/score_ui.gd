@@ -10,6 +10,8 @@ var highscores = []
 @onready var score_group = $ScoreUIContainer/ScoreGroup
 @onready var diamond_score_ui: Label = $ScoreUIContainer/ScoreGroup/DiamondScoreUI
 @onready var restart_message: TextureRect = $RestartMessage
+@onready var name_input_dialog = $NameInputDialog
+@onready var name_line_edit = $NameInputDialog/LineEdit
 
 func _ready():
 	score_ui_container.scale = Vector2(4, 4) # Adjust as needed
@@ -37,32 +39,16 @@ func update_diamond_score():
 	diamond_score_ui.text = str(Globals.diamond_score)
 
 func submit_score():
-	# Always fetch the latest name before submitting
-	if Engine.has_singleton("FirebaseAuth"):
-		var auth = Engine.get_singleton("FirebaseAuth")
-		if auth.is_logged_in():
-			var user_id = auth.get_user_id()
-			var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/users/%s/name.json" % user_id
-			var http = HTTPRequest.new()
-			add_child(http)
-			http.request_completed.connect(
-				func(_result, response_code, _headers, body):
-					var name = ""
-					if response_code == 200:
-						name = body.get_string_from_utf8().strip_edges().replace('\"', '')
-					if name == "":
-						name = auth.get_user_email() # fallback to email
-					Globals.player_name = name
-					if highscore_manager:
-						highscore_manager.submit_score(Globals.diamond_score, Globals.player_name)
-					http.queue_free()
-			)
-			http.request(url)
-			return # Don't submit until name is fetched
-	# Not logged in
-	Globals.player_name = "Anonymous"
-	if highscore_manager:
-		highscore_manager.submit_score(Globals.diamond_score, Globals.player_name)
+	name_line_edit.text = ""
+	name_input_dialog.popup_centered()
+	name_line_edit.grab_focus()
+	name_line_edit.select_all()
+
+func _on_NameInputDialog_confirmed():
+	var name = name_line_edit.text.strip_edges()
+	if name == "":
+		name = "Anonymous"
+	HighscoreManager.submit_score(Globals.diamond_score, name)
 
 func _on_request_completed(result, response_code, headers, body):
 	if response_code == 200:
