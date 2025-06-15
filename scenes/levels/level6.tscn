@@ -975,10 +975,10 @@ autoplay = true
 bus = &"Music"
 
 [node name="Diamond" parent="." groups=["ScoreUI"] instance=ExtResource("8_km634")]
-position = Vector2(-8, -79)
+position = Vector2(3, -67)
 
 [node name="Diamond6" parent="." groups=["ScoreUI"] instance=ExtResource("8_km634")]
-position = Vector2(-6, -74)
+position = Vector2(-19, -67)
 
 [node name="Diamond2" parent="." groups=["ScoreUI"] instance=ExtResource("8_km634")]
 position = Vector2(-174, -57)
@@ -1012,7 +1012,7 @@ position = Vector2(157, -44)
 
 [node name="Platform3" parent="." instance=ExtResource("10_rx4po")]
 z_index = 2
-position = Vector2(-16, -59)
+position = Vector2(-18, -52)
 
 [node name="Platform4" parent="." instance=ExtResource("10_rx4po")]
 z_index = 2

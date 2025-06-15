@@ -364,7 +364,7 @@ text_tutorial = "Open Door"
 autorun = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.886745)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 34.0
 offset_top = 9.0
@@ -385,9 +385,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TutorialText" type="Label" parent="NinePatchRect/CenterContainer"]
-self_modulate = Color(1, 1, 1, 0.886745)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_fonts/font = SubResource("1")
 text = "Open Door"
 
 [node name="Left" type="NinePatchRect" parent="NinePatchRect"]

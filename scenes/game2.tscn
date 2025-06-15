@@ -948,7 +948,7 @@ is_start_door = true
 position = Vector2(20, 85)
 
 [node name="PauseScreen" parent="." instance=ExtResource("17_lxcs1")]
-offset_left = -122.0
-offset_top = 4.0
-offset_right = -122.0
-offset_bottom = 4.0
+offset_left = -71.0
+offset_top = -24.0
+offset_right = -71.0
+offset_bottom = -24.0

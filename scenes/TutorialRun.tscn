@@ -387,7 +387,6 @@ grow_vertical = 2
 [node name="TutorialText" type="Label" parent="NinePatchRect/CenterContainer"]
 self_modulate = Color(1, 1, 1, 0.830168)
 layout_mode = 2
-theme_override_fonts/font = SubResource("1")
 text = "Shift to run"
 
 [node name="Left" type="NinePatchRect" parent="NinePatchRect"]

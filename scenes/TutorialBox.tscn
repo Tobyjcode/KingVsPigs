@@ -1,17 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcy5kcb0wgigs"]
+[gd_scene load_steps=6 format=3 uid="uid://bcy5kcb0wgigs"]
 
 [ext_resource type="Script" uid="uid://cm6xx7raccfah" path="res://scripts/TutorialBox.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://corvvqq2wlf21" path="res://Assets/UI/tutorialBox.png" id="2"]
-
-[sub_resource type="FontFile" id="1"]
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
 
 [sub_resource type="Animation" id="2"]
 resource_name = "Appear"
@@ -256,7 +246,6 @@ anchor_bottom = 1.0
 [node name="TutorialText" type="Label" parent="NinePatchRect/CenterContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_fonts/font = SubResource("1")
 text = "Sample Tutorial text"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
