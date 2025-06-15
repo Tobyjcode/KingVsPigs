@@ -1,6 +1,6 @@
 # 👑 Kings and Pigs
 
-Hey! I’m **ColaDrinker**, and this is **Kings and Pigs** — a fast-paced little platformer where you play as a grumpy King on a mission to bash through pig-infested levels.  
+Hey! I’m **ColaDrinker**, and this is **Kings and Pigs** a fast-paced little platformer where you play as a grumpy King on a mission to bash through pig-infested levels.  
 Collect diamonds, squash enemies, and try to beat the clock for the best score you can.
 
 ---
