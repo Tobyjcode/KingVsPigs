@@ -1,11 +1,268 @@
-[gd_scene load_steps=10 format=3 uid="uid://r68hlni6hybk"]
+[gd_scene load_steps=16 format=3 uid="uid://dgkiih30x57al"]
 
-[ext_resource type="Script" uid="uid://bp2tbk66cpliw" path="res://scenes/tutorial_box_open.gd" id="1_nu8kq"]
-[ext_resource type="Texture2D" uid="uid://corvvqq2wlf21" path="res://Assets/UI/tutorialBox.png" id="2_5w4px"]
-[ext_resource type="Texture2D" uid="uid://cp68vpfpbnnjg" path="res://Assets/UI/L.png" id="3_y8x7n"]
-[ext_resource type="Texture2D" uid="uid://dohdl6wy7wxcv" path="res://Assets/UI/X.png" id="4_nu8kq"]
+[ext_resource type="Script" uid="uid://bp2tbk66cpliw" path="res://scenes/tutorial_box_open.gd" id="1_c107u"]
+[ext_resource type="Texture2D" uid="uid://corvvqq2wlf21" path="res://Assets/UI/tutorialBox.png" id="2_k8bp7"]
+[ext_resource type="Texture2D" uid="uid://cp68vpfpbnnjg" path="res://Assets/UI/L.png" id="3_tx4l3"]
+[ext_resource type="Texture2D" uid="uid://dohdl6wy7wxcv" path="res://Assets/UI/X.png" id="4_mctat"]
+[ext_resource type="Texture2D" uid="uid://cin7koyb4bu2w" path="res://Assets/UI/Space.png" id="5_k8bp7"]
 
 [sub_resource type="FontFile" id="1"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Appear"
+length = 5.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NinePatchRect:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NinePatchRect:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NinePatchRect:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NinePatchRect:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.1, 1, 2.5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NinePatchRect/CenterContainer/TutorialText:self_modulate:r")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NinePatchRect/CenterContainer/TutorialText:self_modulate:g")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NinePatchRect/CenterContainer/TutorialText:self_modulate:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("NinePatchRect/CenterContainer/TutorialText:self_modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2.5, 4.28599)
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"turn_on_visible"
+}]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("NinePatchRect/NinePatchRect:draw_center")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2.26667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Disappear"
+length = 1.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NinePatchRect:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NinePatchRect:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NinePatchRect:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NinePatchRect:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NinePatchRect/CenterContainer/TutorialText:self_modulate:r")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NinePatchRect/CenterContainer/TutorialText:self_modulate:g")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NinePatchRect/CenterContainer/TutorialText:self_modulate:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("NinePatchRect/CenterContainer/TutorialText:self_modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9)
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_eyad4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NinePatchRect/NinePatchRect:draw_center")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l2xtr"]
+_data = {
+&"Appear": SubResource("2"),
+&"Disappear": SubResource("3"),
+&"RESET": SubResource("Animation_eyad4")
+}
+
+[sub_resource type="FontFile" id="FontFile_tx4l3"]
 subpixel_positioning = 0
 msdf_pixel_range = 14
 msdf_size = 128
@@ -359,18 +616,18 @@ _data = {
 [node name="TutorialBox" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_nu8kq")
+script = ExtResource("1_c107u")
 text_tutorial = "Open Door"
 autorun = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.886745)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 34.0
 offset_top = 9.0
 offset_right = 259.0
 offset_bottom = 47.0
-texture = ExtResource("2_5w4px")
+texture = ExtResource("2_k8bp7")
 patch_margin_left = 20
 patch_margin_top = 15
 patch_margin_right = 20
@@ -385,7 +642,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TutorialText" type="Label" parent="NinePatchRect/CenterContainer"]
-self_modulate = Color(1, 1, 1, 0.886745)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("1")
 text = "Open Door"
@@ -397,7 +654,7 @@ offset_left = -39.0
 offset_top = -71.0
 offset_right = 393.0
 offset_bottom = -29.0
-texture = ExtResource("3_y8x7n")
+texture = ExtResource("3_tx4l3")
 patch_margin_left = 20
 patch_margin_top = 15
 patch_margin_right = 20
@@ -423,15 +680,101 @@ offset_left = 38.0
 offset_top = 2.0
 offset_right = 74.0
 offset_bottom = 36.0
-texture = ExtResource("4_nu8kq")
+texture = ExtResource("4_mctat")
 draw_center = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_i481t")
+&"": SubResource("AnimationLibrary_l2xtr")
 }
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 11.868
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.886745)
+offset_left = 11.0
+offset_top = 7.0
+offset_right = 260.0
+offset_bottom = 56.0
+texture = ExtResource("2_k8bp7")
+patch_margin_left = 20
+patch_margin_top = 15
+patch_margin_right = 20
+patch_margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -13.0
+offset_right = -11.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TutorialText" type="Label" parent="NinePatchRect2/CenterContainer"]
+self_modulate = Color(1, 1, 1, 0.886745)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_tx4l3")
+text = "Jump
+"
+horizontal_alignment = 1
+
+[node name="Left" type="NinePatchRect" parent="NinePatchRect2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -39.0
+offset_top = -71.0
+offset_right = 393.0
+offset_bottom = -29.0
+texture = ExtResource("3_tx4l3")
+patch_margin_left = 20
+patch_margin_top = 15
+patch_margin_right = 20
+patch_margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="NinePatchRect2/Left"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = 75.0
+offset_right = -4.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TutorialText" type="Label" parent="NinePatchRect2/Left/CenterContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_tx4l3")
+text = "Sample Tutorial text"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 8.0
+offset_right = -52.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_k8bp7")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_i481t")
+}
+
+[node name="Timer2" type="Timer" parent="."]
 wait_time = 11.868
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

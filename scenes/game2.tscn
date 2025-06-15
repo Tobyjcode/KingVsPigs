@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://j40m86t4cokl" path="res://nodes/HUDS/score_ui.tscn" id="7_1hpkv"]
 [ext_resource type="PackedScene" uid="uid://cfj53na1183dg" path="res://nodes/HUDS/death_screen.tscn" id="8_yam7v"]
 [ext_resource type="PackedScene" uid="uid://c5i57fcarmmr2" path="res://scenes/door.tscn" id="9_gokrx"]
-[ext_resource type="PackedScene" uid="uid://brlnxkwx745fo" path="res://scenes/levels/level2.tscn" id="10_lv1cq"]
+[ext_resource type="PackedScene" uid="uid://cn8f6bmyon5kk" path="res://scenes/level2.tscn" id="10_lv1cq"]
 [ext_resource type="AudioStream" uid="uid://c6fpl6p44lbnm" path="res://Assets/Sounds/KingVsPigsTheme.ogg" id="11_k8i0y"]
 [ext_resource type="PackedScene" uid="uid://c48hbd4pblqw3" path="res://nodes/diamond.tscn" id="12_hcndq"]
 [ext_resource type="PackedScene" uid="uid://4k5n2wgfu1ha" path="res://scenes/Bomb.tscn" id="13_chdjo"]

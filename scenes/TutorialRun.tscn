@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://r68hlni6hybk"]
+[gd_scene load_steps=10 format=3 uid="uid://yqy3ugu6k2tn"]
 
-[ext_resource type="Script" uid="uid://bp2tbk66cpliw" path="res://scenes/tutorial_box_open.gd" id="1_nu8kq"]
-[ext_resource type="Texture2D" uid="uid://corvvqq2wlf21" path="res://Assets/UI/tutorialBox.png" id="2_5w4px"]
-[ext_resource type="Texture2D" uid="uid://cp68vpfpbnnjg" path="res://Assets/UI/L.png" id="3_y8x7n"]
-[ext_resource type="Texture2D" uid="uid://dohdl6wy7wxcv" path="res://Assets/UI/X.png" id="4_nu8kq"]
+[ext_resource type="Script" uid="uid://bp2tbk66cpliw" path="res://scenes/tutorial_box_open.gd" id="1_2xujn"]
+[ext_resource type="Texture2D" uid="uid://corvvqq2wlf21" path="res://Assets/UI/tutorialBox.png" id="2_gygon"]
+[ext_resource type="Texture2D" uid="uid://cp68vpfpbnnjg" path="res://Assets/UI/L.png" id="3_okj1r"]
+[ext_resource type="Texture2D" uid="uid://cin7koyb4bu2w" path="res://Assets/UI/Space.png" id="4_2xujn"]
 
 [sub_resource type="FontFile" id="1"]
 subpixel_positioning = 0
@@ -359,18 +359,18 @@ _data = {
 [node name="TutorialBox" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_nu8kq")
+script = ExtResource("1_2xujn")
 text_tutorial = "Open Door"
 autorun = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.886745)
+self_modulate = Color(1, 1, 1, 0.830168)
 layout_mode = 0
 offset_left = 34.0
 offset_top = 9.0
 offset_right = 259.0
 offset_bottom = 47.0
-texture = ExtResource("2_5w4px")
+texture = ExtResource("2_gygon")
 patch_margin_left = 20
 patch_margin_top = 15
 patch_margin_right = 20
@@ -385,10 +385,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TutorialText" type="Label" parent="NinePatchRect/CenterContainer"]
-self_modulate = Color(1, 1, 1, 0.886745)
+self_modulate = Color(1, 1, 1, 0.830168)
 layout_mode = 2
 theme_override_fonts/font = SubResource("1")
-text = "Open Door"
+text = "Shift to run"
 
 [node name="Left" type="NinePatchRect" parent="NinePatchRect"]
 self_modulate = Color(1, 1, 1, 0)
@@ -397,7 +397,7 @@ offset_left = -39.0
 offset_top = -71.0
 offset_right = 393.0
 offset_bottom = -29.0
-texture = ExtResource("3_y8x7n")
+texture = ExtResource("3_okj1r")
 patch_margin_left = 20
 patch_margin_top = 15
 patch_margin_right = 20
@@ -419,11 +419,11 @@ text = "Sample Tutorial text"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect"]
 layout_mode = 0
-offset_left = 38.0
-offset_top = 2.0
-offset_right = 74.0
-offset_bottom = 36.0
-texture = ExtResource("4_nu8kq")
+offset_left = 40.0
+offset_top = 8.0
+offset_right = 62.0
+offset_bottom = 32.0
+texture = ExtResource("4_2xujn")
 draw_center = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
