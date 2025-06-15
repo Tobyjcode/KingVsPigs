@@ -4,16 +4,62 @@ extends Control
 @onready var survey_list = $Panel/VBoxContainer/ScrollContainer/SurveyList
 @onready var refresh_button = $Panel/VBoxContainer/RefreshButton
 @onready var status_label = $Panel/VBoxContainer/StatusLabel
+@onready var access_panel = $AccessPanel
+@onready var code_input = $AccessPanel/VBoxContainer/LineEdit
+@onready var access_button = $AccessPanel/VBoxContainer/AccessButton
 
-var firebase_api_key = "AIzaSyCmdy8DSoDesCFhX9hb3lO9Qseq-STnEWg"
+var is_firebase_admin = false
 var delete_pending_id = null
 
 func _ready():
 	refresh_button.pressed.connect(_on_refresh_pressed)
-	load_surveys()
+	access_button.pressed.connect(_on_access_pressed)
+	
+	# Check if user is a Firebase admin
+	var user_id = ""
+	if Engine.has_singleton("FirebaseAuth"):
+		var auth = Engine.get_singleton("FirebaseAuth")
+		if auth.is_logged_in():
+			user_id = auth.get_user_id()
+	
+	if user_id != "":
+		_check_firebase_admin(user_id)
+	else:
+		# Not logged in, show code entry
+		$Panel.visible = false
+		access_panel.visible = true
+
+func _check_firebase_admin(user_id):
+	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/admins/%s.json" % user_id
+	var http = HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(
+		func(_result, response_code, _headers, body):
+			if response_code == 200 and body.get_string_from_utf8().strip_edges() == "true":
+				is_firebase_admin = true
+				access_panel.visible = false
+				$Panel.visible = true
+				load_surveys()
+			else:
+				# Not a Firebase admin, show code entry
+				$Panel.visible = false
+				access_panel.visible = true
+			http.queue_free()
+	)
+	http.request(url)
 
 func _on_refresh_pressed():
 	load_surveys()
+
+func _on_access_pressed():
+	var input_code = code_input.text
+	if input_code == "123321":
+		access_panel.visible = false
+		$Panel.visible = true
+		load_surveys()
+	else:
+		status_label.text = "Invalid access code"
+		code_input.text = ""  # Clear the input field
 
 func load_surveys():
 	status_label.text = "Loading surveys..."
@@ -118,18 +164,3 @@ func _on_delete_survey_pressed(survey_id):
 	delete_pending_id = survey_id
 	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/surveys/%s.json" % survey_id
 	http.request(url, [], HTTPClient.METHOD_DELETE)
-
-func _on_admin_pressed():
-	var user_id = get_user_id() # Your function to get the current user's UID
-	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/admins/%s.json" % user_id
-	var http = HTTPRequest.new()
-	add_child(http)
-	http.request_completed.connect(
-		func(_result, response_code, _headers, body):
-			if response_code == 200 and body.get_string_from_utf8() == "true":
-				get_tree().change_scene_to_file("res://scenes/admin_survey_viewer.tscn")
-			else:
-				show_feedback("You are not authorized to access the admin panel.", true)
-			http.queue_free()
-	)
-	http.request(url) 

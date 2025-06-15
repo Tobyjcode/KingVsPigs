@@ -80,10 +80,9 @@ func is_admin(user_id, callback):
 func _on_admin_pressed():
 	var user_id = get_user_id()
 	is_admin(user_id, func(is_admin):
-		if is_admin:
-			get_tree().change_scene_to_file("res://scenes/admin_survey_viewer.tscn")
-		else:
-			show_feedback("Sorry, this section is for admins only.", true)
+		# Always open the admin survey viewer scene.
+		# The scene itself will check if the user is a Firebase admin and skip the code entry if so.
+		get_tree().change_scene_to_file("res://scenes/admin_survey_viewer.tscn")
 	)
 
 func _on_quit_pressed():

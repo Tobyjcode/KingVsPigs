@@ -77,13 +77,7 @@ func get_system_info():
 	}
 
 func get_user_id():
-	# Try to get user ID from Firebase auth if available
-	var user_id = "anonymous"
-	if Engine.has_singleton("FirebaseAuth"):
-		var auth = Engine.get_singleton("FirebaseAuth")
-		if auth.is_logged_in():
-			user_id = auth.get_user_id()
-	return user_id
+	return GlobalStorage.get_user_id()
 
 func save_survey_data(rating, gameplay, difficulty):
 	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/surveys.json"

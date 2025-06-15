@@ -132,7 +132,6 @@ frame_progress = 0.0513764
 [node name="NameInputDialog" type="AcceptDialog" parent="."]
 title = "Leaderboard Name"
 size = Vector2i(266, 100)
-visible = true
 
 [node name="LineEdit" type="LineEdit" parent="NameInputDialog"]
 offset_left = 8.0
