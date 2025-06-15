@@ -1,6 +1,7 @@
 extends Control
 
 @onready var start_button = $Panel/VBoxContainer/StartButton
+@onready var highscores_button = $Panel/VBoxContainer/HighscoresButton
 @onready var survey_button = $Panel/VBoxContainer/SurveyButton
 @onready var options_button = $Panel/VBoxContainer/OptionsButton
 @onready var admin_button = $Panel/VBoxContainer/AdminButton
@@ -11,6 +12,7 @@ var feedback_timer: Timer = null
 func _ready():
 	# Corrected paths to the buttons after menu redesign
 	start_button.pressed.connect(_on_start_pressed)
+	highscores_button.pressed.connect(_on_highscores_pressed)
 	survey_button.pressed.connect(_on_survey_pressed)
 	options_button.pressed.connect(_on_options_pressed)
 	admin_button.pressed.connect(_on_admin_pressed)
@@ -19,6 +21,10 @@ func _ready():
 func _on_start_pressed():
 	# Change to the game scene
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
+
+func _on_highscores_pressed():
+	# Change to the highscores scene
+	get_tree().change_scene_to_file("res://scenes/highscore_ui.tscn")
 
 func _on_survey_pressed():
 	# Change to the survey scene

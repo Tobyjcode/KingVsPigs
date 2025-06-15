@@ -140,7 +140,6 @@ func state_fall():
 	return cur_state
 
 func state_ground():
-	print("In GROUND state")
 	velocity.x *= 0.15
 	return cur_state
 

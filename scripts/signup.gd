@@ -25,7 +25,7 @@ var countries = [
 	"Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
 	"Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia",
 	"Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
-	"Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy",
+	"Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Israel", "Italy",
 	"Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
 	"Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia",
 	"Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco",
@@ -41,6 +41,7 @@ var countries = [
 ]
 var country_type_buffer = ""
 var country_type_timer = null
+var profile_http = null # Add this variable to manage a separate HTTPRequest for profile saving
 
 func _ready():
 	guest_button.pressed.connect(_on_guest_pressed)
@@ -74,17 +75,9 @@ func _on_guest_pressed():
 	login_anonymous()
 
 func _on_create_user_pressed():
-	print("Create User button pressed")
 	var name = name_edit.text.strip_edges()
 	var email = email_edit.text.strip_edges()
-	print("Email entered: '", email, "'")
-	if not ("@" in email and "." in email.split("@")[-1]):
-		show_feedback("Please enter a valid email.", true)
-		return
 	var age = age_edit.text.strip_edges()
-	if country_option.selected < 0:
-		show_feedback("Please select a country.", true)
-		return
 	var country = country_option.text
 	var password = password_edit.text.strip_edges()
 	var gender = ""
@@ -95,24 +88,12 @@ func _on_create_user_pressed():
 	elif other_check.button_pressed:
 		gender = "Other"
 
-	if name == "":
-		show_feedback("Please enter your name.", true)
-		return
-	if email == "":
-		show_feedback("Please enter your email.", true)
-		return
-	if password == "":
-		show_feedback("Please enter your password.", true)
-		return
-	if age == "":
-		show_feedback("Please enter your age.", true)
-		return
-	if gender == "":
-		show_feedback("Please select a gender.", true)
+	if name == "" or email == "" or password == "" or age == "" or gender == "" or country_option.selected < 0:
+		show_feedback("Please fill in all fields.", true)
 		return
 
 	pending_action = "register"
-	print("name:", name, "email:", email, "age:", age, "country:", country, "password:", password, "gender:", gender)
+	print("Registering user:", name, email, age, country, gender)
 	register_user(email, password)
 
 func _on_login_pressed():
@@ -157,16 +138,22 @@ func _on_gender_checked(checked_box):
 		male_check.button_pressed = false
 		female_check.button_pressed = false
 
-func save_user_profile(local_id, id_token, name, age, country, gender):
-	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/users/%s.json?auth=%s" % [local_id, id_token]
+func save_user_profile(local_id, id_token):
+	if profile_http:
+		profile_http.queue_free()
+	profile_http = HTTPRequest.new()
+	add_child(profile_http)
+	profile_http.request_completed.connect(_on_profile_save_completed)
 	var data = {
-		"name": name,
-		"age": age,
-		"country": country,
-		"gender": gender
+		"name": name_edit.text.strip_edges(),
+		"age": age_edit.text.strip_edges(),
+		"country": country_option.text,
+		"gender": "Male" if male_check.button_pressed else "Female" if female_check.button_pressed else "Other",
+		"email": email_edit.text.strip_edges()
 	}
+	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/users/%s.json?auth=%s" % [local_id, id_token]
 	var json = JSON.stringify(data)
-	http.request(url, [], HTTPClient.METHOD_PUT, json)
+	profile_http.request(url, [], HTTPClient.METHOD_PUT, json)
 
 func _on_redirect_timer_timeout():
 	if pending_action == "register":
@@ -186,31 +173,21 @@ func show_feedback(message: String, is_error: bool = false):
 	feedback_label.add_theme_color_override("bg_color", Color(0.1, 0.1, 0.1, 0.8))
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
+	print("Auth response:", response_code, body.get_string_from_utf8())
 	var response = JSON.parse_string(body.get_string_from_utf8())
-	if response_code == 200:
-		var success_message = "Successfully " + pending_action + "! Redirecting..."
-		show_feedback(success_message)
-		print("Success!", pending_action, response)
-		if pending_action == "register":
-			var local_id = response.get("localId", "")
-			var id_token = response.get("idToken", "")
-			if local_id != "" and id_token != "":
-				save_user_profile(
-					local_id,
-					id_token,
-					name_edit.text.strip_edges(),
-					age_edit.text.strip_edges(),
-					country_option.text,
-					"Male" if male_check.button_pressed else "Female" if female_check.button_pressed else "Other"
-				)
-				# Start timer for redirect after showing feedback
-				redirect_timer.start(3.0)  # Show feedback for 3 seconds
-		elif pending_action == "guest":
-			# Store the guest user's ID and token if needed
-			var local_id = response.get("localId", "")
-			var id_token = response.get("idToken", "")
-			# Start timer for redirect after showing feedback
-			redirect_timer.start(3.0)  # Show feedback for 3 seconds
+	if response_code == 200 and pending_action == "register":
+		var local_id = response.get("localId", "")
+		var id_token = response.get("idToken", "")
+		if local_id != "" and id_token != "":
+			save_user_profile(local_id, id_token)
+		else:
+			show_feedback("Registration failed: missing user ID.", true)
+		# Always redirect after a short delay
+		redirect_timer.start(3.0)
+		show_feedback("Successfully registered! Redirecting...")
+	elif response_code == 200 and pending_action == "guest":
+		show_feedback("Guest login successful! Redirecting...")
+		redirect_timer.start(3.0)
 	else:
 		var error_message = "Error: " + response.get("error", {}).get("message", "Unknown error occurred")
 		show_feedback(error_message, true)
@@ -250,3 +227,13 @@ func _country_option_jump_to(prefix):
 		if item_text.begins_with(prefix):
 			country_option.selected = i
 			break
+
+func _on_profile_save_completed(result, response_code, headers, body):
+	if response_code == 200:
+		print("Profile saved successfully.")
+	else:
+		print("Profile save failed:", body.get_string_from_utf8())
+		show_feedback("Warning: Profile not saved! You may not be able to login by username.", true)
+	if profile_http:
+		profile_http.queue_free()
+		profile_http = null

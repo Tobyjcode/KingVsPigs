@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var start_door = $door2  # Use the correct name for your start door node
 @onready var player: CharacterBody2D = $Player  # Use the correct name for your player node
+@onready var pause_screen: Control = $PauseScreen
 
 const DOOR = preload("res://scenes/door.tscn")
 const PLAYER = preload("res://scenes/player.tscn")
@@ -11,3 +12,9 @@ func _ready():
 		player.global_position = start_door.global_position  # Move player to start door
 		start_door.connect("start_door_opened", Callable(player, "play_door_out"))
 		start_door.start_open_sequence()
+
+func _input(event):
+	if event.is_action_pressed("pause"):
+		if not pause_screen.visible:
+			pause_screen.visible = true
+			get_tree().paused = true

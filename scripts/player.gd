@@ -133,6 +133,10 @@ func _on_AnimatedSprite2D_animation_finished():
 		check_attack_area()  # Only check for hits after the animation
 	elif animated_sprite.animation == "doorIn":
 		is_entering_door = false
+		# Show the name input dialog for leaderboard
+		var hud = get_tree().get_first_node_in_group("ScoreUI")
+		if hud and hud.has_method("submit_score"):
+			hud.submit_score()
 	elif animated_sprite.animation == "hit":
 		animated_sprite.play("fall")
 	elif animated_sprite.animation == "fall":
@@ -193,6 +197,10 @@ func die():
 	print("Player died! (die() called)")
 	is_dead = true
 	animated_sprite.play("dead")
+	# Show the name input dialog for leaderboard
+	var hud = get_tree().get_first_node_in_group("ScoreUI")
+	if hud and hud.has_method("submit_score"):
+		hud.submit_score()
 	var death_screen = get_tree().get_root().find_child("DeathScreen", true, false)
 	if death_screen:
 		death_screen.visible = true
@@ -208,3 +216,8 @@ func play_door_out():
 	animated_sprite.play("doorOut")
 	await get_tree().create_timer(0.8).timeout  # Adjust to match your animation
 	is_entering_door = false
+
+func submit_score():
+	var hud = get_tree().get_first_node_in_group("ScoreUI")
+	if hud and hud.has_method("submit_score"):
+		hud.submit_score()

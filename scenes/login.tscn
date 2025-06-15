@@ -53,7 +53,6 @@ text = "Password:"
 [node name="PasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(400, 32)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cs5o2")
 placeholder_text = "Enter your password"
 secret = true
 

@@ -60,7 +60,6 @@ text = "Password:"
 
 [node name="PasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vfncv")
 placeholder_text = "Enter your password"
 secret = true
 

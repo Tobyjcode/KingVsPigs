@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bsidra6cwxs67"]
+[gd_scene load_steps=23 format=4 uid="uid://bsidra6cwxs67"]
 
 [ext_resource type="Script" uid="uid://cfw4u41wkkrk7" path="res://scenes/game.gd" id="1_ir15t"]
 [ext_resource type="PackedScene" uid="uid://cj47rlfy46f4y" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ccmbhcieqerou" path="res://scenes/bomberPiggy.tscn" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://bdwst50utlk8l" path="res://scenes/mimicPiggy.tscn" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://1jlsh3vqehku" path="res://scenes/TutorialBoxMovement.tscn" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://vihqfbfa5li1" path="res://scenes/pause_screen.tscn" id="17_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("2_lnu2h")
@@ -947,3 +948,9 @@ is_start_door = true
 
 [node name="mimicPiggy" parent="." instance=ExtResource("13_kvuet")]
 position = Vector2(20, 85)
+
+[node name="PauseScreen" parent="." instance=ExtResource("17_rysoc")]
+offset_left = -122.0
+offset_top = 4.0
+offset_right = -122.0
+offset_bottom = 4.0

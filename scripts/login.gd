@@ -29,10 +29,17 @@ func _on_login_pressed():
 		feedback_label.text = "Please enter your username/email and password."
 		return
 	pending_action = "login"
-	var email = user
-	if not user.contains("@"):
-		email = user + "@kingvspigs.com"
-	login_user(email, password)
+	if user.contains("@"):
+		login_user(user, password)
+	else:
+		# Try to find email by username (force lowercase)
+		feedback_label.text = "Looking up username..."
+		find_email_by_username(user.to_lower(), func(email):
+			if email != "":
+				login_user(email, password)
+			else:
+				feedback_label.text = "Username not found."
+		)
 
 func login_user(email, password):
 	var url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=%s" % firebase_api_key
@@ -65,6 +72,8 @@ func reset_password(email):
 	http.request(url, [], HTTPClient.METHOD_POST, json)
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
+	print("HTTP request completed! Code:", response_code)
+	print("Body:", body.get_string_from_utf8())
 	var response = JSON.parse_string(body.get_string_from_utf8())
 	if pending_action == "login":
 		if response_code == 200:
@@ -88,3 +97,27 @@ func _on_redirect_timer_timeout():
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/signup.tscn")
+
+func find_email_by_username(username, callback):
+	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"name\"&equalTo=\"%s\"" % username
+	var http = HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(
+		func(_result, response_code, _headers, body):
+			print("Username lookup response:", response_code, body.get_string_from_utf8())
+			if response_code == 200:
+				var users = JSON.parse_string(body.get_string_from_utf8())
+				if users and users.size() > 0:
+					for key in users:
+						var user = users[key]
+						if user.has("email"):
+							callback.call(user["email"])
+							http.queue_free()
+							return
+				# Not found
+				callback.call("")
+			else:
+				callback.call("")
+			http.queue_free()
+	)
+	http.request(url)
