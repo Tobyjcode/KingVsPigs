@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://c652gnot2woup"]
+[gd_scene load_steps=24 format=4 uid="uid://c652gnot2woup"]
 
 [ext_resource type="Script" uid="uid://cfw4u41wkkrk7" path="res://scenes/game.gd" id="1_63dn4"]
 [ext_resource type="Texture2D" uid="uid://dn5pk4sf1sf25" path="res://Assets/Sprites/14-TileSets/Decorations (32x32).png" id="2_mq5e3"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cxm7k3bkes86e" path="res://scenes/platform.tscn" id="9_12yq6"]
 [ext_resource type="PackedScene" uid="uid://c5i57fcarmmr2" path="res://scenes/door.tscn" id="10_p2rd5"]
 [ext_resource type="PackedScene" uid="uid://vihqfbfa5li1" path="res://scenes/pause_screen.tscn" id="11_aglod"]
+[ext_resource type="PackedScene" uid="uid://dse5tnb7hn2ki" path="res://scenes/levels/victoryscene.tscn" id="11_iek1g"]
 [ext_resource type="PackedScene" uid="uid://cfj53na1183dg" path="res://nodes/HUDS/death_screen.tscn" id="12_fy801"]
 [ext_resource type="PackedScene" uid="uid://dmixkcy6oojq1" path="res://scenes/piggy.tscn" id="13_jvocj"]
 [ext_resource type="PackedScene" uid="uid://ccmbhcieqerou" path="res://scenes/bomberPiggy.tscn" id="14_snut3"]
@@ -1025,9 +1026,7 @@ is_start_door = true
 
 [node name="door" parent="." instance=ExtResource("10_p2rd5")]
 position = Vector2(342, -81)
-
-[node name="door3" parent="." instance=ExtResource("10_p2rd5")]
-position = Vector2(342, -81)
+next_level = ExtResource("11_iek1g")
 
 [node name="PauseScreen" parent="." instance=ExtResource("11_aglod")]
 visible = false

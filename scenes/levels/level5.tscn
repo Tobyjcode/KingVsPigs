@@ -1024,9 +1024,6 @@ is_start_door = true
 
 [node name="door" parent="." instance=ExtResource("11_xrw0o")]
 position = Vector2(342, -81)
-
-[node name="door3" parent="." instance=ExtResource("11_xrw0o")]
-position = Vector2(342, -81)
 next_level = ExtResource("11_kykwg")
 
 [node name="PauseScreen" parent="." instance=ExtResource("12_pm1y0")]

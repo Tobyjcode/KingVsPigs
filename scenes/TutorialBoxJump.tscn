@@ -693,6 +693,7 @@ wait_time = 11.868
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.886745)
+layout_mode = 0
 offset_left = 11.0
 offset_top = 7.0
 offset_right = 260.0

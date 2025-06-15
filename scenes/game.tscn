@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cj47rlfy46f4y" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dn5pk4sf1sf25" path="res://Assets/Sprites/14-TileSets/Decorations (32x32).png" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://dis7fet3ee3w8" path="res://Assets/Sprites/14-TileSets/Terrain (32x32).png" id="3_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://crukvsomqn6ax" path="res://scenes/levels/level2.tscn" id="8_dinhu"]
 [ext_resource type="PackedScene" uid="uid://j40m86t4cokl" path="res://nodes/HUDS/score_ui.tscn" id="9_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://cn8f6bmyon5kk" path="res://scenes/level2.tscn" id="10_ca42v"]
 [ext_resource type="PackedScene" uid="uid://cfj53na1183dg" path="res://nodes/HUDS/death_screen.tscn" id="10_vtaks"]
 [ext_resource type="AudioStream" uid="uid://c6fpl6p44lbnm" path="res://Assets/Sounds/KingVsPigsTheme.ogg" id="11_dinhu"]
 [ext_resource type="PackedScene" uid="uid://c5i57fcarmmr2" path="res://scenes/door.tscn" id="11_kvpfn"]
@@ -894,7 +894,7 @@ visible = false
 
 [node name="door" parent="." instance=ExtResource("11_kvpfn")]
 position = Vector2(335, 69)
-next_level = ExtResource("10_ca42v")
+next_level = ExtResource("8_dinhu")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_dinhu")

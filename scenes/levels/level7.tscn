@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://duh3axvd0j7jo"]
+[gd_scene load_steps=24 format=4 uid="uid://duh3axvd0j7jo"]
 
 [ext_resource type="Script" uid="uid://cfw4u41wkkrk7" path="res://scenes/game.gd" id="1_1gkwy"]
 [ext_resource type="Texture2D" uid="uid://dn5pk4sf1sf25" path="res://Assets/Sprites/14-TileSets/Decorations (32x32).png" id="2_rge87"]
@@ -12,8 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://cxm7k3bkes86e" path="res://scenes/platform.tscn" id="10_gycp8"]
 [ext_resource type="PackedScene" uid="uid://vihqfbfa5li1" path="res://scenes/pause_screen.tscn" id="11_l0cwd"]
 [ext_resource type="PackedScene" uid="uid://c5i57fcarmmr2" path="res://scenes/door.tscn" id="11_prm31"]
-[ext_resource type="PackedScene" uid="uid://ujh8rnerg33f" path="res://scenes/levels/level6.tscn" id="12_emhfo"]
+[ext_resource type="PackedScene" uid="uid://c52m5acy335lo" path="res://scenes/game2.tscn" id="12_emhfo"]
 [ext_resource type="PackedScene" uid="uid://cfj53na1183dg" path="res://nodes/HUDS/death_screen.tscn" id="12_rge87"]
+[ext_resource type="PackedScene" uid="uid://drmb7s32v17kg" path="res://scenes/levels/level8.tscn" id="13_vd1yw"]
 [ext_resource type="PackedScene" uid="uid://bdwst50utlk8l" path="res://scenes/mimicPiggy.tscn" id="13_vnwci"]
 [ext_resource type="PackedScene" uid="uid://4k5n2wgfu1ha" path="res://scenes/Bomb.tscn" id="15_vnwci"]
 
@@ -1003,6 +1004,7 @@ is_start_door = true
 
 [node name="door" parent="." instance=ExtResource("11_prm31")]
 position = Vector2(342, -81)
+next_level = ExtResource("13_vd1yw")
 
 [node name="DeathScreen" parent="." instance=ExtResource("12_rge87")]
 visible = false

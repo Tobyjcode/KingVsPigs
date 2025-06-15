@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bppp4umxww2jg" path="res://nodes/crate/Crate.tscn" id="9_wo5bm"]
 [ext_resource type="PackedScene" uid="uid://cxm7k3bkes86e" path="res://scenes/platform.tscn" id="10_edoqj"]
 [ext_resource type="PackedScene" uid="uid://c5i57fcarmmr2" path="res://scenes/door.tscn" id="11_022ip"]
-[ext_resource type="PackedScene" uid="uid://brrox3c13xlo6" path="res://scenes/levels/level4.tscn" id="11_522sc"]
+[ext_resource type="PackedScene" uid="uid://brrox3c13xlo6" path="res://scenes/levels/level4.tscn" id="11_t14x3"]
 [ext_resource type="PackedScene" uid="uid://dmixkcy6oojq1" path="res://scenes/piggy.tscn" id="12_wb0vq"]
 [ext_resource type="PackedScene" uid="uid://bfe1lxfdv54cm" path="res://scenes/TutorialAttack.tscn" id="13_522sc"]
 [ext_resource type="PackedScene" uid="uid://cfj53na1183dg" path="res://nodes/HUDS/death_screen.tscn" id="13_ah4rv"]
@@ -998,7 +998,7 @@ is_start_door = true
 
 [node name="door" parent="." instance=ExtResource("11_022ip")]
 position = Vector2(342, -81)
-next_level = ExtResource("11_522sc")
+next_level = ExtResource("11_t14x3")
 
 [node name="Piggy" parent="." instance=ExtResource("12_wb0vq")]
 position = Vector2(244, 71)

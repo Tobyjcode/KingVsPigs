@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c48hbd4pblqw3" path="res://nodes/diamond.tscn" id="8_irrt8"]
 [ext_resource type="PackedScene" uid="uid://bppp4umxww2jg" path="res://nodes/crate/Crate.tscn" id="9_ev8xs"]
 [ext_resource type="PackedScene" uid="uid://cxm7k3bkes86e" path="res://scenes/platform.tscn" id="10_q6dln"]
-[ext_resource type="PackedScene" uid="uid://ujh8rnerg33f" path="res://scenes/levels/level6.tscn" id="11_f62st"]
+[ext_resource type="PackedScene" uid="uid://cvpxf6ba23qkl" path="res://scenes/levels/level5.tscn" id="11_5sfmg"]
 [ext_resource type="PackedScene" uid="uid://c5i57fcarmmr2" path="res://scenes/door.tscn" id="11_qtppw"]
 [ext_resource type="PackedScene" uid="uid://bdwst50utlk8l" path="res://scenes/mimicPiggy.tscn" id="11_t7v7a"]
 [ext_resource type="PackedScene" uid="uid://yqy3ugu6k2tn" path="res://scenes/TutorialRun.tscn" id="12_xx6b8"]
@@ -991,7 +991,7 @@ is_start_door = true
 
 [node name="door" parent="." instance=ExtResource("11_qtppw")]
 position = Vector2(342, -81)
-next_level = ExtResource("11_f62st")
+next_level = ExtResource("11_5sfmg")
 
 [node name="mimicPiggy" parent="." instance=ExtResource("11_t7v7a")]
 z_index = 2

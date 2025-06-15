@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bppp4umxww2jg" path="res://nodes/crate/Crate.tscn" id="9_oyk6k"]
 [ext_resource type="PackedScene" uid="uid://cxm7k3bkes86e" path="res://scenes/platform.tscn" id="10_oyk6k"]
 [ext_resource type="PackedScene" uid="uid://vihqfbfa5li1" path="res://scenes/pause_screen.tscn" id="12_8i1lk"]
-[ext_resource type="PackedScene" uid="uid://dyr7cwmtf0o5h" path="res://scenes/levels/level3.tscn" id="12_hgky1"]
+[ext_resource type="PackedScene" uid="uid://dyr7cwmtf0o5h" path="res://scenes/levels/level3.tscn" id="12_sqrei"]
 [ext_resource type="PackedScene" uid="uid://r68hlni6hybk" path="res://scenes/TutorialBoxOpen.tscn" id="14_b4tpv"]
 [ext_resource type="PackedScene" uid="uid://dgkiih30x57al" path="res://scenes/TutorialBoxJump.tscn" id="15_hkuam"]
 [ext_resource type="PackedScene" uid="uid://bfe1lxfdv54cm" path="res://scenes/TutorialAttack.tscn" id="16_f3b2k"]
@@ -990,7 +990,7 @@ is_start_door = true
 
 [node name="door" parent="." instance=ExtResource("2")]
 position = Vector2(342, -81)
-next_level = ExtResource("12_hgky1")
+next_level = ExtResource("12_sqrei")
 
 [node name="PauseScreen" parent="." instance=ExtResource("12_8i1lk")]
 offset_left = -38.0
