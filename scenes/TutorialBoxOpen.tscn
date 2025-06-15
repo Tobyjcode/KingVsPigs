@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://1jlsh3vqehku"]
+[gd_scene load_steps=10 format=3 uid="uid://r68hlni6hybk"]
 
-[ext_resource type="Script" uid="uid://cm6xx7raccfah" path="res://scripts/TutorialBox.gd" id="1_g64wm"]
-[ext_resource type="Texture2D" uid="uid://corvvqq2wlf21" path="res://Assets/UI/tutorialBox.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://cp68vpfpbnnjg" path="res://Assets/UI/L.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://8b0v6ttoprpp" path="res://Assets/UI/R.png" id="4"]
+[ext_resource type="Script" uid="uid://bp2tbk66cpliw" path="res://scenes/tutorial_box_open.gd" id="1_nu8kq"]
+[ext_resource type="Texture2D" uid="uid://corvvqq2wlf21" path="res://Assets/UI/tutorialBox.png" id="2_5w4px"]
+[ext_resource type="Texture2D" uid="uid://cp68vpfpbnnjg" path="res://Assets/UI/L.png" id="3_y8x7n"]
+[ext_resource type="Texture2D" uid="uid://dohdl6wy7wxcv" path="res://Assets/UI/X.png" id="4_nu8kq"]
 
 [sub_resource type="FontFile" id="1"]
 subpixel_positioning = 0
@@ -129,19 +129,7 @@ tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0, 2.26667),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("NinePatchRect/NinePatchRect2:draw_center")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 2.26667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
+"update": 0,
 "values": [false, true]
 }
 
@@ -262,19 +250,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NinePatchRect/NinePatchRect2:draw_center")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [false]
 }
 
@@ -288,30 +264,36 @@ _data = {
 [node name="TutorialBox" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_g64wm")
+script = ExtResource("1_nu8kq")
+text_tutorial = "Open Door"
+autorun = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 40.0
-offset_right = 472.0
-offset_bottom = 42.0
-texture = ExtResource("2")
+offset_left = 34.0
+offset_top = 9.0
+offset_right = 259.0
+offset_bottom = 47.0
+texture = ExtResource("2_5w4px")
 patch_margin_left = 20
 patch_margin_top = 15
 patch_margin_right = 20
 patch_margin_bottom = 10
 
 [node name="CenterContainer" type="CenterContainer" parent="NinePatchRect"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TutorialText" type="Label" parent="NinePatchRect/CenterContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("1")
-text = "Use                  To Move"
+text = "Open Door"
 
 [node name="Left" type="NinePatchRect" parent="NinePatchRect"]
 self_modulate = Color(1, 1, 1, 0)
@@ -320,7 +302,7 @@ offset_left = -39.0
 offset_top = -71.0
 offset_right = 393.0
 offset_bottom = -29.0
-texture = ExtResource("3")
+texture = ExtResource("3_y8x7n")
 patch_margin_left = 20
 patch_margin_top = 15
 patch_margin_right = 20
@@ -342,20 +324,11 @@ text = "Sample Tutorial text"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect"]
 layout_mode = 0
-offset_left = 171.0
-offset_top = 6.0
-offset_right = 198.0
+offset_left = 38.0
+offset_top = 2.0
+offset_right = 74.0
 offset_bottom = 36.0
-texture = ExtResource("3")
-draw_center = false
-
-[node name="NinePatchRect2" type="NinePatchRect" parent="NinePatchRect"]
-layout_mode = 0
-offset_left = 199.0
-offset_top = 6.0
-offset_right = 226.0
-offset_bottom = 36.0
-texture = ExtResource("4")
+texture = ExtResource("4_nu8kq")
 draw_center = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -364,6 +337,6 @@ libraries = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 11.868
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

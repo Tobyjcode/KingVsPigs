@@ -10,13 +10,60 @@ extends Control
 var feedback_timer: Timer = null
 
 func _ready():
-	# Corrected paths to the buttons after menu redesign
+	# Connect button signals
 	start_button.pressed.connect(_on_start_pressed)
 	highscores_button.pressed.connect(_on_highscores_pressed)
 	survey_button.pressed.connect(_on_survey_pressed)
 	options_button.pressed.connect(_on_options_pressed)
 	admin_button.pressed.connect(_on_admin_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+	
+	# Set up focus navigation for all buttons
+	var buttons = [start_button, highscores_button, survey_button, 
+				  options_button, admin_button, quit_button]
+	
+	for button in buttons:
+		button.focus_mode = Control.FOCUS_ALL
+		button.focus_entered.connect(_on_button_focus_entered.bind(button))
+		button.focus_exited.connect(_on_button_focus_exited.bind(button))
+	
+	# Create and apply focus style
+	var focus_style = StyleBoxFlat.new()
+	focus_style.bg_color = Color(0.2, 0.2, 0.2, 0.8)
+	focus_style.border_width_left = 2
+	focus_style.border_width_top = 2
+	focus_style.border_width_right = 2
+	focus_style.border_width_bottom = 2
+	focus_style.border_color = Color(1, 1, 1, 0.8)
+	
+	for button in buttons:
+		button.add_theme_stylebox_override("focus", focus_style)
+	
+	# Set initial focus to start button
+	start_button.grab_focus()
+
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		if start_button.has_focus():
+			_on_start_pressed()
+		elif highscores_button.has_focus():
+			_on_highscores_pressed()
+		elif survey_button.has_focus():
+			_on_survey_pressed()
+		elif options_button.has_focus():
+			_on_options_pressed()
+		elif admin_button.has_focus():
+			_on_admin_pressed()
+		elif quit_button.has_focus():
+			_on_quit_pressed()
+
+func _on_button_focus_entered(button):
+	# Visual feedback when button gets focus
+	button.modulate = Color(1.2, 1.2, 1.2)
+
+func _on_button_focus_exited(button):
+	# Reset button appearance when focus is lost
+	button.modulate = Color(1, 1, 1)
 
 func _on_start_pressed():
 	# Change to the game scene
