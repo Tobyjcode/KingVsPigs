@@ -186,11 +186,6 @@ func show_feedback(message: String, is_error: bool = false):
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 	print("Auth response:", response_code, body.get_string_from_utf8())
 	var response = JSON.parse_string(body.get_string_from_utf8())
-	if response == null:
-		show_feedback("Error: Invalid server response.", true)
-		print("Error: Could not parse JSON response.")
-		return
-
 	if response_code == 200 and pending_action == "register":
 		var local_id = response.get("localId", "")
 		var id_token = response.get("idToken", "")
@@ -198,13 +193,14 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 			save_user_profile(local_id, id_token)
 		else:
 			show_feedback("Registration failed: missing user ID.", true)
+		# Always redirect after a short delay
 		redirect_timer.start(3.0)
 		show_feedback("Successfully registered! Redirecting...")
 	elif response_code == 200 and pending_action == "guest":
 		show_feedback("Guest login successful! Redirecting...")
 		redirect_timer.start(3.0)
 	else:
-		var error_message = "Error: " + (response.get("error", {}).get("message", "Unknown error occurred") if response.has("error") else "Unknown error occurred")
+		var error_message = "Error: " + response.get("error", {}).get("message", "Unknown error occurred")
 		show_feedback(error_message, true)
 		print("Error:", response)
 

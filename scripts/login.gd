@@ -23,12 +23,10 @@ func _ready():
 	redirect_timer.timeout.connect(_on_redirect_timer_timeout)
 
 func _on_login_pressed():
-	login_button.disabled = true
 	var user = user_edit.text.strip_edges()
 	var password = password_edit.text.strip_edges()
 	if user == "" or password == "":
 		feedback_label.text = "Please enter your username/email and password."
-		login_button.disabled = false
 		return
 	pending_action = "login"
 	if user.contains("@"):
@@ -41,7 +39,6 @@ func _on_login_pressed():
 				login_user(email, password)
 			else:
 				feedback_label.text = "Username not found."
-				login_button.disabled = false
 		)
 
 func login_user(email, password):
@@ -75,22 +72,13 @@ func reset_password(email):
 	http.request(url, [], HTTPClient.METHOD_POST, json)
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
-	login_button.disabled = false  # Always re-enable after request
 	print("HTTP request completed! Code:", response_code)
 	print("Body:", body.get_string_from_utf8())
-	
-	# Check for network error
-	if result != OK:
-		feedback_label.text = "Network error. Please check your connection."
-		print("Network error: ", result)
-		return
-	
 	var response = JSON.parse_string(body.get_string_from_utf8())
 	if response == null:
 		feedback_label.text = "Error: Invalid server response."
 		print("Error: Could not parse JSON response.")
 		return
-	
 	if pending_action == "login":
 		if response_code == 200:
 			local_id = response.get("localId", "")
@@ -102,15 +90,13 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 			print("GlobalStorage.user_id:", GlobalStorage.user_id)
 			redirect_timer.start(2.0)
 		else:
-			var error_message = "Login failed: " + (response.get("error", {}).get("message", "Unknown error occurred") if response.has("error") else "Unknown error occurred")
-			feedback_label.text = error_message
+			feedback_label.text = "Login failed. Please check your password."
 			print("Login failed:", response)  # Developer debug info
 	elif pending_action == "reset_password":
 		if response_code == 200:
 			feedback_label.text = "Password reset email sent! Check your inbox."
 		else:
-			var error_message = "Failed to send reset email: " + (response.get("error", {}).get("message", "Unknown error occurred") if response.has("error") else "Unknown error occurred")
-			feedback_label.text = error_message
+			feedback_label.text = "Failed to send reset email. Please check your email address."
 			print("Reset failed:", response)  # Developer debug info
 
 func _on_redirect_timer_timeout():
