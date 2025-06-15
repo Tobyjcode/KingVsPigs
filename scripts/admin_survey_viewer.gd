@@ -124,17 +124,50 @@ func create_survey_item(survey):
 	rating.text = "Rating: " + str(survey.rating) + "/10"
 	container.add_child(rating)
 	
-	# Add gameplay feedback
+	# Add most enjoyed
 	var gameplay = Label.new()
-	gameplay.text = "Gameplay Feedback: " + survey.gameplay_feedback
-	gameplay.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	gameplay.text = "Most Enjoyed: " + (survey.most_enjoyed if survey.has("most_enjoyed") else "")
 	container.add_child(gameplay)
 	
-	# Add difficulty feedback
+	# Add least enjoyed
+	var least_enjoyed = Label.new()
+	least_enjoyed.text = "Least Enjoyed: " + (survey.least_enjoyed if survey.has("least_enjoyed") else "")
+	container.add_child(least_enjoyed)
+	
+	# Add difficulty
 	var difficulty = Label.new()
-	difficulty.text = "Difficulty Feedback: " + survey.difficulty_feedback
-	difficulty.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	difficulty.text = "Difficulty & Pacing: " + (survey.difficulty if survey.has("difficulty") else "")
 	container.add_child(difficulty)
+	
+	# Add controls
+	var controls = Label.new()
+	controls.text = "Controls: " + (survey.controls if survey.has("controls") else "")
+	container.add_child(controls)
+	
+	# Add clarity
+	var clarity = Label.new()
+	clarity.text = "Clarity: " + (survey.clarity if survey.has("clarity") else "")
+	container.add_child(clarity)
+	
+	# Add bugs
+	var bugs = Label.new()
+	bugs.text = "Bugs/Issues: " + (survey.bugs if survey.has("bugs") else "")
+	container.add_child(bugs)
+	
+	# Add visual/audio
+	var visual_audio = Label.new()
+	visual_audio.text = "Visual/Audio: " + (survey.visual_audio if survey.has("visual_audio") else "")
+	container.add_child(visual_audio)
+	
+	# Add game types
+	var game_types = Label.new()
+	game_types.text = "Game Types: " + (survey.game_types if survey.has("game_types") else "")
+	container.add_child(game_types)
+	
+	# Add improvements
+	var improvements = Label.new()
+	improvements.text = "Improvements: " + (survey.improvements if survey.has("improvements") else "")
+	container.add_child(improvements)
 	
 	# Add system info
 	var system_info = Label.new()

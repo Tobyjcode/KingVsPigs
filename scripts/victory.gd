@@ -51,7 +51,7 @@ func _ready():
 func _on_menu_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
-func _on_feedback_button_pressed():
+func _on_next_level_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/survey.tscn")
 
 func _input(event):
@@ -59,4 +59,4 @@ func _input(event):
 		if menu_button.has_focus():
 			_on_menu_button_pressed()
 		elif feedback_button.has_focus():
-			_on_feedback_button_pressed() 
+			_on_next_level_button_pressed() 

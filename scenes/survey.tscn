@@ -21,8 +21,8 @@ anchor_left = 0.25
 anchor_top = 0.2
 anchor_right = 0.75
 anchor_bottom = 0.8
-offset_top = 0.399994
-offset_bottom = 269.6
+offset_top = -140.6
+offset_bottom = 340.6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -45,7 +45,7 @@ layout_mode = 2
 [node name="RatingLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_2sqka")
-text = "How would you rate your experience?"
+text = "How likely are you to recommend this game to a friend?"
 
 [node name="RatingContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -58,36 +58,101 @@ min_value = 1.0
 max_value = 10.0
 value = 5.0
 
-[node name="RatingLabel" type="Label" parent="Panel/VBoxContainer/RatingContainer"]
+[node name="RatingValueLabel" type="Label" parent="Panel/VBoxContainer/RatingContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_2sqka")
-text = "Rating: 5"
+text = "5"
 
 [node name="MiddleSpacer" type="Control" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="GameplayLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="MostEnjoyedLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_2sqka")
 text = "What did you enjoy most about the gameplay?"
 
-[node name="GameplayComment" type="TextEdit" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="MostEnjoyedComment" type="TextEdit" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vfncv")
-placeholder_text = "Share your thoughts about the gameplay..."
+placeholder_text = "Share what you liked most..."
+
+[node name="LeastEnjoyedLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
+text = "What did you enjoy least about the gameplay?"
+
+[node name="LeastEnjoyedComment" type="TextEdit" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vfncv")
+placeholder_text = "Share what you liked least..."
+
+[node name="ControlsLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
+text = "How intuitive were the controls?"
+
+[node name="ControlsOption" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ClarityLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
+text = "Did you always understand what to do next?"
+
+[node name="ClarityOption" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
 
 [node name="DifficultyLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_2sqka")
-text = "How was the difficulty level? Any suggestions?"
+text = "How was the difficulty and pacing?"
 
-[node name="DifficultyComment" type="TextEdit" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="DifficultyOption" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="BugsLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
+text = "Did you encounter any bugs, frustrations, or technical issues?"
+
+[node name="BugsComment" type="TextEdit" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vfncv")
-placeholder_text = "Share your thoughts about the difficulty..."
+placeholder_text = "Describe any issues (optional)..."
+
+[node name="VisualAudioLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
+text = "How would you rate the visual and audio quality?"
+
+[node name="VisualAudioOption" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameTypesLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
+text = "What types of games do you usually play?"
+
+[node name="GameTypesComment" type="TextEdit" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vfncv")
+placeholder_text = "E.g. platformers, action, RPGs..."
+
+[node name="ImprovementsLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2sqka")
+text = "What would you improve or change about the game?"
+
+[node name="ImprovementsComment" type="TextEdit" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vfncv")
+placeholder_text = "Your suggestions..."
 
 [node name="BottomSpacer" type="Control" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
