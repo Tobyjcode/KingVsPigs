@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d2spom8qcs3xo" path="res://Assets/Sprites/08-Box/Hit.png" id="1_l118f"]
 [ext_resource type="Script" uid="uid://cpf6eby6uut82" path="res://nodes/crate/Crate.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://Assets/Sprites/08-Box/Idle.png" id="2_ryp3t"]
-[ext_resource type="AudioStream" uid="uid://c1bweu1hr70th" path="res://Assets/Sounds/effects/others/booom_fast.wav" id="4_cpmf1"]
+[ext_resource type="AudioStream" uid="uid://dsxprjy3aw38x" path="res://Assets/Sounds/footstep_carpet_002.ogg" id="4_cpmf1"]
 
 [sub_resource type="PhysicsMaterial" id="75"]
 bounce = 0.2
@@ -52,9 +52,9 @@ script = ExtResource("1_script")
 sprite_frames = SubResource("72")
 animation = &"Idle"
 
-[node name="Hit" type="AudioStreamPlayer" parent="."]
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_cpmf1")
-volume_db = -8.0
+volume_db = 6.667
 
 [node name="HitBox" type="Area2D" parent="."]
 rotation = 3.14159

@@ -8,13 +8,16 @@ extends RigidBody2D
 @export var fragment_lifetime: float = 1.5
 
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var hit_sound = $Hit
+@onready var hit: AudioStreamPlayer2D = $Hit
 
 var crate_frag_scene = preload("res://nodes/crate/CrateFrag.tscn")
 var diamond_scene = preload("res://nodes/diamond.tscn")
 
+var should_free = false
+
 func _ready():
 	$HitBox.area_entered.connect(_on_HitBox_area_entered)
+	hit.finished.connect(_on_Hit_finished) # Connect the finished signal
 
 func _on_HitBox_area_entered(area):
 	print("Area entered:", area, "Groups:", area.get_groups(), "Monitoring:", area.monitoring)
@@ -25,7 +28,8 @@ func _on_HitBox_area_entered(area):
 func break_into_fragments():
 	# Play hit animation and sound
 	animated_sprite.play("Hit")
-	hit_sound.play()
+	hit.stop()
+	hit.play()
 	await animated_sprite.animation_finished
 
 	# Spawn fragments in a nice arc
@@ -50,7 +54,15 @@ func break_into_fragments():
 		if diamond.has_method("set_velocity"):
 			diamond.set_velocity(Vector2(0, -120))
 
-	queue_free()
+	# Mark for freeing after sound
+	should_free = true
+	# If the sound is not playing for some reason, free immediately
+	if not hit.playing:
+		queue_free()
+
+func _on_Hit_finished():
+	if should_free:
+		queue_free()
 
 func _on_animation_finished():
 	queue_free()

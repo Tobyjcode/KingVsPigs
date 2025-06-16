@@ -997,6 +997,12 @@ position = Vector2(-130, 23)
 
 [node name="Crate2" parent="." instance=ExtResource("9_fmais")]
 position = Vector2(-95, 21)
+fragment_count = 4
+diamond_chance = 0.9
+fragment_min_speed = 180.0
+fragment_max_speed = 260.0
+fragment_arc = 0.7
+fragment_lifetime = 1.5
 
 [node name="Platform" parent="." instance=ExtResource("10_72xjh")]
 z_index = 2

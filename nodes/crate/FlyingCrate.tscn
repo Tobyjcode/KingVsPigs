@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c60lj6ntv00we"]
+[gd_scene load_steps=11 format=3 uid="uid://c60lj6ntv00we"]
 
 [ext_resource type="Texture2D" uid="uid://d2spom8qcs3xo" path="res://Assets/Sprites/08-Box/Hit.png" id="1_i4gmy"]
 [ext_resource type="Script" uid="uid://bmh2sqyfre5uj" path="res://nodes/crate/FlyingCrate.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://dh0l011l6qylv" path="res://Assets/Sprites/08-Box/Idle.png" id="2_40vav"]
+[ext_resource type="AudioStream" uid="uid://duojyk1u0kmav" path="res://Assets/Sounds/hit03.wav" id="4_onwig"]
 
 [sub_resource type="PhysicsMaterial" id="75"]
 bounce = 0.2
@@ -53,7 +54,8 @@ script = ExtResource("1_script")
 sprite_frames = SubResource("72")
 animation = &"Idle"
 
-[node name="Hit" type="AudioStreamPlayer" parent="."]
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_onwig")
 volume_db = -8.0
 
 [node name="HitBox" type="Area2D" parent="."]
