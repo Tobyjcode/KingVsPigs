@@ -44,6 +44,7 @@ custom_minimum_size = Vector2(400, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_cs5o2")
 placeholder_text = "Enter your username or email"
+virtual_keyboard_type = 1
 
 [node name="PasswordLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -54,6 +55,7 @@ text = "Password:"
 custom_minimum_size = Vector2(400, 32)
 layout_mode = 2
 placeholder_text = "Enter your password"
+virtual_keyboard_type = 2
 secret = true
 
 [node name="MiddleSpacer" type="Control" parent="Panel/VBoxContainer"]
