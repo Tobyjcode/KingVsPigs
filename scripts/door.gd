@@ -41,10 +41,17 @@ func _process(_delta):
 		elif player.has_node("AnimatedSprite2D"):
 			player.get_node("AnimatedSprite2D").play("doorIn")
 		await get_tree().create_timer(0.4).timeout  # Wait for the open animation to finish
-		if player and player.has_method("end_level"):
-			player.end_level()
-		if next_level:
-			get_tree().change_scene_to_packed(next_level) 
+		
+		if is_start_door:
+			# For start doors, just play the animation and emit signal
+			emit_signal("start_door_opened")
+			$AnimatedSprite2D.play("close")
+		else:
+			# For regular doors, handle level transition
+			if player and player.has_method("end_level"):
+				player.end_level()
+			if next_level:
+				get_tree().change_scene_to_packed(next_level)
 
 func start_open_sequence():
 	$AnimatedSprite2D.play("open")
