@@ -30,6 +30,7 @@ var invincibility_timer: Timer
 @onready var restart_message: TextureRect = $RestartMessage
 @onready var attack_timer: Timer = $AttackTimer
 @onready var walking: AudioStreamPlayer2D = $Walking
+@onready var die_sound: AudioStreamPlayer2D = $DieSound
 
 func _ready():
 	visible = false  # Make player invisible at start
@@ -212,6 +213,7 @@ func die():
 	print("Player died! (die() called)")
 	is_dead = true
 	animated_sprite.play("dead")
+	die_sound.play()
 	
 	# Automatically submit highscore
 	if Engine.has_singleton("HighscoreManager"):
