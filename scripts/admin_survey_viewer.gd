@@ -8,6 +8,7 @@ extends Control
 @onready var code_input = $AccessPanel/VBoxContainer/LineEdit
 @onready var access_button = $AccessPanel/VBoxContainer/AccessButton
 @onready var access_back_button = $AccessPanel/VBoxContainer/BackButton
+@onready var survey_back_button = $Panel/VBoxContainer/BackButton
 
 var is_firebase_admin = false
 var delete_pending_id = null
@@ -16,6 +17,7 @@ func _ready():
 	refresh_button.pressed.connect(_on_refresh_pressed)
 	access_button.pressed.connect(_on_access_pressed)
 	access_back_button.pressed.connect(_on_BackButton_pressed)
+	survey_back_button.pressed.connect(_on_BackButton_pressed)
 	
 	# Check if user is a Firebase admin
 	var user_id = ""

@@ -1,6 +1,6 @@
 extends Control
 
-@onready var scores_container = $Panel/VBoxContainer/ScoresContainer
+@onready var scores_container = $Panel/VBoxContainer/ScrollContainer/ScoresContainer
 @onready var back_button = $Panel/VBoxContainer/BackButton
 
 var highscore_manager: Node
@@ -33,7 +33,7 @@ func _on_highscores_updated():
 		child.queue_free()
 	
 	# Display highscores
-	var top_scores = HighscoreManager.get_top_scores(10)
+	var top_scores = HighscoreManager.get_top_scores(30)
 	if top_scores.is_empty():
 		var no_scores = Label.new()
 		no_scores.text = "No highscores yet!"
