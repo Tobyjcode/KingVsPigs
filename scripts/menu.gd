@@ -18,31 +18,35 @@ func _ready():
 	admin_button.pressed.connect(_on_admin_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	
-	# Set up focus navigation for all buttons
+	# Make buttons more touch-friendly
 	var buttons = [start_button, highscores_button, survey_button, 
 				  options_button, admin_button, quit_button]
 	
 	for button in buttons:
+		# Add touch feedback
+		button.pressed.connect(_on_button_pressed.bind(button))
+		button.button_up.connect(_on_button_released.bind(button))
+		
+		# Enable focus and hover for all platforms
 		button.focus_mode = Control.FOCUS_ALL
-		button.focus_entered.connect(_on_button_focus_entered.bind(button))
-		button.focus_exited.connect(_on_button_focus_exited.bind(button))
-	
-	# Create and apply focus style
-	var focus_style = StyleBoxFlat.new()
-	focus_style.bg_color = Color(0.2, 0.2, 0.2, 0.8)
-	focus_style.border_width_left = 2
-	focus_style.border_width_top = 2
-	focus_style.border_width_right = 2
-	focus_style.border_width_bottom = 2
-	focus_style.border_color = Color(1, 1, 1, 0.8)
-	
-	for button in buttons:
+		button.mouse_entered.connect(_on_button_focus_entered.bind(button))
+		button.mouse_exited.connect(_on_button_focus_exited.bind(button))
+		
+		# Create and apply focus style
+		var focus_style = StyleBoxFlat.new()
+		focus_style.bg_color = Color(0.2, 0.2, 0.2, 0.8)
+		focus_style.border_width_left = 2
+		focus_style.border_width_top = 2
+		focus_style.border_width_right = 2
+		focus_style.border_width_bottom = 2
+		focus_style.border_color = Color(1, 1, 1, 0.8)
 		button.add_theme_stylebox_override("focus", focus_style)
 	
 	# Set initial focus to start button
 	start_button.grab_focus()
 
 func _input(event):
+	# Handle keyboard navigation for all platforms
 	if event.is_action_pressed("ui_accept"):
 		if start_button.has_focus():
 			_on_start_pressed()
@@ -57,12 +61,18 @@ func _input(event):
 		elif quit_button.has_focus():
 			_on_quit_pressed()
 
+func _on_button_pressed(button):
+	# Visual feedback when button is pressed
+	button.modulate = Color(0.8, 0.8, 0.8)  # Darken the button
+
+func _on_button_released(button):
+	# Reset button appearance
+	button.modulate = Color(1, 1, 1)
+
 func _on_button_focus_entered(button):
-	# Visual feedback when button gets focus
 	button.modulate = Color(1.2, 1.2, 1.2)
 
 func _on_button_focus_exited(button):
-	# Reset button appearance when focus is lost
 	button.modulate = Color(1, 1, 1)
 
 func _on_start_pressed():
