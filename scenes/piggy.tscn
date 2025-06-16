@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dmixkcy6oojq1"]
+[gd_scene load_steps=47 format=3 uid="uid://dmixkcy6oojq1"]
 
 [ext_resource type="Script" uid="uid://dwbatx1scim37" path="res://scripts/enemy_pig.gd" id="1_56si3"]
 [ext_resource type="Texture2D" uid="uid://0re6e3f1tkjp" path="res://Assets/Sprites/03-Pig/Attack (34x28).png" id="1_j740r"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://7k77lav4ud8r" path="res://Assets/Sprites/03-Pig/Fall (34x28).png" id="4_venk0"]
 [ext_resource type="Texture2D" uid="uid://b2l6pcn2bfr5j" path="res://Assets/Sprites/03-Pig/Run (34x28).png" id="5_7wbru"]
 [ext_resource type="Texture2D" uid="uid://d1juosjwcs1qu" path="res://Assets/Sprites/03-Pig/Jump (34x28).png" id="8_3t7up"]
+[ext_resource type="AudioStream" uid="uid://c0pgof2f18y8a" path="res://Assets/Sounds/effects/enemies/pig_attack.wav" id="10_1lj5m"]
+[ext_resource type="AudioStream" uid="uid://b4cwq1lngbvl1" path="res://Assets/Sounds/effects/enemies/pig_die.wav" id="11_yo3qk"]
+[ext_resource type="AudioStream" uid="uid://ckktnk3xld4yx" path="res://Assets/Sounds/effects/enemies/pig_hrrr.wav" id="12_ju8d8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnrkt"]
 atlas = ExtResource("1_j740r")
@@ -317,3 +320,12 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["enemy_hitbox"]]
 position = Vector2(2, 5)
 shape = SubResource("RectangleShape2D_ow6q2")
+
+[node name="PiggyAttackAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_1lj5m")
+
+[node name="PiggyDieAudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_yo3qk")
+
+[node name="PiggyHitAudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_ju8d8")

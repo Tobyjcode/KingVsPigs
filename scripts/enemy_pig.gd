@@ -25,6 +25,9 @@ var is_falling := false
 @onready var attack_area = $AttackArea
 @onready var walking: AudioStreamPlayer2D = $Walking
 @onready var attack_shape = $AttackArea/CollisionPolygon2D
+@onready var attack_sound = $PiggyAttackAudioStreamPlayer2D
+@onready var die_sound = $PiggyDieAudioStreamPlayer2D2
+@onready var hit_sound = $PiggyHitAudioStreamPlayer2D3
 
 func _ready():
 	start_position = position
@@ -58,6 +61,7 @@ func _physics_process(delta):
 				is_attacking = true
 				is_winding_up = true
 				animated_sprite.play("attack")
+				attack_sound.play()  # Play sound when attack starts
 				attack_windup_timer.start()
 			# Always face the player during attack or windup
 			var direction = 1 if player.position.x > position.x else -1
@@ -92,7 +96,7 @@ func _on_attack_windup_timeout():
 	is_winding_up = false
 	# Only attack if not dead
 	if not is_dead and player and position.distance_to(player.position) < ATTACK_RANGE:
-		player.hit()
+		player.hit()  # Removed attack_sound.play() from here
 
 func _on_attack_cooldown_timeout():
 	is_on_cooldown = false
@@ -130,8 +134,12 @@ func hit():
 		# Stop any ongoing attack timers
 		attack_windup_timer.stop()
 		attack_cooldown_timer.stop()
+		# Play death sound
+		die_sound.play()
 	else:
 		animated_sprite.play("hit")
+		# Play hit sound
+		hit_sound.play()
 		# Knockback: move away from player
 		var dir = sign(global_position.x - player.global_position.x)
 		if dir == 0:
