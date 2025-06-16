@@ -24,6 +24,7 @@ var is_falling := false
 @onready var hit_timer: Timer = $HitTimer
 @onready var attack_area = $AttackArea
 @onready var walking: AudioStreamPlayer2D = $Walking
+@onready var attack_shape = $AttackArea/CollisionPolygon2D
 
 func _ready():
 	start_position = position
@@ -35,6 +36,9 @@ func _ready():
 func _physics_process(delta):
 	if is_dead:
 		velocity = Vector2.ZERO
+		# Disable attack area and its collision shape when dead
+		attack_area.monitoring = false
+		attack_shape.disabled = true
 		return
 	if is_falling:
 		velocity = knockback_velocity
@@ -50,7 +54,7 @@ func _physics_process(delta):
 	# Check if player is in range
 	if player and position.distance_to(player.position) < DETECTION_RANGE:
 		if position.distance_to(player.position) < ATTACK_RANGE:
-			if not is_attacking and not is_on_cooldown and not is_winding_up:
+			if not is_attacking and not is_on_cooldown and not is_winding_up and not is_dead:
 				is_attacking = true
 				is_winding_up = true
 				animated_sprite.play("attack")
@@ -86,7 +90,8 @@ func _physics_process(delta):
 
 func _on_attack_windup_timeout():
 	is_winding_up = false
-	if player and position.distance_to(player.position) < ATTACK_RANGE:
+	# Only attack if not dead
+	if not is_dead and player and position.distance_to(player.position) < ATTACK_RANGE:
 		player.hit()
 
 func _on_attack_cooldown_timeout():
@@ -119,6 +124,12 @@ func hit():
 		is_dead = true
 		animated_sprite.play("dead")
 		velocity = Vector2.ZERO
+		# Disable attack area and its collision shape when dead
+		attack_area.monitoring = false
+		attack_shape.disabled = true
+		# Stop any ongoing attack timers
+		attack_windup_timer.stop()
+		attack_cooldown_timer.stop()
 	else:
 		animated_sprite.play("hit")
 		# Knockback: move away from player

@@ -17,6 +17,8 @@ var is_entering_door = false
 var knockback_velocity := Vector2.ZERO
 var is_falling := false
 var timer_running := false
+var is_invincible = false
+var invincibility_timer: Timer
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
@@ -35,6 +37,14 @@ func _ready():
 	hit_timer.timeout.connect(_on_HitTimer_timeout)
 	if attack_timer:
 		attack_timer.timeout.connect(_on_AttackTimer_timeout)
+	
+	# Create invincibility timer
+	invincibility_timer = Timer.new()
+	invincibility_timer.one_shot = true
+	invincibility_timer.wait_time = 1.0  # 1 second of invincibility
+	invincibility_timer.timeout.connect(_on_invincibility_timeout)
+	add_child(invincibility_timer)
+	
 	var hud = get_tree().get_first_node_in_group("ScoreUI")
 	if hud:
 		if hud.has_method("show_restart_message"):
@@ -148,11 +158,13 @@ func _on_AnimatedSprite2D_animation_finished():
 		is_falling = false
 
 func hit(attacker = null):
-	if not is_hit and not is_dead:
+	if not is_hit and not is_dead and not is_invincible:
 		is_hit = true
+		is_invincible = true
 		animated_sprite.play("hit")
 		hit_sound.play()
 		hit_timer.start()
+		invincibility_timer.start()
 		lives -= 1
 		update_hearts()
 		# Knockback effect
@@ -248,3 +260,6 @@ func _on_Door_body_entered(body):
 func end_level():
 	timer_running = false
 	Globals.total_level_time += Globals.level_time
+
+func _on_invincibility_timeout():
+	is_invincible = false
