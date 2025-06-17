@@ -3,15 +3,22 @@ extends Node2D
 @onready var start_door = $door2  # Use the correct name for your start door node
 @onready var player: CharacterBody2D = $Player  # Use the correct name for your player node
 @onready var pause_screen: Control = $PauseScreen
+@onready var mobile_integration = preload("res://scripts/mobile_integration.gd").new()
 
 const DOOR = preload("res://scenes/door.tscn")
 const PLAYER = preload("res://scenes/player.tscn")
 
 func _ready():
+	add_child(mobile_integration)
 	if start_door.is_start_door:
 		player.global_position = start_door.global_position  # Move player to start door
 		start_door.connect("start_door_opened", Callable(player, "play_door_out"))
 		start_door.start_open_sequence()
+	var mobile_controls = get_node_or_null("MobileControls")
+	if mobile_controls:
+		var should_show = OS.has_feature("mobile") or OS.has_feature("web") or OS.get_name() == "Android"
+		mobile_controls.visible = should_show
+		print("MobileControls visible:", should_show, "| Platform:", OS.get_name())
 
 func _input(event):
 	if event.is_action_pressed("pause"):
