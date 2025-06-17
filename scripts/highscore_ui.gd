@@ -44,11 +44,14 @@ func _on_highscores_updated():
 	for i in range(top_scores.size()):
 		var score_data = top_scores[i]
 		if typeof(score_data) == TYPE_DICTIONARY:
+			var player_name = score_data.get("player_name", "Anonymous")  # Use get() with default value
+			var score = score_data.get("score", 0)  # Use get() with default value
+			
 			var score_label = Label.new()
 			score_label.text = "%d. %s - %d diamonds" % [
 				i + 1,
-				score_data.player_name,
-				score_data.score
+				player_name,
+				score
 			]
 			score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			scores_container.add_child(score_label)
