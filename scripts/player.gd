@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED = 130.0
 const RUN_SPEED = 220.0
 const JUMP_VELOCITY = -400.0
@@ -19,9 +18,6 @@ var is_falling := false
 var timer_running := false
 var is_invincible = false
 var invincibility_timer: Timer
-
-# Mobile controls reference
-var mobile_controls: Control
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
@@ -49,9 +45,6 @@ func _ready():
 	invincibility_timer.timeout.connect(_on_invincibility_timeout)
 	add_child(invincibility_timer)
 	
-	# Setup mobile controls with deferred call
-	setup_mobile_controls.call_deferred()
-	
 	var hud = get_tree().get_first_node_in_group("ScoreUI")
 	if hud:
 		if hud.has_method("show_restart_message"):
@@ -61,51 +54,6 @@ func _ready():
 	animated_sprite.play("idle")
 	attack_area.monitoring = false
 	attack_shape.disabled = true
-
-func setup_mobile_controls():
-	# Check if mobile controls scene exists
-	var mobile_controls_scene = preload("res://scenes/mobile_controls.tscn")
-	if mobile_controls_scene:
-		mobile_controls = mobile_controls_scene.instantiate()
-		get_tree().current_scene.add_child(mobile_controls)
-		
-		# Connect mobile control signals
-		if mobile_controls.has_signal("action_pressed"):
-			mobile_controls.action_pressed.connect(_on_mobile_action_pressed)
-		if mobile_controls.has_signal("action_released"):
-			mobile_controls.action_released.connect(_on_mobile_action_released)
-
-func _on_mobile_action_pressed(action_name: String):
-	# Handle mobile button presses
-	match action_name:
-		"jump":
-			if is_on_floor() and not is_attacking and not is_hit:
-				velocity.y = JUMP_VELOCITY
-				if jump_sound:
-					jump_sound.play()
-		"attack":
-			if not is_attacking and not is_hit:
-				is_attacking = true
-				attack_area.monitoring = true
-				attack_shape.disabled = false
-				animated_sprite.play("attack")
-				if attack_sound:
-					attack_sound.play()
-				attack()
-				if attack_timer:
-					attack_timer.start()
-		"pause":
-			# Handle pause functionality
-			var pause_screen = get_tree().get_first_node_in_group("PauseScreen")
-			if pause_screen:
-				pause_screen.show_pause_screen()
-			else:
-				# Simple pause toggle
-				get_tree().paused = !get_tree().paused
-
-func _on_mobile_action_released(action_name: String):
-	# Handle mobile button releases
-	pass
 
 func _physics_process(delta):
 	if is_dead:
@@ -129,7 +77,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Handle attack (both keyboard and mobile)
+	# Handle attack
 	if not is_attacking and Input.is_action_just_pressed("attack"):
 		is_attacking = true
 		attack_area.monitoring = true
@@ -139,7 +87,7 @@ func _physics_process(delta):
 			attack_sound.play()
 		attack()
 		if attack_timer:
-			attack_timer.start()  # Start the attack window
+			attack_timer.start()
 
 	# Prevent movement and jumping while attacking or hit
 	if is_attacking or is_hit:
@@ -147,7 +95,7 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 
-	# Handle jump (both keyboard and mobile)
+	# Handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		if jump_sound:
@@ -166,7 +114,6 @@ func _physics_process(delta):
 	
 	# Play animations
 	if is_attacking:
-		# Attack animation is already playing
 		if walking and walking.playing:
 			walking.stop()
 	elif is_on_floor():
@@ -197,10 +144,9 @@ func _physics_process(delta):
 func _on_AnimatedSprite2D_animation_finished():
 	if animated_sprite.animation == "attack":
 		is_attacking = false
-		check_attack_area()  # Only check for hits after the animation
+		check_attack_area()
 	elif animated_sprite.animation == "doorIn":
 		is_entering_door = false
-		# Show the name input dialog for leaderboard
 		var hud = get_tree().get_first_node_in_group("ScoreUI")
 		if hud and hud.has_method("submit_score"):
 			hud.submit_score()
@@ -250,7 +196,7 @@ func check_attack_area():
 func _on_AttackTimer_timeout():
 	attack_area.monitoring = false
 	attack_shape.disabled = true
-	is_attacking = false  # Optionally reset attack state here if needed
+	is_attacking = false
 
 func update_hearts():
 	var hud = get_tree().get_first_node_in_group("ScoreUI")
