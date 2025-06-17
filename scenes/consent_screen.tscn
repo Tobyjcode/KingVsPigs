@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2w4tvinol8t4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 0.901961)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="ConsentScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.0
+offset_top = -476.0
+offset_right = 306.0
+offset_bottom = 291.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 19.0
+offset_right = -30.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Welcome to King vs Pigs!"
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "To provide you with the best gaming experience, we need your permission to:
+
+• Save your game progress and scores
+• Remember your settings
+• Store your achievements
+• Track your gameplay statistics
+
+Your data is stored securely and you can delete it anytime.
+You must be 16 or older, or have parental consent to play."
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="AgeVerification" type="CheckBox" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "I confirm I am 16 or older, or have parental consent"
+
+[node name="HighContrastButton" type="CheckButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "High Contrast Mode"
+
+[node name="PrivacyPolicyButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Read Privacy Policy"
+
+[node name="ConsentButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "I Accept - Let's Play!"
+
+[node name="DeclineButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "No Thanks - Limited Features"
+
+[node name="DeleteDataButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Delete My Data"

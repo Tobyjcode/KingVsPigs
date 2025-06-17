@@ -13,6 +13,8 @@ extends Control
 @onready var female_check = $Panel/VBoxContainer/GenderRadioContainer/FemaleCheck
 @onready var other_check = $Panel/VBoxContainer/GenderRadioContainer/OtherCheck
 @onready var feedback_label = $Panel/VBoxContainer/FeedbackLabel
+@onready var consent_checkbox = $Panel/VBoxContainer/ConsentContainer/ConsentCheckbox
+@onready var privacy_button = $Panel/VBoxContainer/ConsentContainer/PrivacyButton
 
 var firebase_api_key = "AIzaSyCmdy8DSoDesCFhX9hb3lO9Qseq-STnEWg" # Replace with your actual API key
 var pending_action = ""
@@ -81,11 +83,18 @@ func _ready():
 			line_edit.connect("focus_entered", _on_line_edit_focus_entered.bind(line_edit))
 			line_edit.connect("focus_exited", _on_line_edit_focus_exited.bind(line_edit))
 
+	# Add consent handling
+	privacy_button.pressed.connect(_on_privacy_button_pressed)
+
 func _on_guest_pressed():
 	pending_action = "guest"
 	login_anonymous()
 
 func _on_create_user_pressed():
+	if not consent_checkbox.button_pressed:
+		show_feedback("Please accept the privacy policy and terms of service")
+		return
+		
 	var name = name_edit.text.strip_edges()
 	var email = email_edit.text.strip_edges()
 	var age = age_edit.text.strip_edges()
@@ -99,8 +108,13 @@ func _on_create_user_pressed():
 	elif other_check.button_pressed:
 		gender = "Other"
 
+	# Check for consent first
+	if age.is_valid_int() and int(age) < 16:
+		show_feedback("You must be 16 or older to register, or have parental consent.")
+		return
+
 	if name == "" or email == "" or password == "" or age == "" or gender == "" or country_option.selected < 0:
-		show_feedback("Please fill in all fields.", true)
+		show_feedback("Please fill in all fields.")
 		return
 
 	pending_action = "register"
@@ -155,13 +169,21 @@ func save_user_profile(local_id, id_token):
 	profile_http = HTTPRequest.new()
 	add_child(profile_http)
 	profile_http.request_completed.connect(_on_profile_save_completed)
+	
+	# Add consent data to the profile
 	var data = {
 		"name": name_edit.text.strip_edges(),
 		"age": age_edit.text.strip_edges(),
 		"country": country_option.text,
 		"gender": "Male" if male_check.button_pressed else "Female" if female_check.button_pressed else "Other",
-		"email": email_edit.text.strip_edges()
+		"email": email_edit.text.strip_edges(),
+		"consent": {
+			"given": true,
+			"timestamp": Time.get_datetime_string_from_system(),
+			"version": "1.0"
+		}
 	}
+	
 	var url = "https://kingvspigs-default-rtdb.europe-west1.firebasedatabase.app/users/%s.json?auth=%s" % [local_id, id_token]
 	var json = JSON.stringify(data)
 	profile_http.request(url, [], HTTPClient.METHOD_PUT, json)
@@ -268,3 +290,42 @@ func _on_line_edit_focus_entered(line_edit):
 func _on_line_edit_focus_exited(line_edit):
 	# Reset panel position when keyboard is dismissed
 	$Panel.position.y = 0
+
+func _on_privacy_button_pressed():
+	var dialog = AcceptDialog.new()
+	dialog.dialog_text = """Privacy Policy for King vs Pigs
+
+1. Data We Collect
+- Your name, email, age, country, and gender
+- Game progress and scores
+- Survey responses (optional)
+- Basic device information
+
+2. How We Use Your Data
+- Create and manage your account
+- Save your game progress
+- Show you on leaderboards
+- Improve the game through feedback
+
+3. Your Rights (GDPR)
+- Access your data
+- Delete your data
+- Withdraw consent
+- Data portability
+
+4. Age Restrictions
+- Users under 16 need parental consent
+- We collect minimal required data
+
+5. Data Storage
+- Secure Firebase storage
+- No third-party sharing
+- Data deleted upon request
+
+Contact: support@kingvspigs.com"""
+	
+	# Set the size correctly
+	dialog.size = Vector2(500, 400)  # Changed from custom_minimum_size to size
+	
+	add_child(dialog)
+	dialog.popup_centered()

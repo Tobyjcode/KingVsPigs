@@ -162,6 +162,17 @@ layout_mode = 2
 text = " "
 horizontal_alignment = 2
 
+[node name="ConsentContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ConsentCheckbox" type="CheckBox" parent="Panel/VBoxContainer/ConsentContainer"]
+layout_mode = 2
+text = "I accept the privacy policy and data collection"
+
+[node name="PrivacyButton" type="Button" parent="Panel/VBoxContainer/ConsentContainer"]
+layout_mode = 2
+text = "Read Privacy Policy"
+
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

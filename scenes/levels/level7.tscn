@@ -949,7 +949,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 sources/2 = SubResource("TileSetAtlasSource_b0vvs")
 
-[node name="Game" type="Node2D"]
+[node name="Game3" type="Node2D"]
 script = ExtResource("1_1gkwy")
 
 [node name="BackGroundTileMapLayer" type="TileMapLayer" parent="."]
