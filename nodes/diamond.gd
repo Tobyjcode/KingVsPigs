@@ -11,7 +11,7 @@ func _on_body_entered(body):
 		if hud and hud.has_method("add_diamond"):
 			hud.add_diamond(value)
 		$AnimatedSprite2D.visible = false
-		$CollisionShape2D.disabled = true
+		$CollisionShape2D.set_deferred("disabled", true)
 		$PickupSound.play()
 		await $PickupSound.finished
 		queue_free()

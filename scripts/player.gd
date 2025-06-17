@@ -20,17 +20,20 @@ var timer_running := false
 var is_invincible = false
 var invincibility_timer: Timer
 
+# Mobile controls reference
+var mobile_controls: Control
+
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_timer: Timer = $HitTimer
 @onready var attack_area = $AttackArea
 @onready var attack_shape = $AttackArea/CollisionPolygon2D
-@onready var jump_sound = $JumpSound
-@onready var hit_sound = $HitSound
-@onready var attack_sound = $AttackSound
-@onready var restart_message: TextureRect = $RestartMessage
-@onready var attack_timer: Timer = $AttackTimer
-@onready var walking: AudioStreamPlayer2D = $Walking
-@onready var die_sound: AudioStreamPlayer2D = $DieSound
+@onready var jump_sound = get_node_or_null("JumpSound")
+@onready var hit_sound = get_node_or_null("HitSound")
+@onready var attack_sound = get_node_or_null("AttackSound")
+@onready var restart_message = get_node_or_null("RestartMessage")
+@onready var attack_timer = get_node_or_null("AttackTimer")
+@onready var walking = get_node_or_null("Walking")
+@onready var die_sound = get_node_or_null("DieSound")
 
 func _ready():
 	visible = false  # Make player invisible at start
@@ -46,6 +49,9 @@ func _ready():
 	invincibility_timer.timeout.connect(_on_invincibility_timeout)
 	add_child(invincibility_timer)
 	
+	# Setup mobile controls with deferred call
+	setup_mobile_controls.call_deferred()
+	
 	var hud = get_tree().get_first_node_in_group("ScoreUI")
 	if hud:
 		if hud.has_method("show_restart_message"):
@@ -55,6 +61,51 @@ func _ready():
 	animated_sprite.play("idle")
 	attack_area.monitoring = false
 	attack_shape.disabled = true
+
+func setup_mobile_controls():
+	# Check if mobile controls scene exists
+	var mobile_controls_scene = preload("res://scenes/mobile_controls.tscn")
+	if mobile_controls_scene:
+		mobile_controls = mobile_controls_scene.instantiate()
+		get_tree().current_scene.add_child(mobile_controls)
+		
+		# Connect mobile control signals
+		if mobile_controls.has_signal("action_pressed"):
+			mobile_controls.action_pressed.connect(_on_mobile_action_pressed)
+		if mobile_controls.has_signal("action_released"):
+			mobile_controls.action_released.connect(_on_mobile_action_released)
+
+func _on_mobile_action_pressed(action_name: String):
+	# Handle mobile button presses
+	match action_name:
+		"jump":
+			if is_on_floor() and not is_attacking and not is_hit:
+				velocity.y = JUMP_VELOCITY
+				if jump_sound:
+					jump_sound.play()
+		"attack":
+			if not is_attacking and not is_hit:
+				is_attacking = true
+				attack_area.monitoring = true
+				attack_shape.disabled = false
+				animated_sprite.play("attack")
+				if attack_sound:
+					attack_sound.play()
+				attack()
+				if attack_timer:
+					attack_timer.start()
+		"pause":
+			# Handle pause functionality
+			var pause_screen = get_tree().get_first_node_in_group("PauseScreen")
+			if pause_screen:
+				pause_screen.show_pause_screen()
+			else:
+				# Simple pause toggle
+				get_tree().paused = !get_tree().paused
+
+func _on_mobile_action_released(action_name: String):
+	# Handle mobile button releases
+	pass
 
 func _physics_process(delta):
 	if is_dead:
@@ -78,13 +129,14 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Handle attack
+	# Handle attack (both keyboard and mobile)
 	if not is_attacking and Input.is_action_just_pressed("attack"):
 		is_attacking = true
 		attack_area.monitoring = true
 		attack_shape.disabled = false
 		animated_sprite.play("attack")
-		attack_sound.play()
+		if attack_sound:
+			attack_sound.play()
 		attack()
 		if attack_timer:
 			attack_timer.start()  # Start the attack window
@@ -95,10 +147,11 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 
-	# Handle jump.
+	# Handle jump (both keyboard and mobile)
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		jump_sound.play()
+		if jump_sound:
+			jump_sound.play()
 
 	# Get the input direction: -1, 0, 1
 	var direction = Input.get_axis("move_left", "move_right")
@@ -114,20 +167,20 @@ func _physics_process(delta):
 	# Play animations
 	if is_attacking:
 		# Attack animation is already playing
-		if walking.playing:
+		if walking and walking.playing:
 			walking.stop()
 	elif is_on_floor():
 		if direction == 0:
 			animated_sprite.play("idle")
-			if walking.playing:
+			if walking and walking.playing:
 				walking.stop()
 		else:
 			animated_sprite.play("run")
-			if not walking.playing:
+			if walking and not walking.playing:
 				walking.play()
 	else:
 		animated_sprite.play("jump")
-		if walking.playing:
+		if walking and walking.playing:
 			walking.stop()
 	
 	# Apply movement
@@ -163,7 +216,8 @@ func hit(attacker = null):
 		is_hit = true
 		is_invincible = true
 		animated_sprite.play("hit")
-		hit_sound.play()
+		if hit_sound:
+			hit_sound.play()
 		hit_timer.start()
 		invincibility_timer.start()
 		lives -= 1
@@ -213,7 +267,8 @@ func die():
 	print("Player died! (die() called)")
 	is_dead = true
 	animated_sprite.play("dead")
-	die_sound.play()
+	if die_sound:
+		die_sound.play()
 	
 	# Automatically submit highscore
 	if Engine.has_singleton("HighscoreManager"):

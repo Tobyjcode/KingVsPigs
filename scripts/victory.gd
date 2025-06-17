@@ -5,7 +5,7 @@ extends Control
 @onready var menu_button = $Panel/VBoxContainer/MenuButton
 @onready var feedback_button = $Panel/VBoxContainer/NextLevelButton
 @onready var audio_player = $AudioStreamPlayer
-@onready var victory: AudioStreamPlayer2D = $Victory
+@onready var victory = get_node_or_null("Victory")
 @onready var total_time_label = $Panel/VBoxContainer/TotalTimeLabel
 
 func _ready():

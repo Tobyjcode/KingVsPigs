@@ -168,25 +168,6 @@ func ready_jump(dir):
 		_jmp_dir = dir
 		next_state = State.BEFORE_JUMP
 
-func spawn_fragments():
-	print("Spawning crate fragments!")
-	var fragment_count = 4
-	var fragment_arc = 0.7
-	var fragment_min_speed = 80
-	var fragment_max_speed = 120
-	var fragment_lifetime = 1.5
-	for i in range(fragment_count):
-		var frag = crate_frag_scene.instantiate()
-		get_tree().get_root().add_child(frag)
-		frag.global_position = global_position
-		var angle = (2 * PI * i) / fragment_count
-		angle = lerp_angle(angle, -PI/2, fragment_arc)
-		var speed = randf_range(fragment_min_speed, fragment_max_speed)
-		frag.linear_velocity = Vector2(cos(angle), sin(angle)) * speed
-		frag.get_node("AnimatedSprite2D").animation = str(randi() % 4)
-		if frag.has_method("start_fade_timer"):
-			frag.start_fade_timer(fragment_lifetime)
-
 func on_hit_box_entered(area):
 	print("Hitbox entered by: ", area)
 	if area.is_in_group("attack_box") and area.name != "BoxAtkBox":
@@ -194,18 +175,46 @@ func on_hit_box_entered(area):
 		next_state = State.HIT
 		_set_animation_for_state(State.HIT)
 		
-		# Spawn crate fragments!
-		spawn_fragments()
-		
-		# Spawn a regular piggy
-		var piggy = piggy_scene.instantiate()
-		get_parent().add_child(piggy)
-		piggy.global_position = global_position
-		piggy.get_node("AnimatedSprite2D").flip_h = _dir < 0
-		
-		# Wait a short moment to ensure fragments are visible, then free
-		await get_tree().create_timer(0.05).timeout
-		queue_free()
+		# Defer all spawning and cleanup operations
+		call_deferred("_handle_hit_response")
+
+func _handle_hit_response():
+	# Spawn crate fragments!
+	spawn_fragments()
+	
+	# Spawn a regular piggy
+	var piggy = piggy_scene.instantiate()
+	get_parent().add_child(piggy)
+	piggy.global_position = global_position
+	piggy.get_node("AnimatedSprite2D").flip_h = _dir < 0
+	
+	# Wait a short moment to ensure fragments are visible, then free
+	await get_tree().create_timer(0.05).timeout
+	queue_free()
+
+func spawn_fragments():
+	print("Spawning crate fragments!")
+	var fragment_count = 4
+	var fragment_arc = 0.7
+	var fragment_min_speed = 80
+	var fragment_max_speed = 120
+	var fragment_lifetime = 1.5
+	
+	# Use call_deferred to add fragments safely
+	for i in range(fragment_count):
+		call_deferred("_spawn_single_fragment", i, fragment_count, fragment_arc, fragment_min_speed, fragment_max_speed, fragment_lifetime)
+
+func _spawn_single_fragment(i: int, fragment_count: int, fragment_arc: float, fragment_min_speed: float, fragment_max_speed: float, fragment_lifetime: float):
+	var frag = crate_frag_scene.instantiate()
+	get_tree().get_root().add_child(frag)
+	frag.global_position = global_position
+	var angle = (2 * PI * i) / fragment_count
+	angle = lerp_angle(angle, -PI/2, fragment_arc)
+	var speed = randf_range(fragment_min_speed, fragment_max_speed)
+	frag.linear_velocity = Vector2(cos(angle), sin(angle)) * speed
+	frag.get_node("AnimatedSprite2D").animation = str(randi() % 4)
+	if frag.has_method("start_fade_timer"):
+		frag.start_fade_timer(fragment_lifetime)
 
 func on_view_range_entered(body):
 	if body.is_in_group("player"):

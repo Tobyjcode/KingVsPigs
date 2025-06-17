@@ -22,7 +22,7 @@ var knockback_velocity := Vector2.ZERO
 @onready var animated_sprite = $AnimatedSprite2D if has_node("AnimatedSprite2D") else null
 @onready var sprite2d = $Sprite2D if has_node("Sprite2D") else null
 @onready var ani = $ani if has_node("ani") else null
-@onready var hit_timer: Timer = $HitTimer
+@onready var hit_timer = get_node_or_null("HitTimer")
 
 func _ready():
 	velocity = Vector2(basic_speed, 0)
@@ -33,8 +33,10 @@ func _ready():
 	if disable_collision:
 		$PlayerDetector.monitorable = false
 		$PlayerDetector.monitoring = false
-	hit_timer.timeout.connect(_on_hit_timer_timeout)
-	# Debug: Warn if this piggy or its children are in 'player_attack' group
+	
+	if hit_timer:
+		hit_timer.timeout.connect(_on_hit_timer_timeout)
+	
 	if is_in_group("player_attack"):
 		print("WARNING: Piggy node is in 'player_attack' group! Remove it from this group in the editor.")
 	for child in get_children():
@@ -56,7 +58,6 @@ func _on_PlayerDetector_body_entered(body):
 	else:
 		flip(false)
 	state = STOP
-	# Only aggro/AI logic here, not instant kill
 
 func _physics_process(delta):
 	if state == STOP:
@@ -95,7 +96,6 @@ func hit(attacker = null):
 	else:
 		if ani:
 			ani.play("Hit")
-		# Knockback: move away from player
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
 			var dir = sign(global_position.x - player.global_position.x)
@@ -181,7 +181,6 @@ func anim_play(new_animation):
 		if animated_sprite.animation != new_animation:
 			animated_sprite.play(new_animation)
 	elif sprite2d:
-		# If using Sprite2D, you may want to swap frames or textures here
 		pass
 
 func _on_ani_animation_finished(anim_name):

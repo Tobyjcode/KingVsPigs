@@ -13,9 +13,9 @@ var is_on_cooldown = false
 var is_hit = false
 var is_winding_up = false
 var lives := 3
-var is_dead := false
+var is_dead = false
 var knockback_velocity := Vector2.ZERO
-var is_falling := false
+var is_falling = false
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -23,11 +23,11 @@ var is_falling := false
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var hit_timer: Timer = $HitTimer
 @onready var attack_area = $AttackArea
-@onready var walking: AudioStreamPlayer2D = $Walking
+@onready var walking = get_node_or_null("Walking")
 @onready var attack_shape = $AttackArea/CollisionPolygon2D
-@onready var attack_sound = $PiggyAttackAudioStreamPlayer2D
-@onready var die_sound = $PiggyDieAudioStreamPlayer2D2
-@onready var hit_sound = $PiggyHitAudioStreamPlayer2D3
+@onready var attack_sound = get_node_or_null("PiggyAttackAudioStreamPlayer2D")
+@onready var die_sound = get_node_or_null("PiggyDieAudioStreamPlayer2D2")
+@onready var hit_sound = get_node_or_null("PiggyHitAudioStreamPlayer2D3")
 
 func _ready():
 	start_position = position
@@ -39,54 +39,50 @@ func _ready():
 func _physics_process(delta):
 	if is_dead:
 		velocity = Vector2.ZERO
-		# Disable attack area and its collision shape when dead
 		attack_area.monitoring = false
-		attack_shape.disabled = true
+		attack_area.monitorable = false
 		return
 	if is_falling:
 		velocity = knockback_velocity
-		knockback_velocity.y += gravity * delta  # apply gravity
+		knockback_velocity.y += gravity * delta
 		move_and_slide()
 		return
 	if is_hit:
 		return
-	# Add gravity
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	# Check if player is in range
 	if player and position.distance_to(player.position) < DETECTION_RANGE:
 		if position.distance_to(player.position) < ATTACK_RANGE:
 			if not is_attacking and not is_on_cooldown and not is_winding_up and not is_dead:
 				is_attacking = true
 				is_winding_up = true
 				animated_sprite.play("attack")
-				attack_sound.play()  # Play sound when attack starts
+				if attack_sound:
+					attack_sound.play()
 				attack_windup_timer.start()
-			# Always face the player during attack or windup
+			
 			var direction = 1 if player.position.x > position.x else -1
 			animated_sprite.flip_h = direction > 0
 			velocity.x = 0
 			move_and_slide()
 			return
 		else:
-			# If player moves out of attack range, stop attacking
 			if is_attacking:
 				is_attacking = false
-		# Move towards player
+		
 		var direction = 1 if player.position.x > position.x else -1
 		velocity.x = direction * SPEED
 		animated_sprite.flip_h = direction > 0
 		animated_sprite.play("run")
 	else:
-		# Patrol behavior
 		if is_attacking:
 			is_attacking = false
 		var distance_from_start = abs(position.x - start_position.x)
 		if distance_from_start >= PATROL_DISTANCE:
 			patrol_direction *= -1
 		velocity.x = patrol_direction * SPEED
-		# Flip based on patrol direction (velocity.x)
 		if velocity.x != 0:
 			animated_sprite.flip_h = velocity.x > 0
 		animated_sprite.play("run")
@@ -94,9 +90,8 @@ func _physics_process(delta):
 
 func _on_attack_windup_timeout():
 	is_winding_up = false
-	# Only attack if not dead
 	if not is_dead and player and position.distance_to(player.position) < ATTACK_RANGE:
-		player.hit()  # Removed attack_sound.play() from here
+		player.hit()
 
 func _on_attack_cooldown_timeout():
 	is_on_cooldown = false
@@ -113,7 +108,6 @@ func _on_animation_finished():
 		is_on_cooldown = true
 		attack_cooldown_timer.start()
 	elif animated_sprite.animation == "dead":
-		# queue_free()  # Commented out so the pig stays visible after dying
 		pass
 
 func _on_hit_timer_timeout():
@@ -128,23 +122,20 @@ func hit():
 		is_dead = true
 		animated_sprite.play("dead")
 		velocity = Vector2.ZERO
-		# Disable attack area and its collision shape when dead
-		attack_area.monitoring = false
-		attack_shape.disabled = true
-		# Stop any ongoing attack timers
+		attack_area.set_deferred("monitoring", false)
+		attack_area.set_deferred("monitorable", false)
 		attack_windup_timer.stop()
 		attack_cooldown_timer.stop()
-		# Play death sound
-		die_sound.play()
+		if die_sound:
+			die_sound.play()
 	else:
 		animated_sprite.play("hit")
-		# Play hit sound
-		hit_sound.play()
-		# Knockback: move away from player
+		if hit_sound:
+			hit_sound.play()
 		var dir = sign(global_position.x - player.global_position.x)
 		if dir == 0:
 			dir = 1
-		knockback_velocity = Vector2(150 * dir, -80)  # adjust to taste
+		knockback_velocity = Vector2(150 * dir, -80)
 		is_falling = true
 	hit_timer.start()
 

@@ -11,8 +11,12 @@ func _ready():
 		$Color.play("Fast")
 	else:
 		$Color.play("Normal")
-	if $HitTimer:
-		$HitTimer.timeout.connect(_on_hit_timer_timeout)
+	
+	# Check if HitTimer exists before connecting
+	var hit_timer = get_node_or_null("HitTimer")
+	if hit_timer:
+		hit_timer.timeout.connect(_on_hit_timer_timeout)
+	
 	if has_node("Hitbox"):
 		$Hitbox.visible = true
 		$Hitbox.monitoring = true
