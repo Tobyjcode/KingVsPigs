@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://dcsqion3u6r70"]
+
+[ext_resource type="Script" uid="uid://fqb4jndddxc8" path="res://scripts/mobile_controls.gd" id="1_mobile_controls"]
+[ext_resource type="Texture2D" uid="uid://igkdocj0myui" path="res://Assets/Sprites/transparent-dark/transparentDark22.png" id="2_yr8f1"]
+[ext_resource type="Texture2D" uid="uid://i71cr0oqppel" path="res://Assets/Sprites/transparent-dark/transparentDark23.png" id="3_0g8qj"]
+[ext_resource type="Texture2D" uid="uid://bb8y05wq23s18" path="res://Assets/Sprites/transparent-dark/transparentDark43.png" id="4_kth8y"]
+[ext_resource type="Texture2D" uid="uid://b5vbjql1ixcse" path="res://Assets/Sprites/transparent-dark/transparentDark47.png" id="5_k6aum"]
+[ext_resource type="Texture2D" uid="uid://df5hylvthylb3" path="res://Assets/Sprites/transparent-dark/transparentDark27.png" id="6_cnqve"]
+[ext_resource type="Texture2D" uid="uid://dw6yfs3iv01y0" path="res://Assets/Sprites/transparent-dark/transparentDark26.png" id="7_kffq0"]
+[ext_resource type="Texture2D" uid="uid://o6guvkl21yuj" path="res://Assets/Sprites/transparent-dark/transparentDark44.png" id="8_0g8qj"]
+
+[node name="MobileControls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mobile_controls")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Left" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(53, 500)
+scale = Vector2(1.25, 1.25)
+texture_normal = ExtResource("2_yr8f1")
+action = "move_left"
+
+[node name="Right" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(281, 499)
+scale = Vector2(1.25, 1.25)
+texture_normal = ExtResource("3_0g8qj")
+action = "move_right"
+
+[node name="Jump" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(1028, 463)
+scale = Vector2(1.25, 1.25)
+texture_normal = ExtResource("4_kth8y")
+action = "jump"
+
+[node name="Attack" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(1240, 563)
+rotation = 3.14159
+scale = Vector2(1.25, 1.25)
+texture_normal = ExtResource("5_k6aum")
+action = "attack"
+
+[node name="EnterDoor" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(1095, 401)
+texture_normal = ExtResource("6_cnqve")
+action = "game_use"
+
+[node name="Run" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(53, 400)
+scale = Vector2(1.25, 1.25)
+texture_normal = ExtResource("7_kffq0")
+action = "sprint"
+
+[node name="Restart" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(283, 400)
+scale = Vector2(1.25, 1.25)
+texture_normal = ExtResource("8_0g8qj")
+action = "restart"
+
+[node name="Background" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.1)
